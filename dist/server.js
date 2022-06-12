@@ -1448,36 +1448,36 @@ eval("/*!\n * toidentifier\n * Copyright(c) 2016 Douglas Christopher Wilson\n * 
 
 /***/ }),
 
-/***/ "./server/index.tsx":
-/*!**************************!*\
-  !*** ./server/index.tsx ***!
-  \**************************/
+/***/ "./src/client/App.tsx":
+/*!****************************!*\
+  !*** ./src/client/App.tsx ***!
+  \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! express */ \"./node_modules/express/index.js\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom/server */ \"./node_modules/react-dom/server.js\");\n/* harmony import */ var _src_App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/App */ \"./src/App.tsx\");\n\n\n\n\n\n\nvar PORT = process.env.PORT || 3006;\nvar app = express__WEBPACK_IMPORTED_MODULE_3___default()();\napp.get('/', function (req, res) {\n    var app = react_dom_server__WEBPACK_IMPORTED_MODULE_4__.renderToString(react__WEBPACK_IMPORTED_MODULE_2__.createElement(_src_App__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null));\n    var indexFile = path__WEBPACK_IMPORTED_MODULE_0___default().resolve('./build/index.html');\n    fs__WEBPACK_IMPORTED_MODULE_1___default().readFile(indexFile, 'utf8', function (err, data) {\n        if (err) {\n            console.error('Something went wrong:', err);\n            return res.status(500).send('Oops, better luck next time!');\n        }\n        return res.send(data.replace('<div id=\"root\"></div>', \"<div id=\\\"root\\\">\".concat(app, \"</div>\")));\n    });\n});\napp.use(express__WEBPACK_IMPORTED_MODULE_3___default()[\"static\"]('./build'));\napp.listen(PORT, function () {\n    console.log(\"Server is listening on port \".concat(PORT));\n});\n\n\n//# sourceURL=webpack://d5-solitaire/./server/index.tsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home */ \"./src/client/Home.tsx\");\n\n// import logo from './logo.svg';\n// import './App.css';\n\nfunction App() {\n    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", { className: \"App\" },\n        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Home__WEBPACK_IMPORTED_MODULE_1__[\"default\"], { name: \"summy\" })));\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n\n//# sourceURL=webpack://d5-solitaire/./src/client/App.tsx?");
 
 /***/ }),
 
-/***/ "./src/App.tsx":
-/*!*********************!*\
-  !*** ./src/App.tsx ***!
-  \*********************/
+/***/ "./src/client/Home.tsx":
+/*!*****************************!*\
+  !*** ./src/client/Home.tsx ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home */ \"./src/Home.tsx\");\n\n// import logo from './logo.svg';\n// import './App.css';\n\nfunction App() {\n    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", { className: \"App\" },\n        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Home__WEBPACK_IMPORTED_MODULE_1__[\"default\"], { name: \"summy\" })));\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);\n\n\n//# sourceURL=webpack://d5-solitaire/./src/App.tsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nfunction Home(props) {\n    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null,\n        \"Hello \",\n        props.name,\n        \"!\"));\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);\n\n\n//# sourceURL=webpack://d5-solitaire/./src/client/Home.tsx?");
 
 /***/ }),
 
-/***/ "./src/Home.tsx":
-/*!**********************!*\
-  !*** ./src/Home.tsx ***!
-  \**********************/
+/***/ "./src/server/index.tsx":
+/*!******************************!*\
+  !*** ./src/server/index.tsx ***!
+  \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nfunction Home(props) {\n    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null,\n        \"Hello \",\n        props.name,\n        \"!\"));\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);\n\n\n//# sourceURL=webpack://d5-solitaire/./src/Home.tsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! path */ \"path\");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ \"fs\");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! express */ \"./node_modules/express/index.js\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var react_dom_server__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom/server */ \"./node_modules/react-dom/server.js\");\n/* harmony import */ var _client_App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../client/App */ \"./src/client/App.tsx\");\n\n\n\n\n\n\nvar PORT = process.env.PORT || 3006;\nvar app = express__WEBPACK_IMPORTED_MODULE_3___default()();\napp.get('/', function (req, res) {\n    var app = react_dom_server__WEBPACK_IMPORTED_MODULE_4__.renderToString(react__WEBPACK_IMPORTED_MODULE_2__.createElement(_client_App__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null));\n    var indexFile = path__WEBPACK_IMPORTED_MODULE_0___default().resolve('./build/index.html');\n    fs__WEBPACK_IMPORTED_MODULE_1___default().readFile(indexFile, 'utf8', function (err, data) {\n        if (err) {\n            console.error('Something went wrong:', err);\n            return res.status(500).send('Oops, better luck next time!');\n        }\n        return res.send(data.replace('<div id=\"root\"></div>', \"<div id=\\\"root\\\">\".concat(app, \"</div>\")));\n    });\n});\napp.use(express__WEBPACK_IMPORTED_MODULE_3___default()[\"static\"]('./build'));\napp.listen(PORT, function () {\n    console.log(\"Server is listening on port \".concat(PORT));\n});\n\n\n//# sourceURL=webpack://d5-solitaire/./src/server/index.tsx?");
 
 /***/ }),
 
@@ -1982,7 +1982,7 @@ eval("module.exports = JSON.parse('{\"100\":\"Continue\",\"101\":\"Switching Pro
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./server/index.tsx");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/server/index.tsx");
 /******/ 	
 /******/ })()
 ;

@@ -5,8 +5,8 @@ module.exports = {
     mode: "development",
     target: "node",
     entry: {
-        server: "./server/index.tsx",
-        "public/client": "./src/index.tsx",
+        server: "./src/server/index.tsx",
+        "public/client": "./src/client/index.tsx",
     },
     output: {
         filename: "[name].js",
