@@ -2,11 +2,12 @@ import React from 'react';
 
 type HomeProps = {
     name: string
+    name2: string
 }
 
 function Home(props: HomeProps) {
     return (
-        <h1>Hello {props.name}!</h1>
+        <h1>Hello {props.name} and {props.name2}!</h1>
     )
 }
 

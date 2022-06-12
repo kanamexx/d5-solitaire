@@ -3,10 +3,15 @@ import React from 'react';
 // import './App.css';
 import Home from './Home'
 
-function App() {
+type AppProps = {
+  old: string,
+  now: string,
+}
+
+function App(props: AppProps) {
   return (
     <div className="App">
-      <Home name="summy" />
+      <Home name={props.old} name2={props.now} />
     </div>
   );
 }
