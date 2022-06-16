@@ -9,9 +9,10 @@ import App from '../client/App';
 
 const PORT = process.env.PORT || 3006;
 const app = express();
+app.use(express.static("dist"));
 
 app.get('/', (req, res) => {
-    const app = ReactDOMServer.renderToString(<App old="a" now="b" />);
+    const app = ReactDOMServer.renderToString(<App set={[]} lines={[]} goals={[]} message={""}/>);
     const indexFile = path.resolve('./build/index.html');
     fs.readFile(indexFile, 'utf8', (err, data) => {
         if (err) {
@@ -19,9 +20,18 @@ app.get('/', (req, res) => {
             return res.status(500).send('Oops, better luck next time!');
         }
 
-        return res.send(
-            data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
-        );
+        return res.send(`
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <title>d5-solitaire</title>
+                    <script src="/public/client.js" defer></script>
+                </head>
+                <body>
+                    <div id="root">${app}</div>
+                </body>
+            </html>
+        `)
     });
 });
 
@@ -52,8 +62,6 @@ app.get('/solitaire/:now', (req, res) => {
         message: "どうしますか？(操作対象のレーン。手札の場合は7):"
     })
 })
-
-app.use(express.static('./build'));
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

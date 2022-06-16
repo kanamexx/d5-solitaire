@@ -15,7 +15,10 @@
 			"extensions": [
 				"dbaeumer.vscode-eslint",
 				"steoates.autoimpor",
-				"Gruntfuggly.todo-tree"
+				"Gruntfuggly.todo-tree",
+				"christian-kohler.npm-intellisense",
+				"christian-kohler.path-intellisense",
+				"esbenp.prettier-vscode"
 			]
 		}
 	},

@@ -4,7 +4,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.hydrate(<BrowserRouter><App old='' now='' /></BrowserRouter>, document.getElementById('root'))
+ReactDOM.hydrate(
+    <BrowserRouter>
+        <App set={[]} lines={[]} goals={[]} message={""}/>
+    </BrowserRouter>,
+    document.getElementById('root')
+)
 
 // const root = ReactDOM.createRoot(
 //   document.getElementById('root') as HTMLElement

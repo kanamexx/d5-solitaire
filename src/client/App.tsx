@@ -1,17 +1,21 @@
 import React from 'react';
 // import logo from './logo.svg';
 // import './App.css';
-import Home from './Home'
+import PlayMat from './PlayMat'
 
 type AppProps = {
-  old: string,
-  now: string,
+  set: string[]
+  lines: string[]
+  goals: string[]
+  message: string
 }
 
 function App(props: AppProps) {
   return (
     <div className="App">
-      <Home name={props.old} name2={props.now} />
+      <PlayMat
+        {...props}
+      />
     </div>
   );
 }
