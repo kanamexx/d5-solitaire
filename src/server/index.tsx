@@ -28,10 +28,10 @@ let set: Array<number> = [...Array(13 * 4)].map((_, i) => i)
 let lines: Array<Array<{ number, bool }>> = []
 for (let i = 0; i < 7; i++) {
     const line = new Array<{ number, bool }>()
-    lines.push(line)
     for (let j = 0; j < i + 1; j++) {
         line.push({ number: set.shift(), bool: i === j })
     }
+    lines.push(line)
 }
 
 let goals: Array<Array<number>> = []
@@ -44,7 +44,7 @@ rest.get('/solitaire/:now', (req, res) => {
         set: set.map(i => `${suit(i)}${number(i)}`),
         lines: lines.map(line => line.map(card =>
         ({
-            card: `${suit(card.number)}${number(card.bool)}`,
+            card: `${suit(card.number)}${number(card.number)}`,
             tail: card.bool
         }))),
         goals: goals,

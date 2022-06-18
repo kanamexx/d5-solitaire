@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import Card from './Card';
+import Lane from './Lane';
+import Lanes from './Lanes';
 
 type PlayMatProps = {
     set: string[]
-    lines: string[]
+    lines: TempCard[][]
     goals: string[]
     message: string
+}
+
+export type TempCard = {
+    card: string
+    tail: boolean
 }
 
 class PlayMat extends Component<PlayMatProps, PlayMatProps> {
@@ -41,13 +48,21 @@ class PlayMat extends Component<PlayMatProps, PlayMatProps> {
             />
         )
     }
+    renderLanes(props: TempCard[][]){
+        return (
+            <Lanes
+                props={props}
+            />
+        )
+    }
 
     render() {
         return (
             <>
-                <h1>set: {this.state.set.map(card => this.renderCard(card))}</h1>
-                {/* <h1>lines: {this.state.lines}</h1>
-                <h1>goals: {this.state.goals}</h1> */}
+                <div className='set'>set: {this.state.set.map(card => this.renderCard(card))}</div>
+                {/* <div>lines: {this.state.lines.map((line, i)=> this.renderLane(line, i))}</div> */}
+                <div>lines: {this.renderLanes(this.state.lines)}</div>
+                {/* <h1>goals: {this.state.goals}</h1> */}
                 <h1>message: {this.state.message}</h1>
                 <button
                     onClick={async() => await this.get()}
