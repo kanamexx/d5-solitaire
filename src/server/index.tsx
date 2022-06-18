@@ -8,30 +8,19 @@ import ReactDOMServer from 'react-dom/server';
 import App from '../client/App';
 
 const PORT = process.env.PORT || 3006;
-const app = express();
-app.use(express.static("dist"));
+const rest = express();
 
-app.get('/', (req, res) => {
-    const app = ReactDOMServer.renderToString(<App set={[]} lines={[]} goals={[]} message={""}/>);
-    const indexFile = path.resolve('./build/index.html');
+rest.use(express.static("dist"));
+rest.get('/', (req, res) => {
+    const app = ReactDOMServer.renderToString(<App set={[]} goals={[]} lines={[]} message={""}/>);
+    const indexFile = path.resolve('./dist/public/html/index.html');
     fs.readFile(indexFile, 'utf8', (err, data) => {
         if (err) {
             console.error('Something went wrong:', err);
             return res.status(500).send('Oops, better luck next time!');
         }
 
-        return res.send(`
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <title>d5-solitaire</title>
-                    <script src="/public/client.js" defer></script>
-                </head>
-                <body>
-                    <div id="root">${app}</div>
-                </body>
-            </html>
-        `)
+        return res.send(data.replace('<div id="root"></div>', `<div id="root">${app}</div>`))
     });
 });
 
@@ -50,7 +39,7 @@ for (let i = 0; i < 4; i++) {
     goals.push(new Array<number>())
 }
 
-app.get('/solitaire/:now', (req, res) => {
+rest.get('/solitaire/:now', (req, res) => {
     return res.json({
         set: set.map(i => `${suit(i)}${number(i)}`),
         lines: lines.map(line => line.map(card =>
@@ -63,7 +52,7 @@ app.get('/solitaire/:now', (req, res) => {
     })
 })
 
-app.listen(PORT, () => {
+rest.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
 
