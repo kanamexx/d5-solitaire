@@ -13,7 +13,7 @@ const rest = express();
 rest.use(express.static("dist"));
 rest.get('/', (req, res) => {
     const app = ReactDOMServer.renderToString(<App set={[]} goals={[]} lines={[]} message={""}/>);
-    const indexFile = path.resolve('./dist/public/html/index.html');
+    const indexFile = path.resolve('./dist/public/index.html');
     fs.readFile(indexFile, 'utf8', (err, data) => {
         if (err) {
             console.error('Something went wrong:', err);

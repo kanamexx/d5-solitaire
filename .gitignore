@@ -9,8 +9,7 @@
 /coverage
 
 # production
-# TODO: 配下のファイルを参照しているのでどうにかする
-/build
+/dist/**.js
 
 # misc
 .DS_Store
