@@ -1,6 +1,6 @@
 import React from 'react';
-import {Lane} from './Lane'
-import {TempCard} from './PlayMat'
+import { Lane } from './Lane';
+import { TempCard } from './PlayMat';
 
 type LanesProps = {
   props: TempCard[][]

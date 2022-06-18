@@ -1,6 +1,5 @@
 import React from 'react';
-import PlayMat from './PlayMat'
-import {TempCard} from './PlayMat'
+import PlayMat, { TempCard } from './PlayMat';
 
 type AppProps = {
   set: string[]

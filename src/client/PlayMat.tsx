@@ -1,7 +1,6 @@
+import axios from 'axios';
 import React, { Component } from 'react';
-import axios from 'axios'
 import Card from './Card';
-import Lane from './Lane';
 import Lanes from './Lanes';
 
 type PlayMatProps = {
@@ -60,7 +59,6 @@ class PlayMat extends Component<PlayMatProps, PlayMatProps> {
         return (
             <>
                 <div className='set'>set: {this.state.set.map(card => this.renderCard(card))}</div>
-                {/* <div>lines: {this.state.lines.map((line, i)=> this.renderLane(line, i))}</div> */}
                 <div>lines: {this.renderLanes(this.state.lines)}</div>
                 {/* <h1>goals: {this.state.goals}</h1> */}
                 <h1>message: {this.state.message}</h1>

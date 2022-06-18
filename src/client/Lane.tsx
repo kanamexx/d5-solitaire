@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import {TempCard} from './PlayMat'
+import { TempCard } from './PlayMat';
 
 export type LaneProps = {
   suits: TempCard[]
