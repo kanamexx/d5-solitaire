@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import Card from './Card';
 
 type PlayMatProps = {
     set: string[]
@@ -32,11 +33,20 @@ class PlayMat extends Component<PlayMatProps, PlayMatProps> {
         })
     }
 
+    renderCard(suit: string){
+        return (
+            <Card
+                suit={suit}
+                key={suit}
+            />
+        )
+    }
+
     render() {
         return (
             <>
-                {/* <h1>set: {this.state.set}</h1>
-                <h1>lines: {this.state.lines}</h1>
+                <h1>set: {this.state.set.map(card => this.renderCard(card))}</h1>
+                {/* <h1>lines: {this.state.lines}</h1>
                 <h1>goals: {this.state.goals}</h1> */}
                 <h1>message: {this.state.message}</h1>
                 <button
