@@ -8,7 +8,8 @@ type CardViewProps = {
 function CardView(props: CardViewProps) {
   return (
     <div className="card">
-      {props.card.suit.suit}{props.card.numberSymbol}
+      {props.card.suit.symbol}
+      {props.card.numberSymbol}
     </div>
   );
 }

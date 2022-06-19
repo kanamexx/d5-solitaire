@@ -4,8 +4,6 @@ import CardView from './CardView';
 
 export type LaneProps = {
   cards: Card[]
-  // number: number
-  // tail: boolean
 }
 
 export function Lane(props: LaneProps) {

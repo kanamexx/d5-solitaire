@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import Card from 'shared/entities/Card';
+import Suit from 'shared/entities/Suit';
 import CardView from './CardView';
 import Lanes from './Lanes';
 
@@ -25,10 +26,9 @@ class PlayMat extends Component<PlayMatProps, PlayMatProps> {
     get = async() => {
         const res = await axios.get('/solitaire/aa')
         const data: PlayMatProps = res.data
-        console.log(data)
 
         this.setState({
-            set: data.set.map(card => Card.of(card.suit, card.number, card.isTail)),
+            set: data.set.map(card => Card.of(Suit.of(card.suit.symbol), card.number, card.isTail)),
             lines: data.lines,
             goals: data.goals,
             message: data.message,

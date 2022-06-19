@@ -1,13 +1,13 @@
 import Card from "shared/entities/Card";
-import Suit from "shared/entities/Suit";
+import { SuitResponse } from "./SuitResponse";
 
 class CardResponse{
-    public readonly suit: Suit
+    public readonly suit: SuitResponse
     public readonly number: number
     public readonly numberSymbol: string
     public readonly isTail: boolean
 
-    private constructor(suit: Suit, number: number, numberSymbol: string, isTail: boolean){
+    private constructor(suit: SuitResponse, number: number, numberSymbol: string, isTail: boolean){
         this.suit = suit
         this.number = number
         this.numberSymbol = numberSymbol
@@ -16,7 +16,7 @@ class CardResponse{
 
     public static fromEntity(entity: Card): CardResponse{
         return new CardResponse(
-            entity.suit,
+            SuitResponse.fromEntity(entity.suit),
             entity.number,
             entity.numberSymbol,
             entity.isTail
