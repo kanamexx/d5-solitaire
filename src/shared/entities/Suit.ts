@@ -4,32 +4,25 @@ export default class Suit {
     private readonly _symbol: Types.SuitSymbolType
     private readonly _color: Types.ColorType
 
-    public static readonly SPADE: Suit = new Suit('♠', 'black')
-    public static readonly CLUB: Suit = new Suit('♣', 'black')
-    public static readonly HEART: Suit = new Suit('♡', 'red')
-    public static readonly DIAMOND: Suit = new Suit('♢', 'red')
+    public static readonly SPADE: Suit = new Suit('♠')
+    public static readonly CLUB: Suit = new Suit('♣')
+    public static readonly HEART: Suit = new Suit('♡')
+    public static readonly DIAMOND: Suit = new Suit('♢')
 
     private constructor(
         symbol: Types.SuitSymbolType,
-        color: Types.ColorType,
     ) {
         this._symbol = symbol
-        this._color = color
+        this._color = (symbol === '♠' || symbol === '♣') ? 'black' : 'red'
     }
 
     public static of(symbol: Types.SuitSymbolType): Suit{
         switch (symbol) {
-            case '♠':
-                return this.SPADE
-            case '♣':
-                return this.CLUB
-            case '♡':
-                return this.HEART
-            case '♢':
-                return this.DIAMOND
-            // TODO: change to appropriate exception 
-            default:
-                throw Error
+            case '♠': return this.SPADE
+            case '♣': return this.CLUB
+            case '♡': return this.HEART
+            case '♢': return this.DIAMOND
+            default: throw new Error(`invalid Suit: ${symbol}`)
         }
     }
 
