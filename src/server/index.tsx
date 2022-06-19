@@ -5,6 +5,8 @@ import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
+import { CardResponse } from 'shared/dtos/CardResponse';
+import Card from 'shared/entities/Card';
 import App from '../client/App';
 
 const PORT = process.env.PORT || 3006;
@@ -41,12 +43,8 @@ for (let i = 0; i < 4; i++) {
 
 rest.get('/solitaire/:now', (req, res) => {
     return res.json({
-        set: set.map(i => `${suit(i)}${number(i)}`),
-        lines: lines.map(line => line.map(card =>
-        ({
-            card: `${suit(card.number)}${number(card.number)}`,
-            tail: card.bool
-        }))),
+        set: set.map(i => CardResponse.fromEntity(Card.fromNumber(i))),
+        lines: lines.map(line => line.map(card => CardResponse.fromEntity(Card.fromNumber(card.number)))),
         goals: goals,
         message: "どうしますか？(操作対象のレーン。手札の場合は7):"
     })
@@ -55,26 +53,3 @@ rest.get('/solitaire/:now', (req, res) => {
 rest.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
-
-function suit(i: any): string {
-    if (i < 13) return "♠"
-    if (i < 13 * 2) return "♣"
-    if (i < 13 * 3) return "♡"
-    return "♢"
-}
-
-function suit2(i: any): string {
-    if (i === 0) return "♠"
-    if (i === 1) return "♣"
-    if (i === 2) return "♡"
-    return "♢"
-}
-
-function number(i: any): string {
-    const ret = (i % 13) + 1
-    if (ret === 11) return "J"
-    if (ret === 12) return "Q"
-    if (ret === 13) return "K"
-    if (ret === 1) return "A"
-    return ret.toString()
-}

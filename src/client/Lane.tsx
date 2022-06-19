@@ -1,9 +1,9 @@
 import React from 'react';
-import Card from './Card';
-import { TempCard } from './PlayMat';
+import Card from '../shared/entities/Card';
+import CardView from './CardView';
 
 export type LaneProps = {
-  suits: TempCard[]
+  cards: Card[]
   // number: number
   // tail: boolean
 }
@@ -11,10 +11,10 @@ export type LaneProps = {
 export function Lane(props: LaneProps) {
   return (
     <div className="lane">
-        {props.suits.map((suit, index) => 
-            <Card
-                key={suit.card + index}
-                suit={suit.card}
+        {props.cards.map((suit, i) => 
+            <CardView
+                key={i.toString()}
+                card={suit}
             />
         )}
     </div>

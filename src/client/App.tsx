@@ -1,9 +1,10 @@
 import React from 'react';
-import PlayMat, { TempCard } from './PlayMat';
+import Card from 'shared/entities/Card';
+import PlayMat from './PlayMat';
 
 type AppProps = {
-  set: string[]
-  lines: TempCard[][]
+  set: Card[]
+  lines: Card[][]
   goals: string[]
   message: string
 }

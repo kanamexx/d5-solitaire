@@ -1,17 +1,18 @@
 import React from 'react';
+import Card from '../shared/entities/Card';
 import { Lane } from './Lane';
-import { TempCard } from './PlayMat';
 
 type LanesProps = {
-  props: TempCard[][]
+  props: Card[][]
 }
 
 function Lanes(props: LanesProps) {
   return (
     <div className="lanes">
-        {props.props.map(prop => 
+        {props.props.map((prop, i) => 
             <Lane
-              suits={prop}
+              key={i.toString()}
+              cards={prop}
             />
         )}
     </div>

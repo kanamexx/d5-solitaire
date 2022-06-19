@@ -1,18 +1,14 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import Card from './Card';
+import Card from 'shared/entities/Card';
+import CardView from './CardView';
 import Lanes from './Lanes';
 
 type PlayMatProps = {
-    set: string[]
-    lines: TempCard[][]
+    set: Card[]
+    lines: Card[][]
     goals: string[]
     message: string
-}
-
-export type TempCard = {
-    card: string
-    tail: boolean
 }
 
 class PlayMat extends Component<PlayMatProps, PlayMatProps> {
@@ -32,22 +28,22 @@ class PlayMat extends Component<PlayMatProps, PlayMatProps> {
         console.log(data)
 
         this.setState({
-            set: data.set,
+            set: data.set.map(card => Card.of(card.suit, card.number, card.isTail)),
             lines: data.lines,
             goals: data.goals,
             message: data.message,
         })
     }
 
-    renderCard(suit: string){
+    renderCard(card: Card, i: number){
         return (
-            <Card
-                suit={suit}
-                key={suit}
+            <CardView
+                key={i.toString()}
+                card={card}
             />
         )
     }
-    renderLanes(props: TempCard[][]){
+    renderLanes(props: Card[][]){
         return (
             <Lanes
                 props={props}
@@ -58,7 +54,7 @@ class PlayMat extends Component<PlayMatProps, PlayMatProps> {
     render() {
         return (
             <>
-                <div className='set'>set: {this.state.set.map(card => this.renderCard(card))}</div>
+                <div className='set'>set: {this.state.set.map((card, i) => this.renderCard(card, i))}</div>
                 <div>lines: {this.renderLanes(this.state.lines)}</div>
                 {/* <h1>goals: {this.state.goals}</h1> */}
                 <h1>message: {this.state.message}</h1>
