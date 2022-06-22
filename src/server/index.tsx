@@ -37,7 +37,7 @@ for (let i = 0; i < 7; i++) {
     }
     lines.push(line)
 }
-let goals: Card[][] = Suit.all().map(() => [])
+let goals: Card[][] = Suit.list().map(() => [])
 
 api.get('/solitaire/:now', (req, res) => {
     return res.json({

@@ -6,8 +6,8 @@ export default class CardServer {
     private constructor(){}
 
     public static serve = (): Card[] => {
-        return Suit.all()
-            .map(suit => Rank.all()
+        return Suit.list()
+            .map(suit => Rank.list()
                 .map(rank => Card.of(suit, rank, false)))
             .flat()
     }

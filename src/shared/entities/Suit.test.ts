@@ -12,6 +12,14 @@ describe('instantiate', () => {
     })
 })
 
+describe('list', () => {
+    test('successful call returns all Suit', () => {
+        expect(Suit.list()).toEqual(
+            [Suit.SPADE, Suit.CLUB, Suit.HEART, Suit.DIAMOND]
+        )
+    })
+})
+
 const testSuccessfulInstantiation = (symbol: any, expectation: Suit) => {
     const suit: Suit = Suit.of(symbol)
     expect(suit).toEqual(expectation)

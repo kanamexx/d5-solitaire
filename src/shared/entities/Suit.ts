@@ -27,7 +27,7 @@ export default class Suit {
         }
     }
 
-    public static all(): Suit[] {return [this.SPADE, this.CLUB, this.HEART, this.DIAMOND]}
+    public static list(): Suit[] {return [this.SPADE, this.CLUB, this.HEART, this.DIAMOND]}
 
     public get color(): Types.ColorType {
         return this._color

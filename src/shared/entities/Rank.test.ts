@@ -20,6 +20,16 @@ describe('instantiate', () => {
         testFailedInstantiation('invalid')
         testFailedInstantiation(0)
     })
+    describe('list', () => {
+        test('successful call returns all Suit', () => {
+            expect(Rank.list()).toEqual([
+                    Rank.ONE, Rank.TWO, Rank.THREE, Rank.FOUR,
+                    Rank.FIVE, Rank.SIX, Rank.SEVEN, Rank.EIGHT,
+                    Rank.NINE, Rank.TEN, Rank.ELEVEN, Rank.TWELVE,
+                    Rank.THIRTEEN, 
+                ])
+        })
+    })
 })
 
 describe('comparison', () => {

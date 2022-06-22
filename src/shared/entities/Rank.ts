@@ -41,7 +41,7 @@ export default class Rank {
         }
     }
 
-    public static all = (): Rank[] => {
+    public static list = (): Rank[] => {
         return [
             this.ONE, this.TWO, this.THREE, this.FOUR,
             this.FIVE, this.SIX, this.SEVEN, this.EIGHT,
