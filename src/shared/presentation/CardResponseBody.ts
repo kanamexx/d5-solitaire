@@ -1,4 +1,4 @@
-import Card from "shared/entities/Card";
+import Card from "shared/domain/Card";
 import RankResponseBody from "./RankResponseBody";
 import { SuitResponse } from "./SuitResponseBody";
 

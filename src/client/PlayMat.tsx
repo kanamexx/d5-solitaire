@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import Card from 'shared/entities/Card';
+import Card from 'shared/domain/Card';
 import CardView from './CardView';
 import Lanes from './Lanes';
 

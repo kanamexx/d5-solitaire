@@ -1,4 +1,4 @@
-import { RankType, SuitSymbolType } from 'shared/types'
+import { RankType, SuitSymbolType } from 'shared/domain/types'
 import Rank from './Rank'
 import Suit from './Suit'
 

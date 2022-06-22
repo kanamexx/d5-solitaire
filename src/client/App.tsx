@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from 'shared/entities/Card';
+import Card from 'shared/domain/Card';
 import PlayMat from './PlayMat';
 
 type AppProps = {

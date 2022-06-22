@@ -1,5 +1,5 @@
-import Suit from 'shared/entities/Suit';
-import * as Types from '../types/index';
+import Suit from 'shared/domain/Suit';
+import * as Types from '../domain/types/index';
 
 class SuitResponseBody{
     public readonly symbol: Types.SuitSymbolType

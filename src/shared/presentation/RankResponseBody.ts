@@ -1,5 +1,5 @@
-import Rank from "shared/entities/Rank"
-import { RankType } from "shared/types"
+import Rank from "shared/domain/Rank"
+import { RankType } from "shared/domain/types"
 
 export default class RankResponseBody {
     private readonly value: RankType

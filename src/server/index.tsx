@@ -5,10 +5,10 @@ import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import { CardResponse as CardResponseBody } from 'shared/dtos/CardResponseBody';
-import Card from 'shared/entities/Card';
-import CardServer from 'shared/entities/CardServer';
-import Suit from 'shared/entities/Suit';
+import Card from 'shared/domain/Card';
+import CardServer from 'shared/domain/CardServer';
+import Suit from 'shared/domain/Suit';
+import { CardResponse as CardResponseBody } from 'shared/presentation/CardResponseBody';
 import App from '../client/App';
 
 const PORT = process.env.PORT || 3006;

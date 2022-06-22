@@ -1,4 +1,4 @@
-import { RankSymbolType, RankType } from "shared/types"
+import { RankSymbolType, RankType } from "shared/domain/types"
 
 
 export default class Rank {
