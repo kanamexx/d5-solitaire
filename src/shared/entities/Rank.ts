@@ -41,6 +41,15 @@ export default class Rank {
         }
     }
 
+    public static all = (): Rank[] => {
+        return [
+            this.ONE, this.TWO, this.THREE, this.FOUR,
+            this.FIVE, this.SIX, this.SEVEN, this.EIGHT,
+            this.NINE, this.TEN, this.ELEVEN, this.TWELVE,
+            this.THIRTEEN,
+    ]}
+
+
     public get value(): RankType{
         return this._value
     }

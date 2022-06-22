@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import Card from 'shared/entities/Card';
-import Suit from 'shared/entities/Suit';
 import CardView from './CardView';
 import Lanes from './Lanes';
 
@@ -28,8 +27,8 @@ class PlayMat extends Component<PlayMatProps, PlayMatProps> {
         const data: PlayMatProps = res.data
 
         this.setState({
-            set: data.set.map(card => Card.of(Suit.of(card.suit.symbol), card.number, card.isTail)),
-            lines: data.lines,
+            set: data.set.map(card => Card.of(card.suit.symbol, card.rank.value, card.isTail)),
+            lines: data.lines.map(line => line.map(card => Card.of(card.suit.symbol, card.rank.value, card.isTail))),
             goals: data.goals,
             message: data.message,
         })

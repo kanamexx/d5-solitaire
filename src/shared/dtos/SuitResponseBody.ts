@@ -1,7 +1,7 @@
 import Suit from 'shared/entities/Suit';
 import * as Types from '../types/index';
 
-class SuitResponse{
+class SuitResponseBody{
     public readonly symbol: Types.SuitSymbolType
     public readonly color: Types.ColorType
     public readonly numberSymbol: string
@@ -15,11 +15,11 @@ class SuitResponse{
         this.color = color
     }
 
-    public static fromEntity(entity: Suit): SuitResponse{
-        return new SuitResponse(
+    public static of(entity: Suit): SuitResponseBody{
+        return new SuitResponseBody(
             entity.symbol,
             entity.color,
         )
     }
 }
-export { SuitResponse };
+export { SuitResponseBody as SuitResponse };

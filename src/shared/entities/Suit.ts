@@ -17,6 +17,7 @@ export default class Suit {
     }
 
     public static of(symbol: Types.SuitSymbolType): Suit{
+        console.log(symbol)
         switch (symbol) {
             case '♠': return this.SPADE
             case '♣': return this.CLUB
@@ -25,6 +26,8 @@ export default class Suit {
             default: throw new Error(`invalid Suit: ${symbol}`)
         }
     }
+
+    public static all(): Suit[] {return [this.SPADE, this.CLUB, this.HEART, this.DIAMOND]}
 
     public get color(): Types.ColorType {
         return this._color
