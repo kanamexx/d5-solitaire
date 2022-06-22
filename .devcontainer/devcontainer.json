@@ -18,7 +18,10 @@
 				"Gruntfuggly.todo-tree",
 				"christian-kohler.npm-intellisense",
 				"christian-kohler.path-intellisense",
-				"esbenp.prettier-vscode"
+				"esbenp.prettier-vscode",
+				"steoates.autoimport",
+				"stringham.move-ts",
+				"NuclleaR.vscode-extension-auto-import",
 			]
 		}
 	},
