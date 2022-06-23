@@ -15,7 +15,7 @@ describe('instantiate', () => {
 describe('list', () => {
     test('successful call returns all Suit', () => {
         expect(Suit.list()).toEqual(
-            [Suit.SPADE, Suit.CLUB, Suit.HEART]
+            [Suit.SPADE, Suit.CLUB, Suit.HEART, Suit.DIAMOND]
         )
     })
 })
