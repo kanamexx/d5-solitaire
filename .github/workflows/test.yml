@@ -1,0 +1,16 @@
+name: "test"
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: setup
+      - run: npm install
+      - name: run test
+      - run: npm test
