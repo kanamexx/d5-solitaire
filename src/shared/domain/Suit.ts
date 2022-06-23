@@ -17,7 +17,6 @@ export default class Suit {
     }
 
     public static of(symbol: Types.SuitSymbolType): Suit{
-        console.log(symbol)
         switch (symbol) {
             case '♠': return this.SPADE
             case '♣': return this.CLUB
