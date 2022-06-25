@@ -1,7 +1,7 @@
 import * as Types from './types/index'
 
 export default class Suit {
-    private readonly _symbol: Types.SuitSymbolType
+    private readonly _value: Types.SuitSymbolType
     private readonly _color: Types.ColorType
 
     public static readonly SPADE: Suit = new Suit('♠')
@@ -10,10 +10,10 @@ export default class Suit {
     public static readonly DIAMOND: Suit = new Suit('♢')
 
     private constructor(
-        symbol: Types.SuitSymbolType,
+        value: Types.SuitSymbolType,
     ) {
-        this._symbol = symbol
-        this._color = (symbol === '♠' || symbol === '♣') ? 'black' : 'red'
+        this._value = value
+        this._color = (value === '♠' || value === '♣') ? 'black' : 'red'
     }
 
     public static of(symbol: Types.SuitSymbolType): Suit{
@@ -31,7 +31,7 @@ export default class Suit {
     public get color(): Types.ColorType {
         return this._color
     }
-    public get symbol(): Types.SuitSymbolType {
-        return this._symbol
+    public get value(): Types.SuitSymbolType {
+        return this._value
     }
 }

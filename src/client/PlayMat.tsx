@@ -27,8 +27,8 @@ class PlayMat extends Component<PlayMatProps, PlayMatProps> {
         const data: PlayMatProps = res.data
 
         this.setState({
-            set: data.set.map(card => Card.of(card.suit.symbol, card.rank.value, card.isTail)),
-            lines: data.lines.map(line => line.map(card => Card.of(card.suit.symbol, card.rank.value, card.isTail))),
+            set: data.set.map(card => Card.of(card.suit.value, card.rank.value, card.isTail)),
+            lines: data.lines.map(line => line.map(card => Card.of(card.suit.value, card.rank.value, card.isTail))),
             goals: data.goals,
             message: data.message,
         })

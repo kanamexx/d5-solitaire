@@ -23,7 +23,7 @@ describe('list', () => {
 const testSuccessfulInstantiation = (symbol: any, expectation: Suit) => {
     const suit: Suit = Suit.of(symbol)
     expect(suit).toEqual(expectation)
-    expect(suit.symbol).toBe(expectation.symbol)
+    expect(suit.value).toBe(expectation.value)
     expect(suit.color).toBe(expectation.color)
 }
 const testFailedInstantiation = (symbol: any, message: string) => {

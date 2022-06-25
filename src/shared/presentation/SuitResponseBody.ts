@@ -17,7 +17,7 @@ class SuitResponseBody{
 
     public static of(entity: Suit): SuitResponseBody{
         return new SuitResponseBody(
-            entity.symbol,
+            entity.value,
             entity.color,
         )
     }

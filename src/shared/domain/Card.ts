@@ -32,7 +32,7 @@ class Card {
     }
 
     public getSuitString(): SuitSymbolType {
-        return this._suit.symbol
+        return this._suit.value
     }
     public getRankString(): RankType {
         return this._rank.value
