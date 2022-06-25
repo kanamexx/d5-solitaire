@@ -1,18 +1,18 @@
 import React from "react";
 import Card from "shared/domain/Card";
-import PlayMat from "./PlayMat";
+import PlayField from "./PlayField";
 
 type AppProps = {
   set: Card[];
   lines: Card[][];
-  goals: string[];
+  goals: Card[][];
   message: string;
 };
 
 function App(props: AppProps) {
   return (
     <div className="App">
-      <PlayMat {...props} />
+      <PlayField {...props} />
     </div>
   );
 }

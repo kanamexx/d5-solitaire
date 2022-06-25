@@ -32,7 +32,7 @@ api.get("/", (req, res) => {
 
 const playField = GameMaster.init();
 
-api.get("/solitaire/:now", (req, res) => {
+api.get("/solitaire/:from/:to", (req, res) => {
   return res.json({
     set: playField.set.map((card) => CardResponseBody.of(card)),
     lines: playField.lines.map((line) =>
