@@ -5,9 +5,7 @@ import express from "express";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 
-import Card from "shared/domain/Card";
-import CardServer from "shared/domain/CardServer";
-import Suit from "shared/domain/Suit";
+import GameMaster from "shared/domain/GameMaster";
 import { CardResponse as CardResponseBody } from "shared/presentation/CardResponseBody";
 import App from "../client/App";
 
@@ -32,22 +30,15 @@ api.get("/", (req, res) => {
   });
 });
 
-let set: Card[] = CardServer.serve();
-let lines: Card[][] = [];
-for (let i = 0; i < 7; i++) {
-  const line: Card[] = [];
-  for (let j = 0; j < i + 1; j++) {
-    line.push(set.shift());
-  }
-  lines.push(line);
-}
-let goals: Card[][] = Suit.list().map(() => []);
+const playField = GameMaster.init();
 
 api.get("/solitaire/:now", (req, res) => {
   return res.json({
-    set: set.map((card) => CardResponseBody.of(card)),
-    lines: lines.map((line) => line.map((card) => CardResponseBody.of(card))),
-    goals: goals,
+    set: playField.set.map((card) => CardResponseBody.of(card)),
+    lines: playField.lines.map((line) =>
+      line.map((card) => CardResponseBody.of(card))
+    ),
+    goals: playField.goals,
     message: "どうしますか？(操作対象のレーン。手札の場合は7):",
   });
 });
