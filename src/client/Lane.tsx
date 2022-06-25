@@ -1,20 +1,17 @@
-import React from 'react';
-import Card from '../shared/domain/Card';
-import CardView from './CardView';
+import React from "react";
+import Card from "../shared/domain/Card";
+import CardView from "./CardView";
 
 export type LaneProps = {
-  cards: Card[]
-}
+  cards: Card[];
+};
 
 export function Lane(props: LaneProps) {
   return (
     <div className="lane">
-        {props.cards.map((suit, i) => 
-            <CardView
-                key={i.toString()}
-                card={suit}
-            />
-        )}
+      {props.cards.map((suit, i) => (
+        <CardView key={i.toString()} card={suit} />
+      ))}
     </div>
   );
 }

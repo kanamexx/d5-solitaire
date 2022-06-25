@@ -1,20 +1,17 @@
-import React from 'react';
-import Card from '../shared/domain/Card';
-import { Lane } from './Lane';
+import React from "react";
+import Card from "../shared/domain/Card";
+import { Lane } from "./Lane";
 
 type LanesProps = {
-  props: Card[][]
-}
+  props: Card[][];
+};
 
 function Lanes(props: LanesProps) {
   return (
     <div className="lanes">
-        {props.props.map((prop, i) => 
-            <Lane
-              key={i.toString()}
-              cards={prop}
-            />
-        )}
+      {props.props.map((prop, i) => (
+        <Lane key={i.toString()} cards={prop} />
+      ))}
     </div>
   );
 }

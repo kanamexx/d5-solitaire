@@ -1,9 +1,9 @@
-import React from 'react';
-import Card from '../shared/domain/Card';
+import React from "react";
+import Card from "../shared/domain/Card";
 
 type CardViewProps = {
-  card: Card
-}
+  card: Card;
+};
 
 function CardView(props: CardViewProps) {
   return (
