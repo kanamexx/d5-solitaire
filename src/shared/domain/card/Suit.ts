@@ -40,4 +40,4 @@ export default class Suit {
     return this._value;
   }
 }
-type ColorType = "black" | "red";
+export type ColorType = "black" | "red";

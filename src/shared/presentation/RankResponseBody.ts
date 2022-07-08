@@ -1,4 +1,4 @@
-import Rank from "shared/domain/Rank";
+import Rank from "shared/domain/card/Rank";
 import { RankType } from "shared/domain/types";
 
 export default class RankResponseBody {

@@ -1,4 +1,4 @@
-import Card from "shared/domain/Card";
+import Card from "shared/domain/card/Card";
 import PlayField from "shared/domain/PlayField";
 
 export default class PlayerUsecase {
