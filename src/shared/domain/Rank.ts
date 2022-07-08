@@ -79,6 +79,9 @@ export default class Rank {
   public isLessThan = (another: Rank): boolean => {
     return this._value < another._value;
   };
+  public isGreaterThan = (another: Rank): boolean => {
+    return this._value > another._value;
+  };
 
   public toString = (): RankSymbolType => {
     switch (this._value) {

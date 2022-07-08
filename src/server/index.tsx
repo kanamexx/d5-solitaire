@@ -6,8 +6,12 @@ import React from "react";
 import ReactDOMServer from "react-dom/server";
 
 import GameMaster from "shared/domain/GameMaster";
+import PlayField from "shared/domain/PlayField";
 import { CardResponse as CardResponseBody } from "shared/presentation/CardResponseBody";
+import PlayerUsecase from "shared/usecase/PlayerUsecase";
+import sourceMapSupport from "source-map-support";
 import App from "../client/App";
+sourceMapSupport.install();
 
 const PORT = process.env.PORT || 3006;
 const api = express();
@@ -30,19 +34,42 @@ api.get("/", (req, res) => {
   });
 });
 
-const playField = GameMaster.init();
+let playField = null;
 
-api.get("/solitaire/:from/:to", (req, res) => {
-  return res.json({
-    set: playField.set.map((card) => CardResponseBody.of(card)),
-    lines: playField.lines.map((line) =>
-      line.map((card) => CardResponseBody.of(card))
-    ),
-    goals: playField.goals,
-    message: "どうしますか？(操作対象のレーン。手札の場合は7):",
-  });
+api.get("/solitaire", (req, res) => {
+  playField = GameMaster.init();
+  return toResponse(res, playField);
+});
+api.get("/solitaire/:from/:index/:to", (req, res) => {
+  try {
+    playField = new PlayerUsecase().move(
+      playField,
+      parseInt(req.params.from),
+      parseInt(req.params.index),
+      parseInt(req.params.to)
+    );
+  } catch (e) {
+    console.log(e);
+    return toResponse(res, playField);
+  }
+  return toResponse(res, playField);
 });
 
 api.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
+
+const toResponse = (res: any, playField: PlayField) => {
+  return res.json({
+    set: !playField.set
+      ? []
+      : playField.set.map((card) => CardResponseBody.of(card)),
+    lines: !playField.lines
+      ? []
+      : playField.lines.map((line) =>
+          !line ? [] : line.map((card) => CardResponseBody.of(card))
+        ),
+    goals: playField.goals,
+    message: "どうしますか？(操作対象のレーン。手札の場合は7):",
+  });
+};

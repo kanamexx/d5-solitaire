@@ -9,5 +9,6 @@
   "html.format.indentInnerHtml": true,
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
-  }
+  },
+  "jest.autoRun": "off"
 }

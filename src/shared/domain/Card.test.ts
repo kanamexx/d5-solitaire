@@ -33,26 +33,26 @@ describe("turnOver", () => {
   test("head card turn to be tail", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, false);
     const tailCard = card.turnOver();
-    expect(tailCard.isTail).toBeTruthy();
+    expect(tailCard.isHead).toBeTruthy();
   });
   test("tail card turn to be head", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, true);
     const tailCard = card.turnOver();
-    expect(tailCard.isTail).toBeFalsy();
+    expect(tailCard.isHead).toBeFalsy();
   });
 });
 describe("toHead", () => {
   test("successful call returns tail card", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, false);
     const tailCard = card.toHead();
-    expect(tailCard.isTail).toBeFalsy();
+    expect(tailCard.isHead).toBeFalsy();
   });
 });
 describe("toTail", () => {
   test("successful call returns tail card", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, false);
     const tailCard = card.toTail();
-    expect(tailCard.isTail).toBeTruthy();
+    expect(tailCard.isHead).toBeTruthy();
   });
 });
 
@@ -65,10 +65,10 @@ const testSuccessfulInstantiation = (
   expect(entity.rank).toEqual(expectation.rank);
   expect(entity.getSuitString()).toEqual(expectation.suit.value);
   expect(entity.getRankString()).toEqual(expectation.rank.toString());
-  expect(entity.isTail).toBeFalsy();
+  expect(entity.isHead).toBeFalsy();
 };
-const testFailedInstantiation = (suit: any, rank: any, isTail: boolean) => {
-  expect(() => Card.of(suit, rank, isTail)).toThrow(
-    new Error(`invalid args: {suit: ${suit}, rank: ${rank}, isTail: ${isTail}`)
+const testFailedInstantiation = (suit: any, rank: any, isHead: boolean) => {
+  expect(() => Card.of(suit, rank, isHead)).toThrow(
+    new Error(`invalid args: {suit: ${suit}, rank: ${rank}, isHead: ${isHead}`)
   );
 };

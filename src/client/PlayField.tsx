@@ -13,6 +13,7 @@ type PlayFieldProps = {
 
 type OrderProps = {
   from: string;
+  index: string;
   to: string;
 };
 
@@ -25,28 +26,51 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
       goals: props.goals,
       message: props.message,
       from: "",
+      index: "",
       to: "",
     };
   }
 
+  init = async () => {
+    const res = await axios.get(`/solitaire`);
+    const data: PlayFieldProps = res.data;
+
+    this.setState({
+      set: data.set.map((card) =>
+        Card.of(card.suit.value, card.rank.value, card.isHead)
+      ),
+      lines: data.lines.map((line) =>
+        line.map((card) =>
+          Card.of(card.suit.value, card.rank.value, card.isHead)
+        )
+      ),
+      goals: data.goals.map((goal) =>
+        goal.map((card) =>
+          Card.of(card.suit.value, card.rank.value, card.isHead)
+        )
+      ),
+      message: data.message,
+    });
+  };
+
   get = async () => {
     const res = await axios.get(
-      `/solitaire/${this.state.from}/${this.state.to}`
+      `/solitaire/${this.state.from}/${this.state.index}/${this.state.to}`
     );
     const data: PlayFieldProps = res.data;
 
     this.setState({
       set: data.set.map((card) =>
-        Card.of(card.suit.value, card.rank.value, card.isTail)
+        Card.of(card.suit.value, card.rank.value, card.isHead)
       ),
       lines: data.lines.map((line) =>
         line.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isTail)
+          Card.of(card.suit.value, card.rank.value, card.isHead)
         )
       ),
       goals: data.goals.map((goal) =>
         goal.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isTail)
+          Card.of(card.suit.value, card.rank.value, card.isHead)
         )
       ),
       message: data.message,
@@ -78,12 +102,19 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
             value={this.state.from}
             onChange={(e) => this.setState({ from: e.target.value })}
           ></input>
+          index:
+          <input
+            value={this.state.index}
+            onChange={(e) => this.setState({ index: e.target.value })}
+          ></input>
+          <br />
           to:
           <input
             value={this.state.to}
             onChange={(e) => this.setState({ to: e.target.value })}
           ></input>
         </div>
+        <button onClick={async () => await this.init()}>init</button>
         <button onClick={async () => await this.get()}>commit</button>
       </>
     );

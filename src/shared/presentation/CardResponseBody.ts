@@ -5,15 +5,20 @@ import { SuitResponse } from "./SuitResponseBody";
 class CardResponseBody {
   public readonly suit: SuitResponse;
   public readonly rank: RankResponseBody;
-  public readonly isTail: boolean;
+  public readonly isHead: boolean;
 
   private constructor(card: Card) {
     this.suit = SuitResponse.of(card.suit);
     this.rank = RankResponseBody.of(card.rank);
-    this.isTail = card.isTail;
+    this.isHead = card.isHead;
   }
 
   public static of(entity: Card): CardResponseBody {
+    // TODO: ここなおす
+    if (!entity) {
+      throw new Error("entity must not be null");
+    }
+
     return new CardResponseBody(entity);
   }
 }

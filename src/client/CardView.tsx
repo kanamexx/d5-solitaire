@@ -22,7 +22,7 @@ export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
   render() {
     return (
       <div className="card" onClick={this.handleClick}>
-        {this.state.card.isTail
+        {this.state.card.isHead
           ? "■"
           : this.state.card.getSuitString() + this.state.card.getRankString()}
       </div>
