@@ -7,7 +7,7 @@ describe("instantiate", () => {
   describe("of", () => {
     test("successful call by ValueClass returns instance", () => {
       const highRankCard = Card.of(Suit.CLUB, Rank.EIGHT, false);
-      const lowRankCard = Card.of(Suit.CLUB, Rank.ONE, false);
+      const lowRankCard = Card.of(Suit.CLUB, Rank.ACE, false);
 
       const cards = Cards.of([highRankCard, lowRankCard]);
     });

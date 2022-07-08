@@ -38,7 +38,7 @@ export default class Lane {
     }
 
     if (this.isCardsEmpty()) {
-      if (cards.getFirst().rank !== Rank.THIRTEEN) {
+      if (cards.getFirst().rank !== Rank.KING) {
         throw new Error("only K can be placed to empty lane");
       }
     }

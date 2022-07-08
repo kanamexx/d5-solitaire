@@ -11,7 +11,7 @@ describe("instansiation", () => {
       test("returns instance with lowest pair", () => {
         const laneId = LaneId.of(1);
         const highRankCard = Card.of(Suit.CLUB, Rank.TWO, true);
-        const lowRankCard = Card.of(Suit.HEART, Rank.ONE, true);
+        const lowRankCard = Card.of(Suit.HEART, Rank.ACE, true);
         const cards = Cards.of([highRankCard, lowRankCard]);
 
         const lane = Lane.of(laneId, cards);
@@ -20,8 +20,8 @@ describe("instansiation", () => {
       });
       test("returns instance with highest pair", () => {
         const laneId = LaneId.of(1);
-        const highRankCard = Card.of(Suit.DIAMOND, Rank.THIRTEEN, true);
-        const lowRankCard = Card.of(Suit.SPADE, Rank.TWELVE, true);
+        const highRankCard = Card.of(Suit.DIAMOND, Rank.KING, true);
+        const lowRankCard = Card.of(Suit.SPADE, Rank.QUEEN, true);
         const cards = Cards.of([highRankCard, lowRankCard]);
 
         const lane = Lane.of(laneId, cards);
@@ -30,7 +30,7 @@ describe("instansiation", () => {
       });
       test("returns instance with lowest one", () => {
         const laneId = LaneId.of(1);
-        const lowRankCard = Card.of(Suit.HEART, Rank.ONE, true);
+        const lowRankCard = Card.of(Suit.HEART, Rank.ACE, true);
         const cards = Cards.of([lowRankCard]);
 
         const lane = Lane.of(laneId, cards);
@@ -39,7 +39,7 @@ describe("instansiation", () => {
       });
       test("returns instance with highest one", () => {
         const laneId = LaneId.of(1);
-        const highRankCard = Card.of(Suit.DIAMOND, Rank.THIRTEEN, true);
+        const highRankCard = Card.of(Suit.DIAMOND, Rank.KING, true);
         const cards = Cards.of([highRankCard]);
 
         const lane = Lane.of(laneId, cards);
@@ -65,9 +65,9 @@ describe("instansiation", () => {
       });
       test("returns instance with tail card that must have less index in array", () => {
         const laneId = LaneId.of(1);
-        const tailCard = Card.of(Suit.HEART, Rank.ONE, false);
+        const tailCard = Card.of(Suit.HEART, Rank.ACE, false);
         const highRankCard = Card.of(Suit.CLUB, Rank.TWO, true);
-        const lowRankCard = Card.of(Suit.DIAMOND, Rank.ONE, true);
+        const lowRankCard = Card.of(Suit.DIAMOND, Rank.ACE, true);
         const cards = Cards.of([tailCard, highRankCard, lowRankCard]);
 
         const lane = Lane.of(laneId, cards);
@@ -78,7 +78,7 @@ describe("instansiation", () => {
     describe("failed call throws error", () => {
       test("by null laneId", () => {
         const highRankCard = Card.of(Suit.CLUB, Rank.TWO, true);
-        const lowRankCard = Card.of(Suit.HEART, Rank.ONE, true);
+        const lowRankCard = Card.of(Suit.HEART, Rank.ACE, true);
 
         expect(() =>
           Lane.of(null, Cards.of([highRankCard, lowRankCard]))
@@ -86,7 +86,7 @@ describe("instansiation", () => {
       });
       test("by invalid order rank cards", () => {
         const highRankCard = Card.of(Suit.CLUB, Rank.TWO, true);
-        const lowRankCard = Card.of(Suit.HEART, Rank.ONE, true);
+        const lowRankCard = Card.of(Suit.HEART, Rank.ACE, true);
         const laneId = LaneId.of(1);
 
         expect(() =>
@@ -95,7 +95,7 @@ describe("instansiation", () => {
       });
       test("by invalid order suit cards", () => {
         const highRankCard = Card.of(Suit.DIAMOND, Rank.TWO, true);
-        const lowRankCard = Card.of(Suit.HEART, Rank.ONE, true);
+        const lowRankCard = Card.of(Suit.HEART, Rank.ACE, true);
         const laneId = LaneId.of(1);
 
         expect(() =>
@@ -104,7 +104,7 @@ describe("instansiation", () => {
       });
       test("by tail card that have larger index than head", () => {
         const highRankCard = Card.of(Suit.DIAMOND, Rank.TWO, true);
-        const lowRankCard = Card.of(Suit.HEART, Rank.ONE, false);
+        const lowRankCard = Card.of(Suit.HEART, Rank.ACE, false);
         const laneId = LaneId.of(1);
 
         expect(() =>
@@ -121,8 +121,8 @@ describe("append", () => {
       const laneId = LaneId.of(1);
       const empty = Lane.of(laneId, null);
       const appendings = Cards.of([
-        Card.of(Suit.CLUB, Rank.THIRTEEN, true),
-        Card.of(Suit.HEART, Rank.TWELVE, true),
+        Card.of(Suit.CLUB, Rank.KING, true),
+        Card.of(Suit.HEART, Rank.QUEEN, true),
       ]);
       const appended: Lane = empty.append(appendings);
 
@@ -132,7 +132,7 @@ describe("append", () => {
     test("empty lane appends K card", () => {
       const laneId = LaneId.of(1);
       const empty = Lane.of(laneId, null);
-      const appendings = Cards.of([Card.of(Suit.CLUB, Rank.THIRTEEN, true)]);
+      const appendings = Cards.of([Card.of(Suit.CLUB, Rank.KING, true)]);
       const appended: Lane = empty.append(appendings);
 
       expect(appended.laneId).toEqual(laneId);
@@ -180,7 +180,7 @@ describe("append", () => {
     test("empty lane reject to append any cards except for K card", () => {
       const laneId = LaneId.of(1);
       const empty = Lane.of(laneId, null);
-      const appendings = Cards.of([Card.of(Suit.HEART, Rank.TWELVE, true)]);
+      const appendings = Cards.of([Card.of(Suit.HEART, Rank.QUEEN, true)]);
       expect(() => empty.append(appendings)).toThrow(
         new Error("only K can be placed to empty lane")
       );
@@ -188,7 +188,7 @@ describe("append", () => {
     test("reject to append any cards contain tail card", () => {
       const laneId = LaneId.of(1);
       const empty = Lane.of(laneId, null);
-      const appendings = Cards.of([Card.of(Suit.HEART, Rank.TWELVE, false)]);
+      const appendings = Cards.of([Card.of(Suit.HEART, Rank.QUEEN, false)]);
       expect(() => empty.append(appendings)).toThrow(
         new Error("tail card cannot be appended")
       );

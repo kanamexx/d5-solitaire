@@ -3,7 +3,7 @@ import { RankSymbolType, RankType } from "shared/domain/types";
 export default class Rank {
   private readonly _value: RankType;
 
-  public static readonly ONE: Rank = new Rank(1);
+  public static readonly ACE: Rank = new Rank(1);
   public static readonly TWO: Rank = new Rank(2);
   public static readonly THREE: Rank = new Rank(3);
   public static readonly FOUR: Rank = new Rank(4);
@@ -13,9 +13,9 @@ export default class Rank {
   public static readonly EIGHT: Rank = new Rank(8);
   public static readonly NINE: Rank = new Rank(9);
   public static readonly TEN: Rank = new Rank(10);
-  public static readonly ELEVEN: Rank = new Rank(11);
-  public static readonly TWELVE: Rank = new Rank(12);
-  public static readonly THIRTEEN: Rank = new Rank(13);
+  public static readonly JACK: Rank = new Rank(11);
+  public static readonly QUEEN: Rank = new Rank(12);
+  public static readonly KING: Rank = new Rank(13);
 
   private constructor(value: RankType) {
     this._value = value;
@@ -24,7 +24,7 @@ export default class Rank {
   public static of = (value: RankType): Rank => {
     switch (value) {
       case 1:
-        return Rank.ONE;
+        return Rank.ACE;
       case 2:
         return Rank.TWO;
       case 3:
@@ -44,11 +44,11 @@ export default class Rank {
       case 10:
         return Rank.TEN;
       case 11:
-        return Rank.ELEVEN;
+        return Rank.JACK;
       case 12:
-        return Rank.TWELVE;
+        return Rank.QUEEN;
       case 13:
-        return Rank.THIRTEEN;
+        return Rank.KING;
       default:
         throw new Error(`invalid Rank: ${value}`);
     }
@@ -56,7 +56,7 @@ export default class Rank {
 
   public static list = (): Rank[] => {
     return [
-      this.ONE,
+      this.ACE,
       this.TWO,
       this.THREE,
       this.FOUR,
@@ -66,9 +66,9 @@ export default class Rank {
       this.EIGHT,
       this.NINE,
       this.TEN,
-      this.ELEVEN,
-      this.TWELVE,
-      this.THIRTEEN,
+      this.JACK,
+      this.QUEEN,
+      this.KING,
     ];
   };
 

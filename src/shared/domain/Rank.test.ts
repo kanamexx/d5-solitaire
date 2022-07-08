@@ -2,7 +2,7 @@ import Rank from "./Rank";
 
 describe("instantiate", () => {
   test("successful call returns a instance", () => {
-    testSuccessfulInstantiation(1, { rank: Rank.ONE, value: 1, str: "A" });
+    testSuccessfulInstantiation(1, { rank: Rank.ACE, value: 1, str: "A" });
     testSuccessfulInstantiation(2, { rank: Rank.TWO, value: 2, str: "2" });
     testSuccessfulInstantiation(3, { rank: Rank.THREE, value: 3, str: "3" });
     testSuccessfulInstantiation(4, { rank: Rank.FOUR, value: 4, str: "4" });
@@ -12,10 +12,10 @@ describe("instantiate", () => {
     testSuccessfulInstantiation(8, { rank: Rank.EIGHT, value: 8, str: "8" });
     testSuccessfulInstantiation(9, { rank: Rank.NINE, value: 9, str: "9" });
     testSuccessfulInstantiation(10, { rank: Rank.TEN, value: 10, str: "10" });
-    testSuccessfulInstantiation(11, { rank: Rank.ELEVEN, value: 11, str: "J" });
-    testSuccessfulInstantiation(12, { rank: Rank.TWELVE, value: 12, str: "Q" });
+    testSuccessfulInstantiation(11, { rank: Rank.JACK, value: 11, str: "J" });
+    testSuccessfulInstantiation(12, { rank: Rank.QUEEN, value: 12, str: "Q" });
     testSuccessfulInstantiation(13, {
-      rank: Rank.THIRTEEN,
+      rank: Rank.KING,
       value: 13,
       str: "K",
     });
@@ -27,7 +27,7 @@ describe("instantiate", () => {
   describe("list", () => {
     test("successful call returns all Suit", () => {
       expect(Rank.list()).toEqual([
-        Rank.ONE,
+        Rank.ACE,
         Rank.TWO,
         Rank.THREE,
         Rank.FOUR,
@@ -37,9 +37,9 @@ describe("instantiate", () => {
         Rank.EIGHT,
         Rank.NINE,
         Rank.TEN,
-        Rank.ELEVEN,
-        Rank.TWELVE,
-        Rank.THIRTEEN,
+        Rank.JACK,
+        Rank.QUEEN,
+        Rank.KING,
       ]);
     });
   });
@@ -47,10 +47,10 @@ describe("instantiate", () => {
 
 describe("comparison", () => {
   test("me is less, then returns true", () => {
-    expect(Rank.SIX.isLessThan(Rank.THIRTEEN)).toBeTruthy();
+    expect(Rank.SIX.isLessThan(Rank.KING)).toBeTruthy();
   });
   test("me is more, then returns false", () => {
-    expect(Rank.SIX.isLessThan(Rank.ONE)).toBeFalsy();
+    expect(Rank.SIX.isLessThan(Rank.ACE)).toBeFalsy();
   });
   test("if the same, then returns false", () => {
     expect(Rank.SIX.isLessThan(Rank.SIX)).toBeFalsy();
