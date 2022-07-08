@@ -1,7 +1,7 @@
-import Card from "./Card";
+import Card from "./card/Card";
+import Rank from "./card/Rank";
+import Suit from "./card/Suit";
 import PlayField from "./PlayField";
-import Rank from "./Rank";
-import Suit from "./Suit";
 
 export default class GameMaster {
   private constructor() {}

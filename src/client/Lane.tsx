@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../shared/domain/Card";
+import Card from "../shared/domain/card/Card";
 import CardView from "./CardView";
 
 export type LaneProps = {

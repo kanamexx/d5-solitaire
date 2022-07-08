@@ -1,4 +1,4 @@
-import * as Types from "./types/index";
+import * as Types from "../types/index";
 
 export default class Suit {
   private readonly _value: Types.SuitSymbolType;

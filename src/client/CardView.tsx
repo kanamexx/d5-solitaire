@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Card from "../shared/domain/Card";
+import Card from "../shared/domain/card/Card";
 
 type CardViewProps = {
   card: Card;

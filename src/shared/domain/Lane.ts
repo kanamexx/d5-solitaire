@@ -1,6 +1,6 @@
+import Rank from "./card/Rank";
 import Cards from "./Cards";
 import LaneId from "./LaneId";
-import Rank from "./Rank";
 
 export default class Lane {
   private readonly _laneId: LaneId;

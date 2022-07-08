@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "./card/Card";
 
 export default class PlayField {
   private readonly _set: Card[];
