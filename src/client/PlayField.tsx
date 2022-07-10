@@ -99,6 +99,7 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
         <div>
           from:
           <input
+            id="aaa"
             value={this.state.from}
             onChange={(e) => this.setState({ from: e.target.value })}
           ></input>
@@ -114,7 +115,9 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
             onChange={(e) => this.setState({ to: e.target.value })}
           ></input>
         </div>
-        <button onClick={async () => await this.init()}>init</button>
+        <button id="init-button" onClick={async () => await this.init()}>
+          init
+        </button>
         <button onClick={async () => await this.get()}>commit</button>
       </>
     );
