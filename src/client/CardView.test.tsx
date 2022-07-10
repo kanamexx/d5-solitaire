@@ -15,7 +15,7 @@ import Suit from "../shared/domain/card/Suit";
 import CardVeiw from "./CardView";
 const { configureToMatchImageSnapshot } = require("jest-image-snapshot");
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
-  customDiffConfig: { threshold: 0.5 },
+  customDiffConfig: { threshold: 1 },
 });
 expect.extend({ toMatchImageSnapshot });
 
