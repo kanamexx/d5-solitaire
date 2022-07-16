@@ -1,14 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import "./css/app.css";
 
-ReactDOM.hydrate(
+ReactDOM.hydrateRoot(
+  document.getElementById("root"),
   <BrowserRouter>
     <App set={[]} lines={[]} goals={[]} message={""} />
-  </BrowserRouter>,
-  document.getElementById("root")
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
