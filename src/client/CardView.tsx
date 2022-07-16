@@ -21,7 +21,7 @@ export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
   };
 
   render() {
-    const view = this.state.card.isHead ? (
+    const view = this.state.card.isFace ? (
       <div>
         {this.state.card.getSuitString() + this.state.card.getRankString()}
       </div>

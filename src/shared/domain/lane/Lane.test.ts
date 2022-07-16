@@ -63,12 +63,12 @@ describe("instansiation", () => {
         // expect(lane.cards).toEqual(Cards.empty());
         expect(lane.cards.values).toEqual(Cards.empty().values);
       });
-      test("returns instance with tail card that must have less index in array", () => {
+      test("returns instance with back card that must have less index in array", () => {
         const laneId = LaneId.of(1);
-        const tailCard = Card.of(Suit.HEART, Rank.ACE, false);
+        const backCard = Card.of(Suit.HEART, Rank.ACE, false);
         const highRankCard = Card.of(Suit.CLUB, Rank.TWO, true);
         const lowRankCard = Card.of(Suit.DIAMOND, Rank.ACE, true);
-        const cards = Cards.of([tailCard, highRankCard, lowRankCard]);
+        const cards = Cards.of([backCard, highRankCard, lowRankCard]);
 
         const lane = Lane.of(laneId, cards);
         expect(lane.laneId).toBe(laneId);
@@ -102,7 +102,7 @@ describe("instansiation", () => {
           Lane.of(laneId, Cards.of([highRankCard, lowRankCard]))
         ).toThrow("invalid order");
       });
-      test("by tail card that have larger index than head", () => {
+      test("by back card that have larger index than face", () => {
         const highRankCard = Card.of(Suit.DIAMOND, Rank.TWO, true);
         const lowRankCard = Card.of(Suit.HEART, Rank.ACE, false);
         const laneId = LaneId.of(1);
@@ -138,7 +138,7 @@ describe("append", () => {
       expect(appended.laneId).toEqual(laneId);
       expect(appended.cards.values).toEqual(appendings.values);
     });
-    test("non-empty lane appends cards start from 1 less than max index one in lane that is head", () => {
+    test("non-empty lane appends cards start from 1 less than max index one in lane that is face", () => {
       const laneId = LaneId.of(1);
       const initial = Lane.of(
         laneId,
@@ -158,7 +158,7 @@ describe("append", () => {
         initial.cards.values.concat(appendings.values)
       );
     });
-    test("non-empty lane appends card 1 less than max index one in lane that is head", () => {
+    test("non-empty lane appends card 1 less than max index one in lane that is face", () => {
       const laneId = LaneId.of(1);
       const initial = Lane.of(
         laneId,
@@ -185,12 +185,12 @@ describe("append", () => {
         new Error("only K can be placed to empty lane")
       );
     });
-    test("reject to append any cards contain tail card", () => {
+    test("reject to append any cards contain back card", () => {
       const laneId = LaneId.of(1);
       const empty = Lane.of(laneId, null);
       const appendings = Cards.of([Card.of(Suit.HEART, Rank.QUEEN, false)]);
       expect(() => empty.append(appendings)).toThrow(
-        new Error("tail card cannot be appended")
+        new Error("back card cannot be appended")
       );
     });
     test("reject to append any invalid order cards", () => {

@@ -5,7 +5,7 @@ class SuitResponseBody {
   public readonly value: Types.SuitSymbolType;
   public readonly color: ColorType;
   public readonly numberSymbol: string;
-  public readonly isTail: boolean;
+  public readonly isBack: boolean;
 
   private constructor(value: Types.SuitSymbolType, color: ColorType) {
     this.value = value;

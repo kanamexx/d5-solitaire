@@ -17,8 +17,8 @@ describe("instantiate", () => {
       expect(Cards.empty().values).toEqual([]);
     });
   });
-  describe("findLastTailIndex", () => {
-    test("returns last tail index if exist", () => {
+  describe("findLastBackIndex", () => {
+    test("returns last back index if exist", () => {
       const card1 = Card.of(Suit.CLUB, Rank.EIGHT, true);
       const card2 = Card.of(Suit.DIAMOND, Rank.SEVEN, true);
       const card3 = Card.of(Suit.HEART, Rank.SIX, false);
@@ -26,7 +26,7 @@ describe("instantiate", () => {
       const card5 = Card.of(Suit.SPADE, Rank.FOUR, true);
 
       const cards = Cards.of([card1, card2, card3, card4, card5]);
-      expect(cards.findLastTailIndex()).toBe(3);
+      expect(cards.findLastBackIndex()).toBe(3);
     });
     test("returns -1 if not exist", () => {
       const card1 = Card.of(Suit.CLUB, Rank.EIGHT, true);
@@ -36,7 +36,7 @@ describe("instantiate", () => {
       const card5 = Card.of(Suit.SPADE, Rank.FOUR, true);
 
       const cards = Cards.of([card1, card2, card3, card4, card5]);
-      expect(cards.findLastTailIndex()).toBe(-1);
+      expect(cards.findLastBackIndex()).toBe(-1);
     });
   });
 });

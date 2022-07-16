@@ -33,8 +33,8 @@ export default class Lane {
   };
 
   private validateAppendingCards(cards: Cards) {
-    if (cards.haveTails()) {
-      throw new Error("tail card cannot be appended");
+    if (cards.haveBacks()) {
+      throw new Error("back card cannot be appended");
     }
 
     if (this.isCardsEmpty()) {
@@ -57,16 +57,16 @@ export default class Lane {
     }
     if (
       !Lane.isDescendingBy1AndColorAlternate(cards) ||
-      !Lane.isSeparatedAndTailsHaveLessIndex(cards)
+      !Lane.isSeparatedAndBacksHaveLessIndex(cards)
     ) {
       throw new Error("invalid order cards");
     }
   };
 
   private static isDescendingBy1AndColorAlternate(cards: Cards): boolean {
-    const heads = cards.getHeads();
-    const invalids = heads
-      .map((c, i) => [c, heads[i + 1]])
+    const faces = cards.getFaces();
+    const invalids = faces
+      .map((c, i) => [c, faces[i + 1]])
       .filter((c) => c[1])
       .filter((c) => {
         const mustBeHigh = c[0];
@@ -81,7 +81,7 @@ export default class Lane {
     return invalids.length === 0;
   }
 
-  private static isSeparatedAndTailsHaveLessIndex(cards: Cards): boolean {
-    return cards.findLastTailIndex() < cards.findFirstHeadIndex();
+  private static isSeparatedAndBacksHaveLessIndex(cards: Cards): boolean {
+    return cards.findLastBackIndex() < cards.findFirstFaceIndex();
   }
 }

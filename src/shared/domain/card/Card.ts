@@ -5,7 +5,7 @@ import Suit from "./Suit";
 class Card {
   private readonly _suit: Suit;
   private readonly _rank: Rank;
-  private readonly _isHead: boolean;
+  private readonly _isFace: boolean;
 
   public get suit() {
     return this._suit;
@@ -13,32 +13,32 @@ class Card {
   public get rank() {
     return this._rank;
   }
-  public get isHead() {
-    return this._isHead;
+  public get isFace() {
+    return this._isFace;
   }
 
   private constructor(
     suit: Suit | SuitSymbolType,
     rank: Rank | RankType,
-    isHead: boolean
+    isFace: boolean
   ) {
     if (!suit || !rank) {
       throw new Error(
-        `invalid args: {suit: ${suit}, rank: ${rank}, isHead: ${isHead}`
+        `invalid args: {suit: ${suit}, rank: ${rank}, isFace: ${isFace}`
       );
     }
 
     this._suit = suit instanceof Suit ? suit : Suit.of(suit);
     this._rank = rank instanceof Rank ? rank : Rank.of(rank);
-    this._isHead = isHead;
+    this._isFace = isFace;
   }
 
   public static of = (
     suit: Suit | SuitSymbolType,
     rank: Rank | RankType,
-    isHead: boolean
+    isFace: boolean
   ): Card => {
-    return new Card(suit, rank, isHead);
+    return new Card(suit, rank, isFace);
   };
 
   public getSuitString(): SuitSymbolType {
@@ -49,12 +49,12 @@ class Card {
   }
 
   public turnOver = (): Card => {
-    return this.isHead ? this.toHead() : this.toTail();
+    return this.isFace ? this.faceUp() : this.faceDown();
   };
-  public toHead = (): Card => {
+  public faceUp = (): Card => {
     return new Card(this._suit, this._rank, false);
   };
-  public toTail = (): Card => {
+  public faceDown = (): Card => {
     return new Card(this._suit, this._rank, true);
   };
 }

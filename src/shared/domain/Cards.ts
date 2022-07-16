@@ -15,24 +15,24 @@ export default class Cards {
     return new Cards(values);
   };
 
-  public getHeads = (): Card[] => {
-    return this._values.filter((c) => c.isHead);
+  public getFaces = (): Card[] => {
+    return this._values.filter((c) => c.isFace);
   };
-  public getTails = (): Card[] => {
-    return this._values.filter((c) => !c.isHead);
+  public getBacks = (): Card[] => {
+    return this._values.filter((c) => !c.isFace);
   };
-  public haveHeads = (): boolean => {
-    return this.getHeads().length !== 0;
+  public haveFaces = (): boolean => {
+    return this.getFaces().length !== 0;
   };
-  public haveTails = (): boolean => {
-    return this.getTails().length !== 0;
+  public haveBacks = (): boolean => {
+    return this.getBacks().length !== 0;
   };
-  public findFirstHeadIndex = (): number => {
-    return this._values.findIndex((c) => c.isHead);
+  public findFirstFaceIndex = (): number => {
+    return this._values.findIndex((c) => c.isFace);
   };
-  public findLastTailIndex = (): number => {
+  public findLastBackIndex = (): number => {
     for (let i = this._values.length - 1; i > 0; i--) {
-      if (!this._values[i].isHead) {
+      if (!this._values[i].isFace) {
         return i;
       }
     }

@@ -22,7 +22,7 @@ export default class GameMaster {
       const line: Card[] = [];
       for (let j = 0; j < i + 1; j++) {
         const cardOnLine = deck.shift();
-        line.push(j === i ? cardOnLine.toHead() : cardOnLine);
+        line.push(j === i ? cardOnLine.faceUp() : cardOnLine);
       }
       lines.push(line);
     }
