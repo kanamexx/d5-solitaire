@@ -28,12 +28,7 @@ module.exports = {
         },
       },
       {
-        test: /\.css/,
-        use: ["style-loader", "css-loader"],
-      },
-      {
         test: /\.(jpg|png)$/,
-        // loader: "file-loader",
         use: {
           loader: "file-loader",
         },
