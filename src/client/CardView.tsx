@@ -1,7 +1,7 @@
+import { styled } from "@linaria/react";
 import React, { Component } from "react";
 import Card from "../shared/domain/card/Card";
 import backImage from "./assets/card-back.png";
-
 type CardViewProps = {
   card: Card;
 };
@@ -21,6 +21,10 @@ export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
   };
 
   render() {
+    const Container = styled.div`
+      backgroud-color: red;
+    `;
+
     const view = this.state.card.isFace ? (
       <div>
         {this.state.card.getSuitString() + this.state.card.getRankString()}

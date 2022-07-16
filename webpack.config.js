@@ -1,8 +1,15 @@
 const path = require("path");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "styles.css",
+    }),
+  ],
+
   target: "node",
   entry: {
     server: "./src/server/index.tsx",
@@ -16,27 +23,40 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        // exclude: /\..*test.*/,
-        use: {
-          loader: "ts-loader",
-          options: {
-            compilerOptions: {
-              strict: false,
-              strictNullChecks: false,
+        use: [
+          { loader: "babel-loader" },
+          {
+            loader: "@linaria/webpack-loader",
+            options: {
+              sourceMap: process.env.NODE_ENV !== "production",
             },
           },
-        },
+          {
+            loader: "ts-loader",
+            options: {
+              compilerOptions: {
+                strict: false,
+                strictNullChecks: false,
+              },
+            },
+          },
+        ],
       },
       {
-        test: /\.css/,
-        use: ["style-loader", "css-loader"],
+        test: /\.css$/,
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: process.env.NODE_ENV !== "production",
+            },
+          },
+        ],
       },
       {
         test: /\.(jpg|png)$/,
-        // loader: "file-loader",
-        use: {
-          loader: "file-loader",
-        },
+        use: [{ loader: "file-loader" }],
       },
     ],
   },
