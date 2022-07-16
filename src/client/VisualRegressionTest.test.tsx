@@ -32,14 +32,14 @@ afterAll(async () => {
 });
 
 describe("visualization", () => {
-  it("should have appropriate visual", async () => {
+  test("components have appropriate visual", async () => {
     const initialWhole = await page.screenshot();
     expect(initialWhole).toMatchImageSnapshot();
 
     await page.click("#init-button");
     // const element = await page.$("#init-button");
 
-    const actual = await page.screenshot();
-    expect(actual).toMatchImageSnapshot();
+    const initiated = await page.screenshot();
+    expect(initiated).toMatchImageSnapshot();
   });
 });

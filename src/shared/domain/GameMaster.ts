@@ -14,7 +14,7 @@ export default class GameMaster {
 
   public static init = (): PlayField => {
     const deck: Card[] = Suit.list()
-      .map((suit) => Rank.list().map((rank) => Card.of(suit, rank, true)))
+      .map((suit) => Rank.list().map((rank) => Card.of(suit, rank, false)))
       .flat();
 
     let lines: Card[][] = [];

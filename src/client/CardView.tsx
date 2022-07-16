@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Card from "../shared/domain/card/Card";
+import backImage from "./assets/card-back.png";
 
 type CardViewProps = {
   card: Card;
@@ -20,11 +21,17 @@ export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
   };
 
   render() {
+    const view = this.state.card.isHead ? (
+      <div>
+        {this.state.card.getSuitString() + this.state.card.getRankString()}
+      </div>
+    ) : (
+      <img src={backImage} />
+    );
+
     return (
       <div className="card" onClick={this.handleClick}>
-        {this.state.card.isHead
-          ? "■"
-          : this.state.card.getSuitString() + this.state.card.getRankString()}
+        {view}
       </div>
     );
   }
