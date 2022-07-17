@@ -6,8 +6,8 @@ export default class Suit {
 
   public static readonly SPADE: Suit = new Suit("♠");
   public static readonly CLUB: Suit = new Suit("♣");
-  public static readonly HEART: Suit = new Suit("♡");
-  public static readonly DIAMOND: Suit = new Suit("♢");
+  public static readonly HEART: Suit = new Suit("♥");
+  public static readonly DIAMOND: Suit = new Suit("♦");
 
   private constructor(value: Types.SuitSymbolType) {
     this._value = value;
@@ -20,9 +20,9 @@ export default class Suit {
         return this.SPADE;
       case "♣":
         return this.CLUB;
-      case "♡":
+      case "♥":
         return this.HEART;
-      case "♢":
+      case "♦":
         return this.DIAMOND;
       default:
         throw new Error(`invalid Suit: ${symbol}`);

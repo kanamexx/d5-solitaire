@@ -4,8 +4,8 @@ describe("instantiate", () => {
   test("successful call returns a instance", () => {
     testSuccessfulInstantiation("♠", Suit.SPADE);
     testSuccessfulInstantiation("♣", Suit.CLUB);
-    testSuccessfulInstantiation("♡", Suit.HEART);
-    testSuccessfulInstantiation("♢", Suit.DIAMOND);
+    testSuccessfulInstantiation("♥", Suit.HEART);
+    testSuccessfulInstantiation("♦", Suit.DIAMOND);
   });
   test("failed call throws Error", () => {
     testFailedInstantiation("invalid", "invalid Suit: invalid");
@@ -32,5 +32,3 @@ const testSuccessfulInstantiation = (symbol: any, expectation: Suit) => {
 const testFailedInstantiation = (symbol: any, message: string) => {
   expect(() => Suit.of(symbol)).toThrow(new Error(message));
 };
-
-export {};

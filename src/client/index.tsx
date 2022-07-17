@@ -7,7 +7,7 @@ import App from "./App";
 ReactDOM.hydrateRoot(
   document.getElementById("root"),
   <BrowserRouter>
-    <App set={[]} deck={Cards.empty()} lines={[]} goals={[]} message={""} />
+    <App set={[]} deck={Cards.empty()} lanes={[]} goals={[]} message={""} />
   </BrowserRouter>
 );
 

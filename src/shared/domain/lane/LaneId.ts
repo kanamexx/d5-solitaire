@@ -9,9 +9,9 @@ export default class LaneId {
     return new LaneId(value);
   };
 
-  public get value() {
+  public get value(): LaneIdType {
     return this._value;
   }
 }
 
-type LaneIdType = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+export type LaneIdType = 0 | 1 | 2 | 3 | 4 | 5 | 6;

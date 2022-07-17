@@ -1,4 +1,5 @@
-import Card from "shared/domain/card/Card";
+import Cards from "shared/domain/card/Cards";
+import Lane from "shared/domain/lane/Lane";
 import PlayField from "shared/domain/PlayField";
 
 export default class PlayerUsecase {
@@ -12,7 +13,7 @@ export default class PlayerUsecase {
   ): PlayField => {
     let lines = null;
     try {
-      lines = this.fromTo(playField.lines, from, index, to);
+      lines = this.fromTo(playField.lanes, from, index, to);
     } catch (e) {
       throw e;
     }
@@ -21,21 +22,23 @@ export default class PlayerUsecase {
   };
 
   private fromTo = (
-    lanes: Card[][],
+    lanes: Lane[],
     from: number,
     index: number,
     to: number
-  ): Card[][] => {
-    const fromLane = lanes[from];
-    const moving: Card[] = fromLane.splice(index, fromLane.length - index);
-    if (moving.length === 0) {
+  ): Lane[] => {
+    const fromLane = lanes[from].cards.values;
+    const moving: Cards = Cards.of(
+      fromLane.splice(index, fromLane.length - index)
+    );
+    if (moving.isEmpty()) {
       throw new Error("cannot move");
     }
-    if (moving.filter((card) => !card.isFaceUp).length >= 1) {
+    if (moving.haveFaceDowns()) {
       throw new Error("you cannot move face down card(s)");
     }
 
-    lanes[to].push(...moving);
+    lanes[to] = Lane.of(lanes[to].laneId, lanes[to].cards.append(moving));
 
     return lanes;
   };

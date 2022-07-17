@@ -1,17 +1,17 @@
 import React from "react";
+import Lane from "shared/domain/lane/Lane";
 import styled from "styled-components";
-import Card from "../shared/domain/card/Card";
-import { LaneView } from "./Lane";
+import { LaneView } from "./LaneView";
 
 type LanesProps = {
-  props: Card[][];
+  props: Lane[];
 };
 
 function Lanes(props: LanesProps) {
   return (
     <Div className="lanes">
       {props.props.map((prop, i) => (
-        <LaneView key={i.toString()} cards={prop} />
+        <LaneView key={i.toString()} lane={prop} />
       ))}
     </Div>
   );

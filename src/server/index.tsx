@@ -9,6 +9,7 @@ import Cards from "shared/domain/card/Cards";
 import GameMaster from "shared/domain/GameMaster";
 import PlayField from "shared/domain/PlayField";
 import CardResponseBody from "shared/presentation/CardResponseBody";
+import LaneResponseBody from "shared/presentation/LaneResponseBody";
 import PlayerUsecase from "shared/usecase/PlayerUsecase";
 import sourceMapSupport from "source-map-support";
 import App from "../client/App";
@@ -20,7 +21,7 @@ const api = express();
 api.use(express.static("dist"));
 api.get("/", (req, res) => {
   const app = ReactDOMServer.renderToString(
-    <App set={[]} deck={Cards.empty()} goals={[]} lines={[]} message={""} />
+    <App set={[]} deck={Cards.empty()} goals={[]} lanes={[]} message={""} />
   );
   const indexFile = path.resolve("./dist/public/index.html");
   fs.readFile(indexFile, "utf8", (err, data) => {
@@ -65,11 +66,9 @@ const toResponse = (res: any, playField: PlayField) => {
     set: !playField.set
       ? []
       : playField.set.map((card) => CardResponseBody.of(card)),
-    lines: !playField.lines
-      ? []
-      : playField.lines.map((line) =>
-          !line ? [] : line.map((card) => CardResponseBody.of(card))
-        ),
+    lanes: !playField.lanes
+      ? null
+      : playField.lanes.map((lane) => LaneResponseBody.of(lane)),
     goals: playField.goals,
     message: "どうしますか？(操作対象のレーン。手札の場合は7):",
   });

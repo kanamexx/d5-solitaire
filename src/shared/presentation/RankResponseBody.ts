@@ -2,7 +2,7 @@ import Rank from "shared/domain/card/Rank";
 import { RankType } from "shared/domain/types";
 
 export default class RankResponseBody {
-  private readonly value: RankType;
+  public readonly value: RankType;
 
   private constructor(value: RankType) {
     this.value = value;

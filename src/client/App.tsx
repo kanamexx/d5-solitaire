@@ -1,12 +1,13 @@
 import React from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
+import Lane from "shared/domain/lane/Lane";
 import PlayField from "./PlayField";
 
 type AppProps = {
   set: Card[];
   deck: Cards;
-  lines: Card[][];
+  lanes: Lane[];
   goals: Card[][];
   message: string;
 };

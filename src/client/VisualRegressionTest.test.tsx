@@ -9,7 +9,7 @@ declare global {
 import puppeteer, { Browser, Page } from "puppeteer";
 const { configureToMatchImageSnapshot } = require("jest-image-snapshot");
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
-  customDiffConfig: { threshold: 1 },
+  customDiffConfig: { threshold: 0.8 },
 });
 expect.extend({ toMatchImageSnapshot });
 
@@ -19,6 +19,7 @@ jest.setTimeout(30000);
 
 beforeAll(async () => {
   browser = await puppeteer.launch({
+    // uncomment below to debug
     // headless: false,
     // slowMo: 300,
     args: ["--no-sandbox"],
