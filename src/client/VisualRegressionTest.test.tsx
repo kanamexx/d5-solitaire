@@ -9,7 +9,7 @@ declare global {
 import puppeteer, { Browser, Page } from "puppeteer";
 const { configureToMatchImageSnapshot } = require("jest-image-snapshot");
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
-  customDiffConfig: { threshold: 1 },
+  customDiffConfig: { threshold: 0.01 },
 });
 expect.extend({ toMatchImageSnapshot });
 
@@ -42,6 +42,7 @@ describe("visualization", () => {
     expect(initialWhole).toMatchImageSnapshot();
 
     await page.click("#init-button");
+    await page.waitForNetworkIdle();
     // const element = await page.$("#init-button");
 
     const initiated = await page.screenshot({ fullPage: true });
