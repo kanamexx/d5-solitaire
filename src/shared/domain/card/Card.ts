@@ -5,7 +5,7 @@ import Suit from "./Suit";
 class Card {
   private readonly _suit: Suit;
   private readonly _rank: Rank;
-  private readonly _isFace: boolean;
+  private readonly _isFaceUp: boolean;
 
   public get suit() {
     return this._suit;
@@ -14,7 +14,7 @@ class Card {
     return this._rank;
   }
   public get isFaceUp() {
-    return this._isFace;
+    return this._isFaceUp;
   }
 
   private constructor(
@@ -30,7 +30,7 @@ class Card {
 
     this._suit = suit instanceof Suit ? suit : Suit.of(suit);
     this._rank = rank instanceof Rank ? rank : Rank.of(rank);
-    this._isFace = isFace;
+    this._isFaceUp = isFace;
   }
 
   public static of = (
