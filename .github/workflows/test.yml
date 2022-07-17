@@ -29,7 +29,7 @@ jobs:
       - run: npm run build --if-present
       - run: npm test
       - name: Upload VRT diff
-        users: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: VRT-diff
           path: ./src/client/__image_snapshots__/__diff_output__/visual-regression-test-test-tsx-visualization-components-have-appropriate-visual-1-diff.png
