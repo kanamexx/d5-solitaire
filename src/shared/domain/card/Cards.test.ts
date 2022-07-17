@@ -1,7 +1,7 @@
-import Card from "./card/Card";
-import Rank from "./card/Rank";
-import Suit from "./card/Suit";
+import Card from "./Card";
 import Cards from "./Cards";
+import Rank from "./Rank";
+import Suit from "./Suit";
 
 describe("instantiate", () => {
   describe("of", () => {

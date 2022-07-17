@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Cards from "shared/domain/Cards";
+import Cards from "shared/domain/card/Cards";
 import styled from "styled-components";
 import backImage from "./assets/card-back.png";
 

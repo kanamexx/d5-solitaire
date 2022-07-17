@@ -1,5 +1,5 @@
+import Cards from "../card/Cards";
 import Rank from "../card/Rank";
-import Cards from "../Cards";
 import LaneId from "./LaneId";
 
 export default class Lane {

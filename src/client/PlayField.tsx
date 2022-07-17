@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import Card from "shared/domain/card/Card";
-import Cards from "shared/domain/Cards";
+import Cards from "shared/domain/card/Cards";
 import CardView from "./CardView";
 import DeckView from "./DeckView";
 import Lanes from "./Lanes";

@@ -1,7 +1,7 @@
 import Card from "../card/Card";
+import Cards from "../card/Cards";
 import Rank from "../card/Rank";
 import Suit from "../card/Suit";
-import Cards from "../Cards";
 import Lane from "./Lane";
 import LaneId from "./LaneId";
 

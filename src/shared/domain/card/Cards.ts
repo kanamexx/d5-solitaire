@@ -1,4 +1,4 @@
-import Card from "./card/Card";
+import Card from "./Card";
 
 export default class Cards {
   private readonly _values: Card[];

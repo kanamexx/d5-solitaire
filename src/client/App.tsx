@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "shared/domain/card/Card";
-import Cards from "shared/domain/Cards";
+import Cards from "shared/domain/card/Cards";
 import PlayField from "./PlayField";
 
 type AppProps = {

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import Cards from "shared/domain/Cards";
+import Cards from "shared/domain/card/Cards";
 import App from "./App";
 
 ReactDOM.hydrateRoot(

@@ -5,7 +5,7 @@ import express from "express";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 
-import Cards from "shared/domain/Cards";
+import Cards from "shared/domain/card/Cards";
 import GameMaster from "shared/domain/GameMaster";
 import PlayField from "shared/domain/PlayField";
 import CardResponseBody from "shared/presentation/CardResponseBody";
