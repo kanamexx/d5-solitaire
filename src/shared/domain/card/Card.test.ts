@@ -63,8 +63,8 @@ const testSuccessfulInstantiation = (
   const entity = Card.of(value.suit, value.rank, value.isBack);
   expect(entity.suit).toEqual(expectation.suit);
   expect(entity.rank).toEqual(expectation.rank);
-  expect(entity.getSuitString()).toEqual(expectation.suit.value);
-  expect(entity.getRankString()).toEqual(expectation.rank.toString());
+  expect(entity.suit).toEqual(expectation.suit);
+  expect(entity.rank).toEqual(expectation.rank);
   expect(entity.isFaceUp).toBeFalsy();
 };
 const testFailedInstantiation = (suit: any, rank: any, isFace: boolean) => {

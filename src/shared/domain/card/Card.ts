@@ -1,4 +1,4 @@
-import { RankSymbolType, RankType, SuitSymbolType } from "shared/domain/types";
+import { RankType, SuitSymbolType } from "shared/domain/types";
 import Rank from "./Rank";
 import Suit from "./Suit";
 
@@ -20,17 +20,17 @@ class Card {
   private constructor(
     suit: Suit | SuitSymbolType,
     rank: Rank | RankType,
-    isFace: boolean
+    isFaceUp: boolean
   ) {
     if (!suit || !rank) {
       throw new Error(
-        `invalid args: {suit: ${suit}, rank: ${rank}, isFace: ${isFace}`
+        `invalid args: {suit: ${suit}, rank: ${rank}, isFace: ${isFaceUp}`
       );
     }
 
     this._suit = suit instanceof Suit ? suit : Suit.of(suit);
     this._rank = rank instanceof Rank ? rank : Rank.of(rank);
-    this._isFaceUp = isFace;
+    this._isFaceUp = isFaceUp;
   }
 
   public static of = (
@@ -40,13 +40,6 @@ class Card {
   ): Card => {
     return new Card(suit, rank, isFace);
   };
-
-  public getSuitString(): SuitSymbolType {
-    return this._suit.value;
-  }
-  public getRankString(): RankSymbolType {
-    return this._rank.toString();
-  }
 
   public turnOver = (): Card => {
     return this.isFaceUp ? this.faceDown() : this.faceUp();
