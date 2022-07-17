@@ -9,7 +9,7 @@ declare global {
 import puppeteer, { Browser, Page } from "puppeteer";
 const { configureToMatchImageSnapshot } = require("jest-image-snapshot");
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
-  customDiffConfig: { threshold: 0.8 },
+  customDiffConfig: { threshold: 1 },
 });
 expect.extend({ toMatchImageSnapshot });
 
