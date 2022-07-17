@@ -33,7 +33,7 @@ export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
   };
 
   render() {
-    const view = this.state.card.isFace ? (
+    const view = this.state.card.isFaceUp ? (
       <FaceUp color={this.state.card.suit.color}>
         <FaceUpTop>
           {this.state.card.getSuitString() + this.state.card.getRankString()}

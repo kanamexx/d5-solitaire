@@ -43,17 +43,17 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
     this.setState({
       deck: Cards.of(
         data.set.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isFace)
+          Card.of(card.suit.value, card.rank.value, card.isFaceUp)
         )
       ),
       lines: data.lines.map((line) =>
         line.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isFace)
+          Card.of(card.suit.value, card.rank.value, card.isFaceUp)
         )
       ),
       goals: data.goals.map((goal) =>
         goal.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isFace)
+          Card.of(card.suit.value, card.rank.value, card.isFaceUp)
         )
       ),
       message: data.message,
@@ -69,17 +69,17 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
     this.setState({
       deck: Cards.of(
         data.set.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isFace)
+          Card.of(card.suit.value, card.rank.value, card.isFaceUp)
         )
       ),
       lines: data.lines.map((line) =>
         line.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isFace)
+          Card.of(card.suit.value, card.rank.value, card.isFaceUp)
         )
       ),
       goals: data.goals.map((goal) =>
         goal.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isFace)
+          Card.of(card.suit.value, card.rank.value, card.isFaceUp)
         )
       ),
       message: data.message,

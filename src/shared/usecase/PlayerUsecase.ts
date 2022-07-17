@@ -31,8 +31,8 @@ export default class PlayerUsecase {
     if (moving.length === 0) {
       throw new Error("cannot move");
     }
-    if (moving.filter((card) => card.isFace).length >= 1) {
-      throw new Error("you cannot moved back card(s)");
+    if (moving.filter((card) => card.isFaceUp).length >= 1) {
+      throw new Error("you cannot move face down card(s)");
     }
 
     lanes[to].push(...moving);

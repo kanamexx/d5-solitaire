@@ -33,26 +33,26 @@ describe("turnOver", () => {
   test("face up card turn to be face down", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, true);
     const faceDownCard = card.turnOver();
-    expect(faceDownCard.isFace).toBeFalsy();
+    expect(faceDownCard.isFaceUp).toBeFalsy();
   });
   test("face down card turn to be face up", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, false);
     const faceUpCard = card.turnOver();
-    expect(faceUpCard.isFace).toBeTruthy();
+    expect(faceUpCard.isFaceUp).toBeTruthy();
   });
 });
 describe("faceUp", () => {
   test("successful call returns face up card", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, false);
     const faceUpCard = card.faceUp();
-    expect(faceUpCard.isFace).toBeTruthy();
+    expect(faceUpCard.isFaceUp).toBeTruthy();
   });
 });
 describe("faceDown", () => {
   test("successful call returns face down card", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, true);
     const faceDownCard = card.faceDown();
-    expect(faceDownCard.isFace).toBeFalsy();
+    expect(faceDownCard.isFaceUp).toBeFalsy();
   });
 });
 
@@ -65,7 +65,7 @@ const testSuccessfulInstantiation = (
   expect(entity.rank).toEqual(expectation.rank);
   expect(entity.getSuitString()).toEqual(expectation.suit.value);
   expect(entity.getRankString()).toEqual(expectation.rank.toString());
-  expect(entity.isFace).toBeFalsy();
+  expect(entity.isFaceUp).toBeFalsy();
 };
 const testFailedInstantiation = (suit: any, rank: any, isFace: boolean) => {
   expect(() => Card.of(suit, rank, isFace)).toThrow(

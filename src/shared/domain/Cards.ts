@@ -16,10 +16,10 @@ export default class Cards {
   };
 
   public getFaces = (): Card[] => {
-    return this._values.filter((c) => c.isFace);
+    return this._values.filter((c) => c.isFaceUp);
   };
   public getBacks = (): Card[] => {
-    return this._values.filter((c) => !c.isFace);
+    return this._values.filter((c) => !c.isFaceUp);
   };
   public haveFaces = (): boolean => {
     return this.getFaces().length !== 0;
@@ -28,11 +28,11 @@ export default class Cards {
     return this.getBacks().length !== 0;
   };
   public findFirstFaceIndex = (): number => {
-    return this._values.findIndex((c) => c.isFace);
+    return this._values.findIndex((c) => c.isFaceUp);
   };
   public findLastBackIndex = (): number => {
     for (let i = this._values.length - 1; i > 0; i--) {
-      if (!this._values[i].isFace) {
+      if (!this._values[i].isFaceUp) {
         return i;
       }
     }

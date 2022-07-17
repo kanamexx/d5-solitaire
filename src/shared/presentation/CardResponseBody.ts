@@ -5,12 +5,12 @@ import { SuitResponse } from "./SuitResponseBody";
 export default class CardResponseBody {
   public readonly suit: SuitResponse;
   public readonly rank: RankResponseBody;
-  public readonly isFace: boolean;
+  public readonly isFaceUp: boolean;
 
   private constructor(card: Card) {
     this.suit = SuitResponse.of(card.suit);
     this.rank = RankResponseBody.of(card.rank);
-    this.isFace = card.isFace;
+    this.isFaceUp = card.isFaceUp;
   }
 
   public static of(entity: Card): CardResponseBody {
