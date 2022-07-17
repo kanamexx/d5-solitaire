@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import Card from "../shared/domain/card/Card";
 import backImage from "./assets/card-back.png";
 
 type CardViewProps = {
   card: Card;
+  view: ViewProps;
+};
+
+type ViewProps = {
+  // field: string;
+  order: number;
 };
 
 export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
@@ -11,6 +18,10 @@ export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
     super(props);
     this.state = {
       card: props.card,
+      view: {
+        // field: "any",
+        order: props.view.order,
+      },
     };
   }
 
@@ -22,17 +33,59 @@ export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
 
   render() {
     const view = this.state.card.isFace ? (
-      <div>
-        {this.state.card.getSuitString() + this.state.card.getRankString()}
-      </div>
+      <FaceUp>
+        <FaceUpTop>
+          {this.state.card.getSuitString() + this.state.card.getRankString()}
+        </FaceUpTop>
+        <FaceUpMiddle>{this.state.card.getSuitString()}</FaceUpMiddle>
+        <FaceUpBottom>
+          {this.state.card.getRankString() + this.state.card.getSuitString()}
+        </FaceUpBottom>
+      </FaceUp>
     ) : (
-      <img src={backImage} />
+      <FaceDown src={backImage} />
     );
 
     return (
-      <div className="card" onClick={this.handleClick}>
+      <Wrapper
+        className="card"
+        order={this.state.view.order}
+        onClick={this.handleClick}
+      >
         {view}
-      </div>
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.div<ViewProps>`
+  position: relative;
+  top: ${(props) => `${-100 * props.order}px`};
+  border: 1px solid black;
+`;
+
+const FaceDown = styled.img`
+  width: 80px;
+  height: 116.125px;
+`;
+const FaceUp = styled.div`
+  width: 80px;
+  height: 116.125px;
+  background-color: aliceblue;
+
+  display: flex;
+  flex-flow: column;
+`;
+const FaceUpTop = styled.div`
+  height: 33.33%;
+`;
+const FaceUpMiddle = styled.div`
+  height: 33.33%;
+  text-align: center;
+  font-size: 30px;
+`;
+const FaceUpBottom = styled.div`
+  height: 33.33%;
+  transform: scaleY(-1);
+  text-align: right;
+`;

@@ -8,7 +8,7 @@ import CardVeiw from "./CardView";
 describe("attribute", () => {
   test("contain card class", async () => {
     const card = Card.of(Suit.CLUB, Rank.ACE, true);
-    const renderResult = render(<CardVeiw card={card} />);
+    const renderResult = render(<CardVeiw card={card} view={{ order: 1 }} />);
     expect(renderResult.container.getElementsByClassName("card").length).toBe(
       1
     );

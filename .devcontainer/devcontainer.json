@@ -20,7 +20,8 @@
         "steoates.autoimport",
         "stringham.move-ts",
         "NuclleaR.vscode-extension-auto-import",
-        "Orta.vscode-jest"
+        "Orta.vscode-jest",
+        "styled-components.vscode-styled-components"
       ]
     }
   },

@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import Cards from "shared/domain/Cards";
 import App from "./App";
 
 ReactDOM.hydrateRoot(
   document.getElementById("root"),
   <BrowserRouter>
-    <App set={[]} lines={[]} goals={[]} message={""} />
+    <App set={[]} deck={Cards.empty()} lines={[]} goals={[]} message={""} />
   </BrowserRouter>
 );
 

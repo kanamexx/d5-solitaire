@@ -5,9 +5,10 @@ import express from "express";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 
+import Cards from "shared/domain/Cards";
 import GameMaster from "shared/domain/GameMaster";
 import PlayField from "shared/domain/PlayField";
-import { CardResponse as CardResponseBody } from "shared/presentation/CardResponseBody";
+import CardResponseBody from "shared/presentation/CardResponseBody";
 import PlayerUsecase from "shared/usecase/PlayerUsecase";
 import sourceMapSupport from "source-map-support";
 import App from "../client/App";
@@ -19,7 +20,7 @@ const api = express();
 api.use(express.static("dist"));
 api.get("/", (req, res) => {
   const app = ReactDOMServer.renderToString(
-    <App set={[]} goals={[]} lines={[]} message={""} />
+    <App set={[]} deck={Cards.empty()} goals={[]} lines={[]} message={""} />
   );
   const indexFile = path.resolve("./dist/public/index.html");
   fs.readFile(indexFile, "utf8", (err, data) => {

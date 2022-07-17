@@ -2,7 +2,7 @@ import Card from "shared/domain/card/Card";
 import RankResponseBody from "./RankResponseBody";
 import { SuitResponse } from "./SuitResponseBody";
 
-class CardResponseBody {
+export default class CardResponseBody {
   public readonly suit: SuitResponse;
   public readonly rank: RankResponseBody;
   public readonly isFace: boolean;
@@ -22,4 +22,3 @@ class CardResponseBody {
     return new CardResponseBody(entity);
   }
 }
-export { CardResponseBody as CardResponse };

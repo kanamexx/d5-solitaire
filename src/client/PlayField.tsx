@@ -1,10 +1,14 @@
 import axios from "axios";
 import React, { Component } from "react";
 import Card from "shared/domain/card/Card";
+import Cards from "shared/domain/Cards";
 import CardView from "./CardView";
+import DeckView from "./DeckView";
 import Lanes from "./Lanes";
 
 type PlayFieldProps = {
+  deck: Cards;
+  // TODO: delete set and use deck
   set: Card[];
   lines: Card[][];
   goals: Card[][];
@@ -21,6 +25,7 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
   constructor(props: PlayFieldProps) {
     super(props);
     this.state = {
+      deck: props.deck,
       set: props.set,
       lines: props.lines,
       goals: props.goals,
@@ -36,8 +41,10 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
     const data: PlayFieldProps = res.data;
 
     this.setState({
-      set: data.set.map((card) =>
-        Card.of(card.suit.value, card.rank.value, card.isFace)
+      deck: Cards.of(
+        data.set.map((card) =>
+          Card.of(card.suit.value, card.rank.value, card.isFace)
+        )
       ),
       lines: data.lines.map((line) =>
         line.map((card) =>
@@ -60,8 +67,10 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
     const data: PlayFieldProps = res.data;
 
     this.setState({
-      set: data.set.map((card) =>
-        Card.of(card.suit.value, card.rank.value, card.isFace)
+      deck: Cards.of(
+        data.set.map((card) =>
+          Card.of(card.suit.value, card.rank.value, card.isFace)
+        )
       ),
       lines: data.lines.map((line) =>
         line.map((card) =>
@@ -77,8 +86,11 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
     });
   };
 
+  renderDeck(cards: Cards) {
+    return <DeckView cards={cards} />;
+  }
   renderCard(card: Card, i: number) {
-    return <CardView key={i.toString()} card={card} />;
+    return <CardView key={i.toString()} card={card} view={{ order: 1 }} />;
   }
   renderLanes(props: Card[][]) {
     return <Lanes props={props} />;
@@ -90,9 +102,7 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
   render() {
     return (
       <>
-        <div className="set">
-          set: {this.state.set.map((card, i) => this.renderCard(card, i))}
-        </div>
+        <div>deck: {this.renderDeck(this.state.deck)}</div>
         <div>lanes: {this.renderLanes(this.state.lines)}</div>
         <div>goals: {this.renderGoals(this.state.goals)}</div>
         <h1>message: {this.state.message}</h1>
