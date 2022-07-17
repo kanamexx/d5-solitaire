@@ -70,6 +70,6 @@ const toResponse = (res: any, playField: PlayField) => {
       ? null
       : playField.lanes.map((lane) => LaneResponseBody.of(lane)),
     goals: playField.goals,
-    message: "どうしますか？(操作対象のレーン。手札の場合は7):",
+    message: "Which lane do you move:",
   });
 };

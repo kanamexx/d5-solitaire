@@ -34,13 +34,13 @@ afterAll(async () => {
 
 describe("visualization", () => {
   test("components have appropriate visual", async () => {
-    const initialWhole = await page.screenshot();
+    const initialWhole = await page.screenshot({ fullPage: true });
     expect(initialWhole).toMatchImageSnapshot();
 
     await page.click("#init-button");
     // const element = await page.$("#init-button");
 
-    const initiated = await page.screenshot();
+    const initiated = await page.screenshot({ fullPage: true });
     expect(initiated).toMatchImageSnapshot();
   });
 });
