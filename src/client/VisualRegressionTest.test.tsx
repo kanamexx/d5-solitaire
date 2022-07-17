@@ -23,6 +23,10 @@ beforeAll(async () => {
     // headless: false,
     // slowMo: 300,
     args: ["--no-sandbox"],
+    defaultViewport: {
+      height: 1000,
+      width: 800,
+    },
   });
   page = await browser.newPage();
   await page.goto("http://localhost:3006");
