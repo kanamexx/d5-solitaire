@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { ColorType } from "shared/domain/card/Suit";
 import styled from "styled-components";
 import Card from "../shared/domain/card/Card";
 import backImage from "./assets/card-back.png";
@@ -33,7 +34,7 @@ export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
 
   render() {
     const view = this.state.card.isFace ? (
-      <FaceUp>
+      <FaceUp color={this.state.card.suit.color}>
         <FaceUpTop>
           {this.state.card.getSuitString() + this.state.card.getRankString()}
         </FaceUpTop>
@@ -68,10 +69,11 @@ const FaceDown = styled.img`
   width: 80px;
   height: 116.125px;
 `;
-const FaceUp = styled.div`
+const FaceUp = styled.div<{ color: ColorType }>`
   width: 80px;
   height: 116.125px;
   background-color: aliceblue;
+  color: ${(props) => props.color};
 
   display: flex;
   flex-flow: column;
