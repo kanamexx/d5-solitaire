@@ -31,7 +31,7 @@ export default class PlayerUsecase {
     if (moving.length === 0) {
       throw new Error("cannot move");
     }
-    if (moving.filter((card) => card.isFaceUp).length >= 1) {
+    if (moving.filter((card) => !card.isFaceUp).length >= 1) {
       throw new Error("you cannot move face down card(s)");
     }
 

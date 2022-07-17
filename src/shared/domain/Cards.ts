@@ -15,22 +15,22 @@ export default class Cards {
     return new Cards(values);
   };
 
-  public getFaces = (): Card[] => {
-    return this._values.filter((c) => c.isFaceUp);
+  public getFaceUps = (): Cards => {
+    return Cards.of(this._values.filter((c) => c.isFaceUp));
   };
-  public getBacks = (): Card[] => {
-    return this._values.filter((c) => !c.isFaceUp);
+  public getFaceDowns = (): Cards => {
+    return Cards.of(this._values.filter((c) => !c.isFaceUp));
   };
-  public haveFaces = (): boolean => {
-    return this.getFaces().length !== 0;
+  public haveFaceUps = (): boolean => {
+    return this.getFaceUps().values.length !== 0;
   };
-  public haveBacks = (): boolean => {
-    return this.getBacks().length !== 0;
+  public haveFaceDowns = (): boolean => {
+    return this.getFaceDowns().values.length !== 0;
   };
-  public findFirstFaceIndex = (): number => {
+  public findFirstFaceUpIndex = (): number => {
     return this._values.findIndex((c) => c.isFaceUp);
   };
-  public findLastBackIndex = (): number => {
+  public findLastFaceDownIndex = (): number => {
     for (let i = this._values.length - 1; i > 0; i--) {
       if (!this._values[i].isFaceUp) {
         return i;
