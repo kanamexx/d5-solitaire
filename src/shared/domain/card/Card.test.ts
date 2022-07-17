@@ -30,29 +30,29 @@ describe("instantiate", () => {
 });
 
 describe("turnOver", () => {
-  test("face card turn to be back", () => {
-    const card = Card.of(Suit.CLUB, Rank.EIGHT, false);
-    const backCard = card.turnOver();
-    expect(backCard.isFace).toBeTruthy();
-  });
-  test("back card turn to be face", () => {
+  test("face up card turn to be face down", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, true);
-    const backCard = card.turnOver();
-    expect(backCard.isFace).toBeFalsy();
+    const faceDownCard = card.turnOver();
+    expect(faceDownCard.isFace).toBeFalsy();
+  });
+  test("face down card turn to be face up", () => {
+    const card = Card.of(Suit.CLUB, Rank.EIGHT, false);
+    const faceUpCard = card.turnOver();
+    expect(faceUpCard.isFace).toBeTruthy();
   });
 });
-describe("toFace", () => {
-  test("successful call returns back card", () => {
+describe("faceUp", () => {
+  test("successful call returns face up card", () => {
     const card = Card.of(Suit.CLUB, Rank.EIGHT, false);
-    const backCard = card.faceUp();
-    expect(backCard.isFace).toBeFalsy();
+    const faceUpCard = card.faceUp();
+    expect(faceUpCard.isFace).toBeTruthy();
   });
 });
-describe("toBack", () => {
-  test("successful call returns back card", () => {
-    const card = Card.of(Suit.CLUB, Rank.EIGHT, false);
-    const backCard = card.faceDown();
-    expect(backCard.isFace).toBeTruthy();
+describe("faceDown", () => {
+  test("successful call returns face down card", () => {
+    const card = Card.of(Suit.CLUB, Rank.EIGHT, true);
+    const faceDownCard = card.faceDown();
+    expect(faceDownCard.isFace).toBeFalsy();
   });
 });
 

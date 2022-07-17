@@ -5,6 +5,7 @@ import Suit from "./Suit";
 class Card {
   private readonly _suit: Suit;
   private readonly _rank: Rank;
+  // TODO: fix isFace to isFaceUp
   private readonly _isFace: boolean;
 
   public get suit() {
@@ -49,13 +50,13 @@ class Card {
   }
 
   public turnOver = (): Card => {
-    return this.isFace ? this.faceUp() : this.faceDown();
+    return this.isFace ? this.faceDown() : this.faceUp();
   };
   public faceUp = (): Card => {
-    return new Card(this._suit, this._rank, false);
+    return new Card(this._suit, this._rank, true);
   };
   public faceDown = (): Card => {
-    return new Card(this._suit, this._rank, true);
+    return new Card(this._suit, this._rank, false);
   };
 }
 
