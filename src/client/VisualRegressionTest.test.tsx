@@ -22,7 +22,7 @@ beforeAll(async () => {
     // uncomment below to debug
     // headless: false,
     // slowMo: 300,
-    args: ["--no-sandbox", "--font-render-hinting=none"],
+    args: ["--no-sandbox"],
     defaultViewport: {
       height: 1000,
       width: 800,
