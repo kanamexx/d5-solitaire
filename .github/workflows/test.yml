@@ -12,7 +12,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    container:
+      image: ghcr.io/kanamexx/devcontainer:latest
+      credentials:
+        username: kanamexx
+        password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
     strategy:
       matrix:
         node-version: [16.x]
