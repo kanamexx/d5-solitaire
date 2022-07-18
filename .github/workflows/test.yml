@@ -43,4 +43,4 @@ jobs:
         with:
           registry: ghcr.io
           username: kanamexx
-          password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+          password: test
