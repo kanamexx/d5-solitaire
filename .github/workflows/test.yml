@@ -10,8 +10,8 @@ on:
     branches: ["**"]
 
 jobs:
-  environment: CI
   build:
+    environment: CI
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/kanamexx/devcontainer:latest
