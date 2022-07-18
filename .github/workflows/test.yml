@@ -19,7 +19,7 @@ jobs:
         username: kanamexx
         password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
       volumes:
-        - ../:/__w/d5-solitaire
+        - /:/__w/d5-solitaire
         - /tmp/.X11-unix/:/tmp/.X11-unix/
     strategy:
       matrix:
