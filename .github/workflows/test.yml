@@ -25,19 +25,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #     cache: "npm"
       - run: npm install
       - run: npm ci
       - run: pwd
       - run: ls
-      - run: npm run build
+      - run: sudo npm run build
       # - run: npm run build --if-present
-      - run: npm run build
-      - run: npm test
+      - run: sudo npm test
         continue-on-error: true
       - name: Upload VRT diff
         uses: actions/upload-artifact@v3
