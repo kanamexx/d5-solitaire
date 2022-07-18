@@ -33,7 +33,7 @@ jobs:
       - run: npm install
       - run: npm ci
       - run: pwd
-      - run: ls /__w/d5-solitaire/d5-solitaire/dist/
+      - run: ls /__w/d5-solitaire/d5-solitaire/ -la
       - run: sudo npm run build
       # - run: npm run build --if-present
       - run: sudo npm test
