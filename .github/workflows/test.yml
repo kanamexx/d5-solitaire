@@ -12,11 +12,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # container:
-    #   image: ghcr.io/kanamexx/devcontainer:latest
-    #   credentials:
-    #     username: kanamexx
-    #     password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+    container:
+      image: ghcr.io/kanamexx/devcontainer:latest
+      credentials:
+        username: kanamexx
+        password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
     strategy:
       matrix:
         node-version: [16.x]
@@ -24,23 +24,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
-      #     cache: "npm"
-      # - run: npm ci
-      # - run: npm run build --if-present
-      # - run: npm test
-      #   continue-on-error: true
-      # - name: Upload VRT diff
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: VRT-diff
-      #     path: ./src/client/__image_snapshots__/__diff_output__/visual-regression-test-test-tsx-visualization-components-have-appropriate-visual-1-diff.png
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          registry: ghcr.io
-          username: kanamexx
-          password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+        continue-on-error: true
+      - name: Upload VRT diff
+        uses: actions/upload-artifact@v3
+        with:
+          name: VRT-diff
+          path: ./src/client/__image_snapshots__/__diff_output__/visual-regression-test-test-tsx-visualization-components-have-appropriate-visual-1-diff.png
