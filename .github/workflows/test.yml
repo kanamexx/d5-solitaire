@@ -18,6 +18,9 @@ jobs:
       credentials:
         username: kanamexx
         password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
+      volumes:
+        - ../:/__w/d5-solitaire
+        - /tmp/.X11-unix/:/tmp/.X11-unix/
     strategy:
       matrix:
         node-version: [16.x]
@@ -33,6 +36,9 @@ jobs:
       - run: npm install
       - run: npm ci
       - run: pwd
+      - run: ls / -la
+      - run: ls /__w/ -la
+      - run: ls /__w/d5-solitaire/ -la
       - run: ls /__w/d5-solitaire/d5-solitaire/ -la
       - run: chmod a+w -R ./dist
       - run: sudo npm run build
