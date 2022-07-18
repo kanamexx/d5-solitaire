@@ -73,7 +73,7 @@ const FaceUp = styled.div<{ color: ColorType }>`
   width: 80px;
   height: 116.125px;
   background-color: aliceblue;
-  color: ${(props) => props.color};
+  color: red;
 
   display: flex;
   flex-flow: column;
