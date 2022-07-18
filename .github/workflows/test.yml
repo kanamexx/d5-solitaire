@@ -19,7 +19,6 @@ jobs:
         username: kanamexx
         password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
       volumes:
-        - /:/__w/d5-solitaire
         - /tmp/.X11-unix/:/tmp/.X11-unix/
     strategy:
       matrix:
@@ -35,18 +34,18 @@ jobs:
       #     cache: "npm"
       - run: npm install
       - run: npm ci
-      - run: pwd
-      - run: ls / -la
-      - run: ls /__w/ -la
-      - run: ls /__w/d5-solitaire/ -la
-      - run: ls /__w/d5-solitaire/d5-solitaire/ -la
+      # - run: pwd
+      # - run: ls / -la
+      # - run: ls /__w/ -la
+      # - run: ls /__w/d5-solitaire/ -la
+      # - run: ls /__w/d5-solitaire/d5-solitaire/ -la
       - run: chmod a+w -R ./dist
-      - run: sudo npm run build
-      # - run: npm run build --if-present
+      # - run: sudo npm run build
+      - run: npm run build --if-present
       - run: sudo npm test
         continue-on-error: true
       - name: Upload VRT diff
         uses: actions/upload-artifact@v3
         with:
           name: VRT-diff
-          path: ./src/client/__image_snapshots__/__diff_output__/visual-regression-test-test-tsx-visualization-components-have-appropriate-visual-1-diff.png
+          path: ./src/client/__image_snapshots__/__diff_output__/
