@@ -34,3 +34,9 @@ jobs:
         with:
           name: VRT-diff
           path: ./src/client/__image_snapshots__/__diff_output__/visual-regression-test-test-tsx-visualization-components-have-appropriate-visual-1-diff.png
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_CONTAINER_REGISTRY_TOKEN }}
