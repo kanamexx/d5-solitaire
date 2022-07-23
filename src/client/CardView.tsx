@@ -3,7 +3,6 @@ import { ColorType } from "shared/domain/card/Suit";
 import styled from "styled-components";
 import Card from "../shared/domain/card/Card";
 import backImage from "./assets/card-back.png";
-
 type CardViewProps = {
   card: Card;
   view: ViewProps;
