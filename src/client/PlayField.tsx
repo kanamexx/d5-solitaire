@@ -5,7 +5,6 @@ import Cards from "shared/domain/card/Cards";
 import Lane from "shared/domain/lane/Lane";
 import LaneId from "shared/domain/lane/LaneId";
 import LaneResponseBody from "shared/presentation/LaneResponseBody";
-import CardView from "./CardView";
 import DeckView from "./DeckView";
 import Lanes from "./Lanes";
 type PlayFieldProps = {
@@ -107,9 +106,6 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
 
   renderDeck(cards: Cards) {
     return <DeckView cards={cards} />;
-  }
-  renderCard(card: Card, i: number) {
-    return <CardView key={i.toString()} card={card} view={{ order: 1 }} />;
   }
   renderLanes(props: Lane[]) {
     return <Lanes props={props} />;

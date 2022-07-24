@@ -1,72 +1,16 @@
 import type { Identifier } from "dnd-core";
-import { Component, FC, useRef } from "react";
+import { FC, useRef } from "react";
 import { useDrag, useDrop, XYCoord } from "react-dnd";
 import { ColorType } from "shared/domain/card/Suit";
 import styled from "styled-components";
 import Card from "../shared/domain/card/Card";
 import backImage from "./assets/card-back.png";
 import { ItemTypes } from "./dndExample/ItemTypes";
+
 type CardViewProps = {
   card: Card;
-  view: ViewProps;
-};
-
-type ViewProps = {
-  // field: string;
-  order: number;
-};
-
-export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
-  constructor(props: CardViewProps) {
-    super(props);
-    this.state = {
-      card: props.card,
-      view: {
-        // field: "any",
-        order: props.view.order,
-      },
-    };
-  }
-
-  handleClick = () => {
-    this.setState({
-      card: this.state.card.turnOver(),
-    });
-  };
-
-  render() {
-    const view = this.state.card.isFaceUp ? (
-      <FaceUp color={this.state.card.suit.color}>
-        <FaceUpTop>
-          {this.state.card.suit.value + this.state.card.rank}
-        </FaceUpTop>
-        <FaceUpMiddle>{this.state.card.suit.value}</FaceUpMiddle>
-        <FaceUpBottom>
-          {this.state.card.rank + this.state.card.suit.value}
-        </FaceUpBottom>
-      </FaceUp>
-    ) : (
-      <FaceDown src={backImage} />
-    );
-
-    return (
-      <Wrapper
-        className="card"
-        order={this.state.view.order}
-        onClick={this.handleClick}
-      >
-        {view}
-      </Wrapper>
-    );
-  }
-}
-
-type CardTestViewProps = {
-  card: Card;
-  view: ViewProps;
   id: any;
   index: number;
-  text: string;
   moveCard: (dragIndex: number, hoberIndex: number) => void;
 };
 
@@ -76,13 +20,8 @@ interface DragItem {
   type: string;
 }
 
-export const CardTestView: FC<CardTestViewProps> = ({
-  id,
-  index,
-  text,
-  moveCard,
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
+export const CardView: FC<CardViewProps> = ({ card, id, index, moveCard }) => {
+  const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
   const [{ handlerId }, drop] = useDrop<
     DragItem,
     void,
@@ -156,23 +95,33 @@ export const CardTestView: FC<CardTestViewProps> = ({
 
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
+  const view = card.isFaceUp ? (
+    <FaceUp color={card.suit.color}>
+      <FaceUpTop>{card.suit.value + card.rank}</FaceUpTop>
+      <FaceUpMiddle>{card.suit.value}</FaceUpMiddle>
+      <FaceUpBottom>{card.rank + card.suit.value}</FaceUpBottom>
+    </FaceUp>
+  ) : (
+    <FaceDown src={backImage} />
+  );
+
   return (
-    <div ref={ref} style={{ ...style, opacity }} data-handler-id={handlerId}>
-      {text}
-    </div>
+    <Wrapper
+      ref={ref}
+      style={{ opacity }}
+      data-handler-id={handlerId}
+      className="card"
+      onClick={card.turnOver}
+      index={index}
+    >
+      {view}
+    </Wrapper>
   );
 };
 
-const style = {
-  border: "1px dashed gray",
-  padding: "0.5rem 1rem",
-  marginBottom: ".5rem",
-  backgroundColor: "white",
-  cursor: "move",
-};
-const Wrapper = styled.div<ViewProps>`
+const Wrapper = styled.div<{ index: number }>`
   position: relative;
-  top: ${(props) => `${-100 * props.order}px`};
+  top: ${(props) => `${-100 * props.index}px`};
   border: 1px solid black;
 `;
 
@@ -202,3 +151,5 @@ const FaceUpBottom = styled.div`
   transform: scaleY(-1);
   text-align: right;
 `;
+
+export default {};

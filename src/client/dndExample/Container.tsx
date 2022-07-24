@@ -1,7 +1,7 @@
 import update from "immutability-helper";
 import type { FC } from "react";
 import { useCallback, useState } from "react";
-import { Card } from "./Card";
+import { CardItem } from "./Card";
 
 const style = {
   width: 400,
@@ -63,7 +63,7 @@ export const Container: FC = () => {
     const renderCard = useCallback(
       (card: { id: number; text: string }, index: number) => {
         return (
-          <Card
+          <CardItem
             key={card.id}
             index={index}
             id={card.id}

@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": false,
+    // make allowJs true for testing with react-dnd.┐(´-｀)┌
+    "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
     "strictNullChecks": false,
