@@ -2,7 +2,8 @@ import fs from "fs";
 import path from "path";
 
 import express from "express";
-import React from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import ReactDOMServer from "react-dom/server";
 
 import Cards from "shared/domain/card/Cards";
@@ -21,7 +22,9 @@ const api = express();
 api.use(express.static("dist"));
 api.get("/", (req, res) => {
   const app = ReactDOMServer.renderToString(
-    <App set={[]} deck={Cards.empty()} goals={[]} lanes={[]} message={""} />
+    <DndProvider backend={HTML5Backend}>
+      <App set={[]} deck={Cards.empty()} goals={[]} lanes={[]} message={""} />
+    </DndProvider>
   );
   const indexFile = path.resolve("./dist/public/index.html");
   fs.readFile(indexFile, "utf8", (err, data) => {

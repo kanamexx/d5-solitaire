@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component } from "react";
+import { Component } from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
 import Lane from "shared/domain/lane/Lane";
@@ -8,7 +8,6 @@ import LaneResponseBody from "shared/presentation/LaneResponseBody";
 import CardView from "./CardView";
 import DeckView from "./DeckView";
 import Lanes from "./Lanes";
-
 type PlayFieldProps = {
   deck: Cards;
   // TODO: delete set and use deck

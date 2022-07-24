@@ -1,4 +1,5 @@
-import React from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import Cards from "shared/domain/card/Cards";
@@ -7,7 +8,9 @@ import App from "./App";
 ReactDOM.hydrateRoot(
   document.getElementById("root"),
   <BrowserRouter>
-    <App set={[]} deck={Cards.empty()} lanes={[]} goals={[]} message={""} />
+    <DndProvider backend={HTML5Backend}>
+      <App set={[]} deck={Cards.empty()} lanes={[]} goals={[]} message={""} />
+    </DndProvider>
   </BrowserRouter>
 );
 
