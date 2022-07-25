@@ -28,9 +28,13 @@ export const CardView: FC<CardViewProps> = ({ card, id, index, moveCard }) => {
     { handlerId: Identifier | null }
   >({
     accept: ItemTypes.CARD,
+    // canDrop(item: DragItem, monitor) {
+    //   return true;
+    // },
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
+        canDrop: monitor.canDrop(),
       };
     },
     hover(item: DragItem, monitor) {

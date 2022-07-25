@@ -16,17 +16,30 @@ const style = {
 export interface CardProps {
   id: any;
   text: string;
-  index: number;
-  moveCard: (dragIndex: number, hoverIndex: number) => void;
+  containerIndex: number;
+  itemIndex: number;
+  moveCard: (
+    dragContainerIndex: number,
+    hoverContainerIndex: number,
+    dragIndex: number,
+    hoverIndex: number
+  ) => void;
 }
 
 interface DragItem {
-  index: number;
+  containerIndex: number;
+  itemIndex: number;
   id: string;
   type: string;
 }
 
-export const CardItem: FC<CardProps> = ({ id, text, index, moveCard }) => {
+export const CardItem: FC<CardProps> = ({
+  id,
+  text,
+  containerIndex,
+  itemIndex,
+  moveCard,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop<
     DragItem,
@@ -43,11 +56,31 @@ export const CardItem: FC<CardProps> = ({ id, text, index, moveCard }) => {
       if (!ref.current) {
         return;
       }
-      const dragIndex = item.index;
-      const hoverIndex = index;
+      const dragIndex = item.itemIndex;
+      const hoverIndex = itemIndex;
+
+      const dragContainerIndex = item.containerIndex;
+      const hoverContainerIndex = containerIndex;
+
+      console.log("item: ", item);
+      console.log("dragIndex: ", dragIndex);
+      console.log("hoverIndex: ", hoverIndex);
+      console.log("dragContainerIndex: ", dragContainerIndex);
+      console.log("hoverContainerIndex: ", hoverContainerIndex);
+      // if (
+      //   !dragIndex ||
+      //   !hoverIndex ||
+      //   !dragContainerIndex ||
+      //   !hoverContainerIndex
+      // ) {
+      //   return;
+      // }
 
       // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
+      if (
+        dragIndex === hoverIndex &&
+        dragContainerIndex === hoverContainerIndex
+      ) {
         return;
       }
 
@@ -79,20 +112,21 @@ export const CardItem: FC<CardProps> = ({ id, text, index, moveCard }) => {
       }
 
       // Time to actually perform the action
-      moveCard(dragIndex, hoverIndex);
+      moveCard(dragContainerIndex, hoverContainerIndex, dragIndex, hoverIndex);
 
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
       // to avoid expensive index searches.
-      item.index = hoverIndex;
+      item.itemIndex = hoverIndex;
+      item.containerIndex = hoverContainerIndex;
     },
   });
 
   const [{ isDragging }, drag] = useDrag({
     type: ItemTypes.CARD,
     item: () => {
-      return { id, index };
+      return { id, itemIndex, containerIndex };
     },
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),

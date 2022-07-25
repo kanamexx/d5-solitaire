@@ -35,7 +35,11 @@ export const LaneView: FC<LaneProps> = (props: LaneProps) => {
         />
       );
     }, []);
-    return <Wrapper>{cards.map((card, i) => renderCard(card, i))}</Wrapper>;
+    return (
+      <>
+        {/* <Wrapper>{cards.map((card, i) => renderCard(card, i))}</Wrapper>; */}
+      </>
+    );
   }
 };
 const Wrapper = styled.div`

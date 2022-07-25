@@ -1,6 +1,6 @@
 import Lane from "shared/domain/lane/Lane";
 import styled from "styled-components";
-import { LaneView } from "./LaneView";
+import { Container } from "./dndExample/Container";
 
 type LanesProps = {
   props: Lane[];
@@ -9,9 +9,10 @@ type LanesProps = {
 function Lanes(props: LanesProps) {
   return (
     <Div className="lanes">
-      {props.props.map((prop, i) => (
+      {/* {props.props.map((prop, i) => (
         <LaneView key={i.toString()} lane={prop} />
-      ))}
+      ))} */}
+      <Container></Container>
     </Div>
   );
 }
