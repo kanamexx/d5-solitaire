@@ -62,11 +62,11 @@ export const CardItem: FC<CardProps> = ({
       const dragContainerIndex = item.containerIndex;
       const hoverContainerIndex = containerIndex;
 
-      console.log("item: ", item);
-      console.log("dragIndex: ", dragIndex);
-      console.log("hoverIndex: ", hoverIndex);
-      console.log("dragContainerIndex: ", dragContainerIndex);
-      console.log("hoverContainerIndex: ", hoverContainerIndex);
+      // console.log("item: ", item);
+      // console.log("dragIndex: ", dragIndex);
+      // console.log("hoverIndex: ", hoverIndex);
+      // console.log("dragContainerIndex: ", dragContainerIndex);
+      // console.log("hoverContainerIndex: ", hoverContainerIndex);
       // if (
       //   !dragIndex ||
       //   !hoverIndex ||
@@ -78,8 +78,9 @@ export const CardItem: FC<CardProps> = ({
 
       // Don't replace items with themselves
       if (
-        dragIndex === hoverIndex &&
-        dragContainerIndex === hoverContainerIndex
+        (dragIndex === hoverIndex &&
+          dragContainerIndex === hoverContainerIndex) ||
+        dragContainerIndex !== hoverContainerIndex
       ) {
         return;
       }

@@ -90,41 +90,44 @@ export const Container: FC = () => {
         dragIndex: number,
         hoverIndex: number
       ) => {
+        console.log("dragContainerIndex: ", dragContainerIndex);
+        console.log("hoverContainerIndex: ", hoverContainerIndex);
         if (dragContainerIndex === hoverContainerIndex) {
-          const lane = lanes[dragContainerIndex];
-          // lane.cards.splice();
-          console.log("lanes", lanes);
-          const newLanes = update(lanes, {
-            [dragContainerIndex]: {
-              cards: {
-                $splice: [
-                  [dragIndex, 1],
-                  [hoverIndex, 0, lane.cards[dragIndex] as Item],
-                ],
-              },
-            },
-          });
-          console.dir("newLanes", newLanes);
-          setLanes([...newLanes]);
+          setLanes(
+            (
+              prev: {
+                cards: {
+                  id: number;
+                  text: string;
+                }[];
+              }[]
+            ) =>
+              update(prev, {
+                [dragContainerIndex]: {
+                  cards: {
+                    $splice: [
+                      [dragIndex, 1],
+                      [
+                        hoverIndex,
+                        0,
+                        prev[dragContainerIndex].cards[dragIndex] as Item,
+                      ],
+                    ],
+                  },
+                },
+              })
+          );
+        } else {
+          throw new Error(
+            `failed. dragContainerIndex: ${dragContainerIndex}, hoverContainerIndex: ${hoverContainerIndex}`
+          );
         }
-        // const newCards = [{ id: 8, text: "new" }];
-        // setCardsList([...cardsList, newCards]);
-
-        // setCardsList((prevCards: Item[][]) =>
-        //   update(prevCards, {
-        //     $splice: [
-        //       [dragIndex, 1],
-        //       [hoverIndex, 0, prevCards[dragIndex] as Item],
-        //     ],
-        //   })
-        // );
       },
       []
     );
 
     const renderCards = useCallback(
       (cards: { id: number; text: string }[], containerIndex: number) => {
-        console.log("xxxxxxxxcontainerIndex: ", containerIndex);
         return (
           <div key={containerIndex} className="container">
             {cards.map((card, id) => {

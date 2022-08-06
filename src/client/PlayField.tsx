@@ -119,9 +119,9 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
       <>
         <div>deck: {this.renderDeck(this.state.deck)}</div>
         <div>lanes: {this.renderLanes(this.state.lanes)}</div>
-        <div>
+        {/* <div>
           goals: {this.renderGoals([Lane.of(LaneId.of(1), Cards.empty())])}
-        </div>
+        </div> */}
         <h1>message: {this.state.message}</h1>
         <div>
           from:
