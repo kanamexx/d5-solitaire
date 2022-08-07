@@ -1,6 +1,5 @@
 import type { Identifier, XYCoord } from "dnd-core";
-import type { FC } from "react";
-import { useRef } from "react";
+import { FC, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 
 import { ItemTypes } from "./ItemTypes";
@@ -24,6 +23,7 @@ export interface CardProps {
     dragIndex: number,
     hoverIndex: number
   ) => void;
+  isDraggable: boolean;
 }
 
 interface DragItem {
@@ -39,6 +39,7 @@ export const CardItem: FC<CardProps> = ({
   containerIndex,
   itemIndex,
   moveCard,
+  isDraggable,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop<
@@ -63,10 +64,10 @@ export const CardItem: FC<CardProps> = ({
       const hoverContainerIndex = containerIndex;
 
       // console.log("item: ", item);
-      // console.log("dragIndex: ", dragIndex);
-      // console.log("hoverIndex: ", hoverIndex);
-      // console.log("dragContainerIndex: ", dragContainerIndex);
-      // console.log("hoverContainerIndex: ", hoverContainerIndex);
+      console.log("dragIndex: ", dragIndex);
+      console.log("hoverIndex: ", hoverIndex);
+      console.log("dragContainerIndex: ", dragContainerIndex);
+      console.log("hoverContainerIndex: ", hoverContainerIndex);
       // if (
       //   !dragIndex ||
       //   !hoverIndex ||
@@ -77,11 +78,7 @@ export const CardItem: FC<CardProps> = ({
       // }
 
       // Don't replace items with themselves
-      if (
-        (dragIndex === hoverIndex &&
-          dragContainerIndex === hoverContainerIndex) ||
-        dragContainerIndex !== hoverContainerIndex
-      ) {
+      if (dragContainerIndex === hoverContainerIndex) {
         return;
       }
 
@@ -124,15 +121,21 @@ export const CardItem: FC<CardProps> = ({
     },
   });
 
-  const [{ isDragging }, drag] = useDrag({
-    type: ItemTypes.CARD,
-    item: () => {
-      return { id, itemIndex, containerIndex };
-    },
-    collect: (monitor: any) => ({
-      isDragging: monitor.isDragging(),
+  const [canDrag, setCanDrag] = useState(isDraggable);
+
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: ItemTypes.CARD,
+      item: () => {
+        return { id, itemIndex, containerIndex };
+      },
+      collect: (monitor: any) => ({
+        isDragging: monitor.isDragging(),
+      }),
+      canDrag: canDrag,
     }),
-  });
+    [canDrag]
+  );
 
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));

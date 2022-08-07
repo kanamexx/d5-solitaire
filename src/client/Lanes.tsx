@@ -22,5 +22,5 @@ export default Lanes;
 const Div = styled.div`
   display: flex;
   background-color: green;
-  height: 300px;
+  height: 900px;
 `;

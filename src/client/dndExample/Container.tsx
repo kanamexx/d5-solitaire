@@ -90,9 +90,9 @@ export const Container: FC = () => {
         dragIndex: number,
         hoverIndex: number
       ) => {
-        console.log("dragContainerIndex: ", dragContainerIndex);
-        console.log("hoverContainerIndex: ", hoverContainerIndex);
-        if (dragContainerIndex === hoverContainerIndex) {
+        // console.log("dragContainerIndex: ", dragContainerIndex);
+        // console.log("hoverContainerIndex: ", hoverContainerIndex);
+        if (dragContainerIndex !== hoverContainerIndex) {
           setLanes(
             (
               prev: {
@@ -105,10 +105,14 @@ export const Container: FC = () => {
               update(prev, {
                 [dragContainerIndex]: {
                   cards: {
+                    $splice: [[dragIndex, 1]],
+                  },
+                },
+                [hoverContainerIndex]: {
+                  cards: {
                     $splice: [
-                      [dragIndex, 1],
                       [
-                        hoverIndex,
+                        prev[hoverContainerIndex].cards.length,
                         0,
                         prev[dragContainerIndex].cards[dragIndex] as Item,
                       ],
@@ -139,6 +143,7 @@ export const Container: FC = () => {
                   containerIndex={containerIndex}
                   itemIndex={id}
                   moveCard={moveCard}
+                  isDraggable={id === cards.length - 1}
                 />
               );
             })}
