@@ -3,11 +3,11 @@ import Lane from "shared/domain/lane/Lane";
 import styled from "styled-components";
 import CardView from "./CardView";
 
-export type LaneProps = {
+export type LaneViewProps = {
   lane: Lane;
 };
 
-export function LaneView(props: LaneProps) {
+export const LaneView: React.FC<LaneViewProps> = (props: LaneViewProps) => {
   return (
     <Wrapper>
       {props.lane.cards.values.map((card, i) => (
@@ -15,7 +15,7 @@ export function LaneView(props: LaneProps) {
       ))}
     </Wrapper>
   );
-}
+};
 
 export default LaneView;
 
