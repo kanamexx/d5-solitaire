@@ -2,7 +2,7 @@ import React from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
 import Lane from "shared/domain/lane/Lane";
-import PlayField from "./PlayField";
+import PlayFieldView from "./PlayFieldView";
 
 type AppProps = {
   set: Card[];
@@ -12,12 +12,12 @@ type AppProps = {
   message: string;
 };
 
-function App(props: AppProps) {
+export const App: React.FC<AppProps> = (props: AppProps) => {
   return (
     <div className="App">
-      <PlayField {...props} />
+      <PlayFieldView {...props} />
     </div>
   );
-}
+};
 
 export default App;
