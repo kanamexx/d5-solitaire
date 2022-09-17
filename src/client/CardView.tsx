@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { ColorType } from "shared/domain/card/Suit";
 import styled from "styled-components";
 import Card from "../shared/domain/card/Card";
 import backImage from "./assets/card-back.png";
-
 type CardViewProps = {
   card: Card;
   view: ViewProps;
@@ -14,50 +13,30 @@ type ViewProps = {
   order: number;
 };
 
-export default class CardVeiw extends Component<CardViewProps, CardViewProps> {
-  constructor(props: CardViewProps) {
-    super(props);
-    this.state = {
-      card: props.card,
-      view: {
-        // field: "any",
-        order: props.view.order,
-      },
-    };
-  }
+export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
+  const [card, setCard] = useState(props.card);
+  const [view, setView] = useState(props.view);
 
-  handleClick = () => {
-    this.setState({
-      card: this.state.card.turnOver(),
-    });
-  };
+  const handleClick = () => setCard((card) => card.turnOver());
 
-  render() {
-    const view = this.state.card.isFaceUp ? (
-      <FaceUp color={this.state.card.suit.color}>
-        <FaceUpTop>
-          {this.state.card.suit.value + this.state.card.rank}
-        </FaceUpTop>
-        <FaceUpMiddle>{this.state.card.suit.value}</FaceUpMiddle>
-        <FaceUpBottom>
-          {this.state.card.rank + this.state.card.suit.value}
-        </FaceUpBottom>
-      </FaceUp>
-    ) : (
-      <FaceDown src={backImage} />
-    );
+  const cardView = card.isFaceUp ? (
+    <FaceUp color={card.suit.color}>
+      <FaceUpTop>{card.suit.value + card.rank}</FaceUpTop>
+      <FaceUpMiddle>{card.suit.value}</FaceUpMiddle>
+      <FaceUpBottom>{card.rank + card.suit.value}</FaceUpBottom>
+    </FaceUp>
+  ) : (
+    <FaceDown src={backImage} />
+  );
 
-    return (
-      <Wrapper
-        className="card"
-        order={this.state.view.order}
-        onClick={this.handleClick}
-      >
-        {view}
-      </Wrapper>
-    );
-  }
-}
+  return (
+    <Wrapper className="card" order={view.order} onClick={handleClick}>
+      {cardView}
+    </Wrapper>
+  );
+};
+
+export default CardView;
 
 const Wrapper = styled.div<ViewProps>`
   position: relative;
