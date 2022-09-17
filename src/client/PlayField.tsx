@@ -6,7 +6,7 @@ import Lane from "shared/domain/lane/Lane";
 import LaneId from "shared/domain/lane/LaneId";
 import LaneResponseBody from "shared/presentation/LaneResponseBody";
 import DeckView from "./DeckView";
-import Lanes from "./Lanes";
+import LanesView from "./LanesView";
 type PlayFieldProps = {
   deck: Cards;
   // TODO: delete set and use deck
@@ -108,10 +108,10 @@ class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
     return <DeckView cards={cards} />;
   }
   renderLanes(props: Lane[]) {
-    return <Lanes props={props} />;
+    return <LanesView props={props} />;
   }
   renderGoals(props: Lane[]) {
-    return <Lanes props={props} />;
+    return <LanesView props={props} />;
   }
 
   render() {
