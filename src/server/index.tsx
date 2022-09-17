@@ -40,28 +40,23 @@ let playField = null;
 
 api.get("/solitaire", (req, res) => {
   playField = GameMaster.init();
-  return toResponse(res, playField);
+  return toResponse(res, playField, "Which lane you move:");
 });
 api.get("/solitaire/:from/:index/:to", (req, res) => {
-  try {
-    playField = new PlayerUsecase().move(
-      playField,
-      parseInt(req.params.from),
-      parseInt(req.params.index),
-      parseInt(req.params.to)
-    );
-  } catch (e) {
-    console.log(e);
-    return toResponse(res, playField);
-  }
-  return toResponse(res, playField);
+  const done = new PlayerUsecase().move(
+    playField,
+    parseInt(req.params.from),
+    parseInt(req.params.index),
+    parseInt(req.params.to)
+  );
+  return toResponse(res, done.playField, done.message);
 });
 
 api.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
 
-const toResponse = (res: any, playField: PlayField) => {
+const toResponse = (res: any, playField: PlayField, message: string) => {
   return res.json({
     set: !playField.set
       ? []
@@ -70,6 +65,6 @@ const toResponse = (res: any, playField: PlayField) => {
       ? null
       : playField.lanes.map((lane) => LaneResponseBody.of(lane)),
     goals: playField.goals,
-    message: "Which lane do you move:",
+    message: message,
   });
 };

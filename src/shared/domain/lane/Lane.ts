@@ -55,6 +55,9 @@ export default class Lane {
     if (cards.isEmpty()) {
       return;
     }
+    if (cards.isOnlyFaceDown()) {
+      return;
+    }
     if (
       !Lane.isDescendingBy1AndColorAlternate(cards) ||
       !Lane.isSeparatedAndFacedownsHaveLessIndex(cards)
@@ -82,6 +85,6 @@ export default class Lane {
   }
 
   private static isSeparatedAndFacedownsHaveLessIndex(cards: Cards): boolean {
-    return cards.findLastFaceDownIndex() < cards.findFirstFaceUpIndex();
+    return cards.findLastFaceDownIndex() <= cards.findFirstFaceUpIndex();
   }
 }

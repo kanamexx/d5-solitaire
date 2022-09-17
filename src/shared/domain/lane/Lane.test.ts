@@ -5,7 +5,7 @@ import Suit from "../card/Suit";
 import Lane from "./Lane";
 import LaneId from "./LaneId";
 
-describe("instansiation", () => {
+describe("instantiation", () => {
   describe("of", () => {
     describe("successful call returns instance", () => {
       test("returns instance with lowest pair", () => {
@@ -69,6 +69,17 @@ describe("instansiation", () => {
         const highRankCard = Card.of(Suit.CLUB, Rank.TWO, true);
         const lowRankCard = Card.of(Suit.DIAMOND, Rank.ACE, true);
         const cards = Cards.of([backCard, highRankCard, lowRankCard]);
+
+        const lane = Lane.of(laneId, cards);
+        expect(lane.laneId).toBe(laneId);
+        expect(lane.cards).toEqual(cards);
+      });
+      test("returns instance with only face down cards", () => {
+        const laneId = LaneId.of(0);
+        const facedown1 = Card.of(Suit.HEART, Rank.ACE, false);
+        const facedown2 = Card.of(Suit.CLUB, Rank.TWO, false);
+        const facedown3 = Card.of(Suit.DIAMOND, Rank.THREE, false);
+        const cards = Cards.of([facedown1, facedown2, facedown3]);
 
         const lane = Lane.of(laneId, cards);
         expect(lane.laneId).toBe(laneId);

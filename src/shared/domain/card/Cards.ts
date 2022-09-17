@@ -14,6 +14,9 @@ export default class Cards {
   public static of = (values: Card[]): Cards => {
     return new Cards(values);
   };
+  public static empty = (): Cards => {
+    return new Cards([]);
+  };
 
   public getFaceUps = (): Cards => {
     return Cards.of(this._values.filter((c) => c.isFaceUp));
@@ -39,10 +42,6 @@ export default class Cards {
     return -1;
   };
 
-  public static empty = (): Cards => {
-    return new Cards([]);
-  };
-
   public isEmpty = (): boolean => {
     return this._values.length === 0;
   };
@@ -53,5 +52,18 @@ export default class Cards {
 
   public getFirst = (): Card => {
     return this._values.find((_) => true);
+  };
+
+  public isOnlyFaceUp = (): boolean => {
+    if (this.isEmpty()) {
+      return false;
+    }
+    return this._values.every((card) => card.isFaceUp);
+  };
+  public isOnlyFaceDown = (): boolean => {
+    if (this.isEmpty()) {
+      return false;
+    }
+    return this._values.every((card) => !card.isFaceUp);
   };
 }
