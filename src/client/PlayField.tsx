@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component } from "react";
+import { Component } from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
 import Lane from "shared/domain/lane/Lane";
@@ -7,7 +7,7 @@ import LaneId from "shared/domain/lane/LaneId";
 import LaneResponseBody from "shared/presentation/LaneResponseBody";
 import CardView from "./CardView";
 import DeckView from "./DeckView";
-import Lanes from "./Lanes";
+import Lanes from "./LanesView";
 
 type PlayFieldProps = {
   deck: Cards;

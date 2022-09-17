@@ -1,13 +1,12 @@
-import React from "react";
 import Lane from "shared/domain/lane/Lane";
 import styled from "styled-components";
 import { LaneView } from "./LaneView";
 
-type LanesProps = {
+type LanesViewProps = {
   props: Lane[];
 };
 
-function Lanes(props: LanesProps) {
+export const LanesView: React.FC<LanesViewProps> = (props: LanesViewProps) => {
   return (
     <Div className="lanes">
       {props.props.map((prop, i) => (
@@ -15,9 +14,9 @@ function Lanes(props: LanesProps) {
       ))}
     </Div>
   );
-}
+};
 
-export default Lanes;
+export default LanesView;
 
 const Div = styled.div`
   display: flex;
