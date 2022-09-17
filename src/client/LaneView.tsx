@@ -8,7 +8,9 @@ export type LaneViewProps = {
 };
 
 export const LaneView: React.FC<LaneViewProps> = (props: LaneViewProps) => {
-  return (
+  return props.lane.cards.isEmpty() ? (
+    <Empty />
+  ) : (
     <Wrapper>
       {props.lane.cards.values.map((card, i) => (
         <CardView key={i.toString()} card={card} view={{ order: i }} />
@@ -23,4 +25,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
   position: relative;
+`;
+
+const Empty = styled.div`
+  width: 80px;
 `;
