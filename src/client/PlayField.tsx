@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Component } from "react";
+import React from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
 import Lane from "shared/domain/lane/Lane";
@@ -31,7 +31,10 @@ type ResponseBody = {
   message: string;
 };
 
-class PlayField extends Component<PlayFieldProps, PlayFieldProps & OrderProps> {
+class PlayField extends React.Component<
+  PlayFieldProps,
+  PlayFieldProps & OrderProps
+> {
   constructor(props: PlayFieldProps) {
     super(props);
     this.state = {

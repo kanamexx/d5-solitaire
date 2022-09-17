@@ -1,3 +1,4 @@
+import React from "react";
 import Lane from "shared/domain/lane/Lane";
 import styled from "styled-components";
 import { LaneView } from "./LaneView";
