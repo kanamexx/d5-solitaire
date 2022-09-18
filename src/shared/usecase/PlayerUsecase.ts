@@ -1,5 +1,4 @@
 import _ from "lodash";
-import Cards from "../domain/card/Cards";
 import Lane from "../domain/lane/Lane";
 import PlayField from "../domain/PlayField";
 
@@ -13,9 +12,9 @@ export default class PlayerUsecase {
     to: number
   ): { playField: PlayField; message: string } => {
     const oldPlayField = _.cloneDeep(playField);
-    let lines = null;
+    let lanes = null;
     try {
-      lines = this.fromTo(playField.lanes, from, index, to);
+      lanes = this.fromTo(playField.lanes, from, index, to);
     } catch (e) {
       return {
         playField: oldPlayField,
@@ -24,7 +23,7 @@ export default class PlayerUsecase {
     }
 
     return {
-      playField: PlayField.of(playField.set, lines, playField.goals),
+      playField: PlayField.of(playField.set, lanes, playField.goals),
       message: "",
     };
   };
@@ -35,19 +34,12 @@ export default class PlayerUsecase {
     index: number,
     to: number
   ): Lane[] => {
-    const fromLane = lanes[from].cards.values;
-    const moving: Cards = Cards.of(
-      fromLane.splice(index, fromLane.length - index)
+    const removed = lanes[from].removeRear(index);
+    lanes[from] = removed.lane;
+    lanes[to] = Lane.of(
+      lanes[to].laneId,
+      lanes[to].cards.append(removed.cards)
     );
-    if (moving.isEmpty()) {
-      throw new Error("select card(s)");
-    }
-    if (moving.haveFaceDowns()) {
-      throw new Error("you cannot move face down card(s)");
-    }
-
-    lanes[to] = Lane.of(lanes[to].laneId, lanes[to].cards.append(moving));
-
     return lanes;
   };
 }

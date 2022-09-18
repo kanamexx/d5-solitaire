@@ -220,3 +220,59 @@ describe("append", () => {
     });
   });
 });
+describe("removeRear", () => {
+  describe("successful call returns removed cards", () => {
+    test("remove non zero cards: last is face up", () => {
+      const card1 = Card.of(Suit.HEART, Rank.TWO, true);
+      const card2 = Card.of(Suit.CLUB, Rank.ACE, true);
+      const lane = Lane.of(LaneId.of(1), Cards.of([card1, card2]));
+
+      const actual = lane.removeRear(1);
+
+      expect(actual.cards).toBeInstanceOf(Cards);
+      expect(JSON.stringify(actual.cards)).toEqual(
+        JSON.stringify(Cards.of([card2]))
+      );
+      expect(actual.lane).toBeInstanceOf(Lane);
+      expect(JSON.stringify(actual.lane)).toEqual(
+        JSON.stringify(Lane.of(LaneId.of(1), Cards.of([card1])))
+      );
+    });
+    test("remove non zero cards: then the last is face down", () => {
+      const card1 = Card.of(Suit.HEART, Rank.TWO, false);
+      const card2 = Card.of(Suit.CLUB, Rank.ACE, true);
+      const lane = Lane.of(LaneId.of(1), Cards.of([card1, card2]));
+
+      const actual = lane.removeRear(1);
+
+      expect(actual.cards).toBeInstanceOf(Cards);
+      expect(JSON.stringify(actual.cards)).toEqual(
+        JSON.stringify(Cards.of([card2]))
+      );
+      expect(actual.lane).toBeInstanceOf(Lane);
+      expect(JSON.stringify(actual.lane)).toEqual(
+        JSON.stringify(
+          Lane.of(LaneId.of(1), Cards.of([Card.of(Suit.HEART, Rank.TWO, true)]))
+        )
+      );
+    });
+  });
+  describe("failed call throws error", () => {
+    test("no rear", () => {
+      const card1 = Card.of(Suit.HEART, Rank.TWO, true);
+      const card2 = Card.of(Suit.CLUB, Rank.ACE, true);
+
+      expect(() =>
+        Lane.of(LaneId.of(1), Cards.of([card1, card2])).removeRear(99)
+      ).toThrow("invalid index was specified");
+    });
+    test("rear contains face down cards", () => {
+      const card1 = Card.of(Suit.HEART, Rank.TWO, false);
+      const card2 = Card.of(Suit.CLUB, Rank.ACE, true);
+
+      expect(() =>
+        Lane.of(LaneId.of(1), Cards.of([card1, card2])).removeRear(0)
+      ).toThrow("face down card(s) cannot be moved");
+    });
+  });
+});

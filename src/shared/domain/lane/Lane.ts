@@ -32,6 +32,21 @@ export default class Lane {
     return new Lane(this._laneId, appended);
   };
 
+  public removeRear = (startIndex: number): { cards: Cards; lane: Lane } => {
+    const removed = Cards.of(
+      this._cards.values.splice(startIndex, this._cards.length - startIndex)
+    );
+    if (removed.isEmpty()) {
+      throw new Error("invalid index was specified");
+    }
+    if (removed.haveFaceDowns()) {
+      throw new Error("face down card(s) cannot be moved");
+    }
+
+    const remained = this._cards.faceUpIfLastIsFaceDown();
+    return { cards: removed, lane: Lane.of(this._laneId, remained) };
+  };
+
   private validateAppendingCards(cards: Cards) {
     if (cards.haveFaceDowns()) {
       throw new Error("back card cannot be appended");

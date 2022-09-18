@@ -11,6 +11,10 @@ export default class Cards {
     return this._values;
   }
 
+  public get length(): number {
+    return this._values.length;
+  }
+
   public static of = (values: Card[]): Cards => {
     return new Cards(values);
   };
@@ -34,7 +38,7 @@ export default class Cards {
     return this._values.findIndex((c) => c.isFaceUp);
   };
   public findLastFaceDownIndex = (): number => {
-    for (let i = this._values.length - 1; i > 0; i--) {
+    for (let i = this._values.length - 1; i >= 0; i--) {
       if (!this._values[i].isFaceUp) {
         return i;
       }
@@ -65,5 +69,26 @@ export default class Cards {
       return false;
     }
     return this._values.every((card) => !card.isFaceUp);
+  };
+
+  public faceUpIfLastIsFaceDown = (): Cards => {
+    if (this.isLastFaceDown()) {
+      return Cards.of(
+        this._values.map((v, index) => {
+          return Card.of(
+            v.suit,
+            v.rank,
+            index === this._values.length - 1 ? true : v.isFaceUp
+          );
+        })
+      );
+    }
+    return this;
+  };
+  private isLastFaceDown = (): boolean => {
+    if (this.isEmpty()) {
+      return false;
+    }
+    return this.findLastFaceDownIndex() === this._values.length - 1;
   };
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ColorType } from "shared/domain/card/Suit";
 import styled from "styled-components";
 import Card from "../shared/domain/card/Card";
@@ -16,6 +16,9 @@ type ViewProps = {
 export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
   const [card, setCard] = useState(props.card);
   const [view, setView] = useState(props.view);
+  useEffect(() => {
+    setCard(card);
+  });
 
   const handleClick = () => setCard((card) => card.turnOver());
 

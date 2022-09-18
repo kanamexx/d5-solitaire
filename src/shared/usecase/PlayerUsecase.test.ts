@@ -175,7 +175,7 @@ describe("move", () => {
           ],
           []
         ),
-        message: "select card(s)",
+        message: "invalid index was specified",
       };
       // an object contains function cant be asserted by toEqual.
       // and so assert by toBeInstanceOf and stringified equality.
@@ -219,7 +219,7 @@ describe("move", () => {
           ],
           []
         ),
-        message: "you cannot move face down card(s)",
+        message: "face down card(s) cannot be moved",
       };
       // an object contains function cant be asserted by toEqual.
       // and so assert by toBeInstanceOf and stringified equality.

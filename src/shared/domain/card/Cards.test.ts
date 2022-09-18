@@ -145,6 +145,10 @@ describe("instantiate", () => {
   });
   describe("findLastFaceDownIndex", () => {
     test("returns last face down index if exist", () => {
+      const cards = Cards.of([Card.of(Suit.CLUB, Rank.EIGHT, false)]);
+      expect(cards.findLastFaceDownIndex()).toBe(0);
+    });
+    test("returns last face down index if exist", () => {
       const card1 = Card.of(Suit.CLUB, Rank.EIGHT, true);
       const card2 = Card.of(Suit.DIAMOND, Rank.SEVEN, true);
       const card3 = Card.of(Suit.HEART, Rank.SIX, false);
@@ -227,15 +231,43 @@ describe("instantiate", () => {
     it("returns false, if empty", () => {
       expect(Cards.empty().isOnlyFaceDown()).toBeFalsy();
     });
-    it("returns false, some of them is face down ", () => {
+    it("returns false, some of them is face down", () => {
       const first = Card.of(Suit.CLUB, Rank.ACE, false);
       const second = Card.of(Suit.CLUB, Rank.TWO, true);
       expect(Cards.of([first, second]).isOnlyFaceDown()).toBeFalsy();
     });
-    it("returns true, all is face up ", () => {
+    it("returns true, all is face up", () => {
       const first = Card.of(Suit.CLUB, Rank.ACE, false);
       const second = Card.of(Suit.CLUB, Rank.TWO, false);
       expect(Cards.of([first, second]).isOnlyFaceDown()).toBeTruthy();
+    });
+  });
+  describe("faceUpIfLastIsFaceDown", () => {
+    it("returns empty, if empty", () => {
+      const actual = Cards.empty().faceUpIfLastIsFaceDown();
+      expect(actual).toBeInstanceOf(Cards);
+      expect(JSON.stringify(actual)).toEqual(JSON.stringify(Cards.empty()));
+    });
+    it("returns the same, if last is face up", () => {
+      const first = Card.of(Suit.CLUB, Rank.ACE, true);
+      const second = Card.of(Suit.CLUB, Rank.TWO, true);
+      const initial = Cards.of([first, second]);
+
+      const actual = initial.faceUpIfLastIsFaceDown();
+
+      expect(actual).toBeInstanceOf(Cards);
+      expect(JSON.stringify(actual)).toEqual(JSON.stringify(initial));
+    });
+    it("returns the same but last one is turn overed, if last is face down", () => {
+      const first = Card.of(Suit.CLUB, Rank.ACE, true);
+      const second = Card.of(Suit.CLUB, Rank.TWO, false);
+      const initial = Cards.of([first, second]);
+
+      const actual = initial.faceUpIfLastIsFaceDown();
+      const expectation = Cards.of([first, Card.of(Suit.CLUB, Rank.TWO, true)]);
+
+      expect(actual).toBeInstanceOf(Cards);
+      expect(JSON.stringify(actual)).toEqual(JSON.stringify(expectation));
     });
   });
 });
