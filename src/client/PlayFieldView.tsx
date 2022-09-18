@@ -40,43 +40,16 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
   const init = async () => {
     const res = await axios.get(`/solitaire`);
     const data: ResponseBody = res.data;
-
-    setDeck(() =>
-      Cards.of(
-        data.set.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isFaceUp)
-        )
-      )
-    );
-
-    setLanes(() =>
-      data.lanes.map((lane) =>
-        Lane.of(
-          LaneId.of(lane.laneId.value),
-          Cards.of(
-            lane.cards.map((card) =>
-              Card.of(card.suit.value, card.rank.value, card.isFaceUp)
-            )
-          )
-        )
-      )
-    );
-
-    setGoals(() =>
-      data.goals.map((goal) =>
-        goal.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isFaceUp)
-        )
-      )
-    );
-
-    setMessage(() => data.message);
+    setData(data);
   };
 
   const get = async () => {
     const res = await axios.get(`/solitaire/${from}/${index}/${to}`);
     const data: ResponseBody = res.data;
+    setData(data);
+  };
 
+  const setData = (data) => {
     setDeck(() =>
       Cards.of(
         data.set.map((card) =>
@@ -107,6 +80,10 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
     );
 
     setMessage(() => data.message);
+
+    setFrom(() => "");
+    setIndex(() => "");
+    setTo(() => "");
   };
 
   const renderDeck = (cards: Cards) => {
@@ -130,22 +107,30 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
       <div>
         from:
         <input
+          id="from"
           value={from}
           onChange={(e) => setFrom(() => e.target.value)}
         ></input>
         index:
         <input
+          id="index"
           value={index}
           onChange={(e) => setIndex(() => e.target.value)}
         ></input>
         <br />
         to:
-        <input value={to} onChange={(e) => setTo(() => e.target.value)}></input>
+        <input
+          id="to"
+          value={to}
+          onChange={(e) => setTo(() => e.target.value)}
+        ></input>
       </div>
       <button id="init-button" onClick={async () => await init()}>
         init
       </button>
-      <button onClick={async () => await get()}>commit</button>
+      <button id="commit-button" onClick={async () => await get()}>
+        commit
+      </button>
     </>
   );
 };

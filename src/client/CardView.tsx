@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ColorType } from "shared/domain/card/Suit";
 import styled from "styled-components";
 import Card from "../shared/domain/card/Card";
@@ -14,26 +14,31 @@ type ViewProps = {
 };
 
 export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
-  const [card, setCard] = useState(props.card);
+  // const [card, setCard] = useState(props.card);
   const [view, setView] = useState(props.view);
-  useEffect(() => {
-    setCard(card);
-  });
+  // const [isFaceUp, setIsFaceUp] = useState(props.card.isFaceUp);
+  // useEffect(() => {
+  //   setCard(card);
+  // }, [props.card]);
+  // useEffect(() => {
+  //   console.log("use", card);
+  //   setIsFaceUp((card) => card);
+  // }, [card]);
 
-  const handleClick = () => setCard((card) => card.turnOver());
+  // const handleClick = () => setCard((card) => card.turnOver());
 
-  const cardView = card.isFaceUp ? (
-    <FaceUp color={card.suit.color}>
-      <FaceUpTop>{card.suit.value + card.rank}</FaceUpTop>
-      <FaceUpMiddle>{card.suit.value}</FaceUpMiddle>
-      <FaceUpBottom>{card.rank + card.suit.value}</FaceUpBottom>
+  const cardView = props.card.isFaceUp ? (
+    <FaceUp color={props.card.suit.color}>
+      <FaceUpTop>{props.card.suit.value + props.card.rank}</FaceUpTop>
+      <FaceUpMiddle>{props.card.suit.value}</FaceUpMiddle>
+      <FaceUpBottom>{props.card.rank + props.card.suit.value}</FaceUpBottom>
     </FaceUp>
   ) : (
     <FaceDown src={backImage} />
   );
 
   return (
-    <Wrapper className="card" order={view.order} onClick={handleClick}>
+    <Wrapper className="card" order={view.order}>
       {cardView}
     </Wrapper>
   );
