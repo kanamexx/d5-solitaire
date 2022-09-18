@@ -1,10 +1,12 @@
 import React from "react";
+import Card from "shared/domain/card/Card";
 import Lane from "shared/domain/lane/Lane";
 import styled from "styled-components";
 import CardView from "./CardView";
 
 export type LaneViewProps = {
   lane: Lane;
+  selectedCardState: [Card, React.Dispatch<React.SetStateAction<Card>>];
 };
 
 export const LaneView: React.FC<LaneViewProps> = (props: LaneViewProps) => {
@@ -13,7 +15,12 @@ export const LaneView: React.FC<LaneViewProps> = (props: LaneViewProps) => {
   ) : (
     <Wrapper>
       {props.lane.cards.values.map((card, i) => (
-        <CardView key={i.toString()} card={card} view={{ order: i }} />
+        <CardView
+          key={i.toString()}
+          card={card}
+          selectedCardState={props.selectedCardState}
+          order={i}
+        />
       ))}
     </Wrapper>
   );

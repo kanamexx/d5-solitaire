@@ -56,6 +56,23 @@ describe("faceDown", () => {
   });
 });
 
+describe("equals", () => {
+  it("returns true, if suit and rank is the same each", () => {
+    const faceup = Card.of(Suit.CLUB, Rank.EIGHT, true);
+    const facedown = Card.of(Suit.CLUB, Rank.EIGHT, false);
+    expect(faceup.equals(facedown)).toBeTruthy();
+  });
+  it("returns false, if another is none", () => {
+    const faceup = Card.of(Suit.CLUB, Rank.SEVEN, true);
+    expect(faceup.equals(null)).toBeFalsy();
+  });
+  it("returns false, if some of suit and rank is not the same", () => {
+    const faceup = Card.of(Suit.CLUB, Rank.SEVEN, true);
+    const facedown = Card.of(Suit.CLUB, Rank.EIGHT, false);
+    expect(faceup.equals(facedown)).toBeFalsy();
+  });
+});
+
 const testSuccessfulInstantiation = (
   value: any,
   expectation: { suit: Suit; rank: Rank; isBack: boolean }

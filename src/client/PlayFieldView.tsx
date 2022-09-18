@@ -5,7 +5,6 @@ import Cards from "shared/domain/card/Cards";
 import Lane from "shared/domain/lane/Lane";
 import LaneId from "shared/domain/lane/LaneId";
 import LaneResponseBody from "shared/presentation/LaneResponseBody";
-import CardView from "./CardView";
 import DeckView from "./DeckView";
 import Lanes from "./LanesView";
 
@@ -89,9 +88,9 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
   const renderDeck = (cards: Cards) => {
     return <DeckView cards={cards} />;
   };
-  const renderCard = (card: Card, i: number) => {
-    return <CardView key={i.toString()} card={card} view={{ order: 1 }} />;
-  };
+  // const renderCard = (card: Card, i: number) => {
+  //   return <CardView key={i.toString()} card={card} view={{ order: 1 }} />;
+  // };
   const renderLanes = (props: Lane[]) => {
     return <Lanes props={props} />;
   };

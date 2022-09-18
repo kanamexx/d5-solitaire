@@ -1,44 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { ColorType } from "shared/domain/card/Suit";
 import styled from "styled-components";
 import Card from "../shared/domain/card/Card";
 import backImage from "./assets/card-back.png";
 type CardViewProps = {
   card: Card;
-  view: ViewProps;
-};
-
-type ViewProps = {
-  // field: string;
   order: number;
+  selectedCardState: [Card, React.Dispatch<React.SetStateAction<Card>>];
 };
 
 export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
-  // const [card, setCard] = useState(props.card);
-  const [view, setView] = useState(props.view);
-  // const [isFaceUp, setIsFaceUp] = useState(props.card.isFaceUp);
-  // useEffect(() => {
-  //   setCard(card);
-  // }, [props.card]);
-  // useEffect(() => {
-  //   console.log("use", card);
-  //   setIsFaceUp((card) => card);
-  // }, [card]);
+  const [selectedCard, setSelectedCard] = props.selectedCardState;
 
-  // const handleClick = () => setCard((card) => card.turnOver());
+  const card = props.card;
+  const isSelected = card.equals(selectedCard);
 
-  const cardView = props.card.isFaceUp ? (
-    <FaceUp color={props.card.suit.color}>
-      <FaceUpTop>{props.card.suit.value + props.card.rank}</FaceUpTop>
-      <FaceUpMiddle>{props.card.suit.value}</FaceUpMiddle>
-      <FaceUpBottom>{props.card.rank + props.card.suit.value}</FaceUpBottom>
-    </FaceUp>
-  ) : (
-    <FaceDown src={backImage} />
-  );
+  const cardView = determinCardView(card, isSelected);
+  const handleClick = () => {
+    setSelectedCard(() => (isSelected || !card.isFaceUp ? null : card));
+  };
 
   return (
-    <Wrapper className="card" order={view.order}>
+    <Wrapper className="card" order={props.order} onClick={() => handleClick()}>
       {cardView}
     </Wrapper>
   );
@@ -46,7 +29,19 @@ export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
 
 export default CardView;
 
-const Wrapper = styled.div<ViewProps>`
+const determinCardView = (card: Card, isSelected: boolean): JSX.Element => {
+  return card.isFaceUp ? (
+    <FaceUp color={card.suit.color} isSelected={isSelected}>
+      <FaceUpTop>{card.suit.value + card.rank}</FaceUpTop>
+      <FaceUpMiddle>{card.suit.value}</FaceUpMiddle>
+      <FaceUpBottom>{card.rank + card.suit.value}</FaceUpBottom>
+    </FaceUp>
+  ) : (
+    <FaceDown src={backImage}></FaceDown>
+  );
+};
+
+const Wrapper = styled.div<{ order: number }>`
   position: relative;
   top: ${(props) => `${-100 * props.order}px`};
   border: 1px solid black;
@@ -56,10 +51,10 @@ const FaceDown = styled.img`
   width: 80px;
   height: 116.125px;
 `;
-const FaceUp = styled.div<{ color: ColorType }>`
+const FaceUp = styled.div<{ color: ColorType; isSelected: boolean }>`
   width: 80px;
   height: 116.125px;
-  background-color: aliceblue;
+  background-color: ${(props) => (props.isSelected ? "gold" : "aliceblue")};
   color: ${(props) => props.color};
 
   display: flex;

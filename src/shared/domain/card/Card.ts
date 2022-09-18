@@ -50,6 +50,13 @@ class Card {
   public faceDown = (): Card => {
     return new Card(this._suit, this._rank, false);
   };
+
+  public equals = (another: Card): boolean => {
+    if (!another) {
+      return false;
+    }
+    return this._suit === another._suit && this._rank === another._rank;
+  };
 }
 
 export default Card;
