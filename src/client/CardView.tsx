@@ -1,5 +1,6 @@
 import React from "react";
 import { ColorType } from "shared/domain/card/Suit";
+import LaneId from "shared/domain/lane/LaneId";
 import styled from "styled-components";
 import Card from "../shared/domain/card/Card";
 import backImage from "./assets/card-back.png";
@@ -7,21 +8,33 @@ type CardViewProps = {
   card: Card;
   order: number;
   selectedCardState: [Card, React.Dispatch<React.SetStateAction<Card>>];
+  selectedCardIndexInLaneState: [
+    number,
+    React.Dispatch<React.SetStateAction<number>>
+  ];
+  selectedLaneIdState: [LaneId, React.Dispatch<React.SetStateAction<LaneId>>];
+  moveCard: (laneIdTo: LaneId) => Promise<void>;
+  laneId: LaneId;
 };
 
 export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
   const [selectedCard, setSelectedCard] = props.selectedCardState;
+  const [selectedCardIndexInLane, setSelectedCardIndexInLane] =
+    props.selectedCardIndexInLaneState;
+  const [selectedLaneId, setSelectedLaneId] = props.selectedLaneIdState;
 
   const card = props.card;
-  const isSelected = card.equals(selectedCard);
+  const isMeSelected = card.equals(selectedCard);
 
-  const content = determinCardContent(card, isSelected);
-  const handleClick = () => {
-    if (isOtherCardSelected(selectedCard, isSelected)) {
-      // TODO: call api
+  const content = determinCardContent(card, isMeSelected);
+  const handleClick = async () => {
+    if (isOtherCardSelected(selectedCard, isMeSelected)) {
+      await props.moveCard(props.laneId);
       return;
     }
-    setSelectedCard(() => (isSelected || !card.isFaceUp ? null : card));
+    setSelectedCard(() => (isMeSelected || !card.isFaceUp ? null : card));
+    setSelectedCardIndexInLane(() => props.order);
+    setSelectedLaneId(props.laneId);
   };
 
   return (
@@ -35,9 +48,9 @@ export default CardView;
 
 const isOtherCardSelected = (
   selectedCard: Card,
-  isSelected: boolean
+  isMeSelected: boolean
 ): boolean => {
-  return !selectedCard && isSelected;
+  return selectedCard && !isMeSelected;
 };
 
 const determinCardContent = (card: Card, isSelected: boolean): JSX.Element => {

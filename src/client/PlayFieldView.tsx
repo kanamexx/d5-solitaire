@@ -1,10 +1,9 @@
-import solitaireClient from "client/clients/solitaireClient";
+import SolitaireClient from "client/clients/solitaireClient";
 import React, { useState } from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
 import Lane from "shared/domain/lane/Lane";
 import LaneId from "shared/domain/lane/LaneId";
-import LaneResponseBody from "shared/presentation/LaneResponseBody";
 import DeckView from "./DeckView";
 import Lanes from "./LanesView";
 
@@ -13,13 +12,6 @@ type PlayFieldProps = {
   // TODO: delete set and use deck
   set: Card[];
   lanes: Lane[];
-  goals: Card[][];
-  message: string;
-};
-
-type ResponseBody = {
-  set: Card[];
-  lanes: LaneResponseBody[];
   goals: Card[][];
   message: string;
 };
@@ -36,17 +28,19 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
   const [index, setIndex] = useState("");
   const [to, setTo] = useState("");
 
-  const sClient = solitaireClient.of();
+  const sClient = SolitaireClient.of();
 
   const init = async () => {
-    const res = await sClient.get<ResponseBody>(`/solitaire`);
+    const res = await sClient.init();
     setData(res);
   };
 
-  const get = async () => {
-    const res = await sClient.get<ResponseBody>(
-      `/solitaire/${from}/${index}/${to}`
-    );
+  const move = async (
+    laneIdFrom: LaneId,
+    indexFrom: number,
+    laneIdTo: LaneId
+  ) => {
+    const res = await sClient.move(laneIdFrom.value, indexFrom, laneIdTo.value);
     setData(res);
   };
 
@@ -94,10 +88,10 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
   //   return <CardView key={i.toString()} card={card} view={{ order: 1 }} />;
   // };
   const renderLanes = (props: Lane[]) => {
-    return <Lanes props={props} />;
+    return <Lanes props={props} moveCard={move} />;
   };
   const renderGoals = (props: Lane[]) => {
-    return <Lanes props={props} />;
+    return <Lanes props={props} moveCard={move} />;
   };
   return (
     <>
@@ -129,7 +123,10 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
       <button id="init-button" onClick={async () => await init()}>
         init
       </button>
-      <button id="commit-button" onClick={async () => await get()}>
+      <button
+        id="commit-button"
+        // onClick={async () => await move()}
+      >
         commit
       </button>
     </>

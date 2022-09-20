@@ -7,7 +7,6 @@ class BaseClient {
     this._httpClient = axios.create({
       baseURL: "",
     });
-    this._httpClient.get;
   }
 
   protected static of(): BaseClient {
