@@ -1,4 +1,4 @@
-import axios from "axios";
+import solitaireClient from "client/clients/solitaireClient";
 import React, { useState } from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
@@ -36,16 +36,18 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
   const [index, setIndex] = useState("");
   const [to, setTo] = useState("");
 
+  const sClient = solitaireClient.of();
+
   const init = async () => {
-    const res = await axios.get(`/solitaire`);
-    const data: ResponseBody = res.data;
-    setData(data);
+    const res = await sClient.get<ResponseBody>(`/solitaire`);
+    setData(res);
   };
 
   const get = async () => {
-    const res = await axios.get(`/solitaire/${from}/${index}/${to}`);
-    const data: ResponseBody = res.data;
-    setData(data);
+    const res = await sClient.get<ResponseBody>(
+      `/solitaire/${from}/${index}/${to}`
+    );
+    setData(res);
   };
 
   const setData = (data) => {

@@ -15,21 +15,32 @@ export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
   const card = props.card;
   const isSelected = card.equals(selectedCard);
 
-  const cardView = determinCardView(card, isSelected);
+  const content = determinCardContent(card, isSelected);
   const handleClick = () => {
+    if (isOtherCardSelected(selectedCard, isSelected)) {
+      // TODO: call api
+      return;
+    }
     setSelectedCard(() => (isSelected || !card.isFaceUp ? null : card));
   };
 
   return (
     <Wrapper className="card" order={props.order} onClick={() => handleClick()}>
-      {cardView}
+      {content}
     </Wrapper>
   );
 };
 
 export default CardView;
 
-const determinCardView = (card: Card, isSelected: boolean): JSX.Element => {
+const isOtherCardSelected = (
+  selectedCard: Card,
+  isSelected: boolean
+): boolean => {
+  return !selectedCard && isSelected;
+};
+
+const determinCardContent = (card: Card, isSelected: boolean): JSX.Element => {
   return card.isFaceUp ? (
     <FaceUp color={card.suit.color} isSelected={isSelected}>
       <FaceUpTop>{card.suit.value + card.rank}</FaceUpTop>
