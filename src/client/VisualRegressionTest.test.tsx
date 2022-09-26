@@ -52,7 +52,6 @@ describe("visualization", () => {
     await page.evaluate(() => {
       (document.querySelector("#♥2") as HTMLElement).click();
     });
-    const commit1 = await page.screenshot({ fullPage: true });
     await toMatchFullPageSnapshot(page);
 
     await page.evaluate(() => {
@@ -74,6 +73,8 @@ describe("visualization", () => {
 });
 
 const toMatchFullPageSnapshot = async (page: Page) => {
+  // wait for 0.1 sec for avoid fragile testing.
+  await page.waitForTimeout(100);
   const commit = await page.screenshot({ fullPage: true });
   expect(commit).toMatchImageSnapshot();
 };

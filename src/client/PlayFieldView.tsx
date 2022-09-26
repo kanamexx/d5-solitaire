@@ -99,35 +99,8 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
       <div>lanes: {renderLanes(lanes)}</div>
       <div>goals: {renderGoals([Lane.of(LaneId.of(1), Cards.empty())])}</div>
       <h1>message: {message}</h1>
-      <div>
-        from:
-        <input
-          id="from"
-          value={from}
-          onChange={(e) => setFrom(() => e.target.value)}
-        ></input>
-        index:
-        <input
-          id="index"
-          value={index}
-          onChange={(e) => setIndex(() => e.target.value)}
-        ></input>
-        <br />
-        to:
-        <input
-          id="to"
-          value={to}
-          onChange={(e) => setTo(() => e.target.value)}
-        ></input>
-      </div>
       <button id="init-button" onClick={async () => await init()}>
         init
-      </button>
-      <button
-        id="commit-button"
-        // onClick={async () => await move()}
-      >
-        commit
       </button>
     </>
   );
