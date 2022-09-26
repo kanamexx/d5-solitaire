@@ -38,29 +38,42 @@ afterAll(async () => {
 
 describe("visualization", () => {
   test("components have appropriate visual", async () => {
-    const initialWhole = await page.screenshot({ fullPage: true });
-    expect(initialWhole).toMatchImageSnapshot();
+    await toMatchFullPageSnapshot(page);
 
     await page.click("#init-button");
     await page.waitForNetworkIdle();
     // const element = await page.$("#init-button");
+    await toMatchFullPageSnapshot(page);
 
-    const initiated = await page.screenshot({ fullPage: true });
-    expect(initiated).toMatchImageSnapshot();
-
-    await commit(page, 0, 0, 6);
+    // FIXME: cause RefenenceError if functionize click process.
+    await page.evaluate(() => {
+      (document.querySelector("#♠A") as HTMLElement).click();
+    });
+    await page.evaluate(() => {
+      (document.querySelector("#♥2") as HTMLElement).click();
+    });
     const commit1 = await page.screenshot({ fullPage: true });
-    expect(commit1).toMatchImageSnapshot();
+    await toMatchFullPageSnapshot(page);
 
-    await commit(page, 6, 6, 1);
-    const commit2 = await page.screenshot({ fullPage: true });
-    expect(commit2).toMatchImageSnapshot();
+    await page.evaluate(() => {
+      (document.querySelector("#♥2") as HTMLElement).click();
+    });
+    await page.evaluate(() => {
+      (document.querySelector("#♠3") as HTMLElement).click();
+    });
+    await toMatchFullPageSnapshot(page);
+
+    await page.evaluate(() => {
+      (document.querySelector("#♥A") as HTMLElement).click();
+    });
+    await page.evaluate(() => {
+      (document.querySelector("#♣2") as HTMLElement).click();
+    });
+    await toMatchFullPageSnapshot(page);
   });
 });
 
-const commit = async (page: Page, from: number, index: number, to: number) => {
-  await page.type("#from", from.toString());
-  await page.type("#index", index.toString());
-  await page.type("#to", to.toString());
-  await page.click("#commit-button");
+const toMatchFullPageSnapshot = async (page: Page) => {
+  const commit = await page.screenshot({ fullPage: true });
+  expect(commit).toMatchImageSnapshot();
 };

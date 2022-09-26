@@ -55,7 +55,11 @@ const isOtherCardSelected = (
 
 const determinCardContent = (card: Card, isSelected: boolean): JSX.Element => {
   return card.isFaceUp ? (
-    <FaceUp color={card.suit.color} isSelected={isSelected}>
+    <FaceUp
+      id={card.suit.value + card.rank}
+      color={card.suit.color}
+      isSelected={isSelected}
+    >
       <FaceUpTop>{card.suit.value + card.rank}</FaceUpTop>
       <FaceUpMiddle>{card.suit.value}</FaceUpMiddle>
       <FaceUpBottom>{card.rank + card.suit.value}</FaceUpBottom>

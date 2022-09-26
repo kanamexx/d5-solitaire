@@ -20,7 +20,7 @@ export const LaneView: React.FC<LaneViewProps> = (props: LaneViewProps) => {
   return props.lane.cards.isEmpty() ? (
     <Empty />
   ) : (
-    <Wrapper onClick={() => {}}>
+    <Wrapper>
       {props.lane.cards.values.map((card, i) => (
         <CardView
           key={i.toString()}
