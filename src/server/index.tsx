@@ -5,6 +5,7 @@ import express from "express";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 
+import { Provider } from "react-redux";
 import Cards from "shared/domain/card/Cards";
 import GameMaster from "shared/domain/GameMaster";
 import PlayField from "shared/domain/PlayField";
@@ -13,6 +14,8 @@ import LaneResponseBody from "shared/presentation/LaneResponseBody";
 import PlayerUsecase from "shared/usecase/PlayerUsecase";
 import sourceMapSupport from "source-map-support";
 import App from "../client/App";
+import { store } from "../client/store";
+
 sourceMapSupport.install();
 
 const PORT = process.env.PORT || 3006;
@@ -21,7 +24,9 @@ const api = express();
 api.use(express.static("dist"));
 api.get("/", (req, res) => {
   const app = ReactDOMServer.renderToString(
-    <App set={[]} deck={Cards.empty()} goals={[]} lanes={[]} message={""} />
+    <Provider store={store}>
+      <App set={[]} deck={Cards.empty()} goals={[]} lanes={[]} message={""} />
+    </Provider>
   );
   const indexFile = path.resolve("./dist/public/index.html");
   fs.readFile(indexFile, "utf8", (err, data) => {

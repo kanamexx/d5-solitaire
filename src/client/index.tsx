@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import Cards from "shared/domain/card/Cards";
 import App from "./App";
+import { store } from "./store";
 
 ReactDOM.hydrateRoot(
   document.getElementById("root"),
   <BrowserRouter>
-    <App set={[]} deck={Cards.empty()} lanes={[]} goals={[]} message={""} />
+    <Provider store={store}>
+      <App set={[]} deck={Cards.empty()} lanes={[]} goals={[]} message={""} />
+    </Provider>
   </BrowserRouter>
 );
 
