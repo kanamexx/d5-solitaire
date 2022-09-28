@@ -34,6 +34,13 @@ export default class Cards {
   public haveFaceDowns = (): boolean => {
     return this.getFaceDowns().values.length !== 0;
   };
+  public find = (card: Card): Card => {
+    const filtered = this._values.filter((c) => c.equals(card));
+    if (filtered.length === 0) {
+      return null;
+    }
+    return filtered[0];
+  };
   public findFirstFaceUpIndex = (): number => {
     return this._values.findIndex((c) => c.isFaceUp);
   };

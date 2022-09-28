@@ -28,13 +28,20 @@ export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
 
   const content = determinCardContent(card, isMeSelected);
   const handleClick = async () => {
-    if (isOtherCardSelected(selectedCard, isMeSelected)) {
-      await props.moveCard(props.laneId);
-      return;
+    // if (isOtherCardSelected(selectedCard, isMeSelected)) {
+    //   await props.moveCard(props.laneId);
+    //   return;
+    // }
+
+    if (!selectedCard) {
+      console.log("setSelectedCard");
+      setSelectedCard(() => card);
+      setSelectedCardIndexInLane(() => props.order);
+      setSelectedLaneId(props.laneId);
     }
-    setSelectedCard(() => (isMeSelected || !card.isFaceUp ? null : card));
-    setSelectedCardIndexInLane(() => props.order);
-    setSelectedLaneId(props.laneId);
+    // setSelectedCard(() => (!selectedCard ? card : null));
+    // setSelectedCard(() => (isMeSelected || !card.isFaceUp ? null : card));
+    // setSelectedLaneId(props.laneId);
   };
 
   return (

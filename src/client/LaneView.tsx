@@ -17,10 +17,10 @@ export type LaneViewProps = {
 };
 
 export const LaneView: React.FC<LaneViewProps> = (props: LaneViewProps) => {
-  return props.lane.cards.isEmpty() ? (
-    <Empty />
+  const content = props.lane.cards.isEmpty() ? (
+    <></>
   ) : (
-    <Wrapper>
+    <>
       {props.lane.cards.values.map((card, i) => (
         <CardView
           key={i.toString()}
@@ -33,8 +33,43 @@ export const LaneView: React.FC<LaneViewProps> = (props: LaneViewProps) => {
           laneId={props.lane.laneId}
         />
       ))}
-    </Wrapper>
+    </>
   );
+
+  const thisLaneDoesntContainsSelectedCard = (): boolean => {
+    // TODO: returns null because props.selectedCardState[0] is immutable.
+    // TODO: install redux?
+    const card = props.lane.cards.find(props.selectedCardState[0]);
+    return !card;
+  };
+
+  const doesContainSelectedCard = () => {
+    console.log("lane");
+    // const selectedCard = props.lane.cards.find(props.selectedCardState[0]);
+
+    if (thisLaneDoesntContainsSelectedCard()) {
+      props.moveCard(props.lane.laneId);
+    } else {
+      console.log("none");
+    }
+
+    // if (
+    //   !thisLaneContainsSelectedCard() &&
+    //   (props.selectedCardIndexInLaneState[0] !== undefined ||
+    //     props.selectedCardIndexInLaneState[0] !== null)
+    // ) {
+    //   // move
+    //   console.log("aaa", props.lane, props.lane.laneId);
+    //   props.moveCard(props.lane.laneId);
+    //   return;
+    // }
+    // cancel
+    // props.selectedCardState[1](() => null);
+    // props.selectedCardIndexInLaneState[1](() => null);
+    // props.selectedLaneIdState[1](() => null);
+  };
+
+  return <Wrapper onClick={() => doesContainSelectedCard()}>{content}</Wrapper>;
 };
 
 export default LaneView;
@@ -43,8 +78,5 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
   position: relative;
-`;
-
-const Empty = styled.div`
   width: 80px;
 `;

@@ -121,6 +121,26 @@ describe("instantiate", () => {
       });
     });
   });
+  describe("find", () => {
+    test("returns the card if exists", () => {
+      const card1 = Card.of(Suit.CLUB, Rank.EIGHT, true);
+      const card2 = Card.of(Suit.DIAMOND, Rank.SEVEN, true);
+
+      const cards = Cards.of([card1, card2]);
+      expect(cards.find(card1)).toEqual(card1);
+    });
+    test("returns null if not exists", () => {
+      const card1 = Card.of(Suit.CLUB, Rank.EIGHT, true);
+      const card2 = Card.of(Suit.DIAMOND, Rank.SEVEN, true);
+
+      const cards = Cards.of([card1]);
+      expect(cards.find(card2)).toBeNull();
+    });
+    test("returns null if cards is empty", () => {
+      const cards = Cards.empty();
+      expect(cards.find(Card.of(Suit.DIAMOND, Rank.SEVEN, true))).toBeNull();
+    });
+  });
   describe("findFirstFaceUpIndex", () => {
     test("returns first face up index if exist", () => {
       const card1 = Card.of(Suit.CLUB, Rank.EIGHT, true);

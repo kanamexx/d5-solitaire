@@ -22,10 +22,13 @@ export const LanesView: React.FC<LanesViewProps> = (props: LanesViewProps) => {
   const [selectedLaneId, setSelectedLaneId] = useState<LaneId | null>(null);
 
   const doMoveCard = async (laneIdTo: LaneId) => {
-    await props.moveCard(selectedLaneId, selectedCardIndexInLane, laneIdTo);
-    setSelectedCard(null);
-    setSelectedCardIndexInLane(null);
-    setSelectedLaneId(null);
+    console.log("domove: ", selectedLaneId, selectedCardIndexInLane, laneIdTo);
+    if (!selectedLaneId && !selectedCardIndexInLane && !laneIdTo) {
+      await props.moveCard(selectedLaneId, selectedCardIndexInLane, laneIdTo);
+    }
+    // setSelectedCard(null);
+    // setSelectedCardIndexInLane(null);
+    // setSelectedLaneId(null);
   };
 
   return (
