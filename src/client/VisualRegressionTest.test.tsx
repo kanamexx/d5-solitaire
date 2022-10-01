@@ -69,6 +69,14 @@ describe("visualization", () => {
       (document.querySelector("#♣2") as HTMLElement).click();
     });
     await toMatchFullPageSnapshot(page);
+
+    await page.evaluate(() => {
+      (document.querySelector("#♣K") as HTMLElement).click();
+    });
+    await page.evaluate(() => {
+      (document.querySelector("#l0") as HTMLElement).click();
+    });
+    await toMatchFullPageSnapshot(page);
   });
 });
 

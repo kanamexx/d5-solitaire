@@ -35,41 +35,20 @@ export const LaneView: React.FC<LaneViewProps> = (props: LaneViewProps) => {
       ))}
     </>
   );
-
-  const thisLaneDoesntContainsSelectedCard = (): boolean => {
-    // TODO: returns null because props.selectedCardState[0] is immutable.
-    // TODO: install redux?
-    const card = props.lane.cards.find(props.selectedCardState[0]);
-    return !card;
-  };
-
-  const doesContainSelectedCard = () => {
-    console.log("lane");
-    // const selectedCard = props.lane.cards.find(props.selectedCardState[0]);
-
-    if (thisLaneDoesntContainsSelectedCard()) {
+  const moveIfSelectedCardExists = () => {
+    if (props.selectedCardState[0]) {
       props.moveCard(props.lane.laneId);
-    } else {
-      console.log("none");
     }
-
-    // if (
-    //   !thisLaneContainsSelectedCard() &&
-    //   (props.selectedCardIndexInLaneState[0] !== undefined ||
-    //     props.selectedCardIndexInLaneState[0] !== null)
-    // ) {
-    //   // move
-    //   console.log("aaa", props.lane, props.lane.laneId);
-    //   props.moveCard(props.lane.laneId);
-    //   return;
-    // }
-    // cancel
-    // props.selectedCardState[1](() => null);
-    // props.selectedCardIndexInLaneState[1](() => null);
-    // props.selectedLaneIdState[1](() => null);
   };
 
-  return <Wrapper onClick={() => doesContainSelectedCard()}>{content}</Wrapper>;
+  return (
+    <Wrapper
+      id={`l${props.lane.laneId.value.toString()}`}
+      onClick={() => moveIfSelectedCardExists()}
+    >
+      {content}
+    </Wrapper>
+  );
 };
 
 export default LaneView;

@@ -17,7 +17,7 @@ export const App: React.FC<AppProps> = (props: AppProps) => {
   return (
     <div className="App">
       <PlayFieldView {...props} />
-      <GenerationPage></GenerationPage>
+      {/* <GenerationPage></GenerationPage> */}
     </div>
   );
 };

@@ -23,25 +23,21 @@ export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
     props.selectedCardIndexInLaneState;
   const [selectedLaneId, setSelectedLaneId] = props.selectedLaneIdState;
 
-  const card = props.card;
-  const isMeSelected = card.equals(selectedCard);
-
-  const content = determinCardContent(card, isMeSelected);
+  const thisCard = props.card;
+  const content = determinCardContent(thisCard, selectedCard);
   const handleClick = async () => {
-    // if (isOtherCardSelected(selectedCard, isMeSelected)) {
-    //   await props.moveCard(props.laneId);
-    //   return;
-    // }
+    if (!props.card.isFaceUp) {
+      setSelectedCard(null);
+      setSelectedCardIndexInLane(null);
+      setSelectedLaneId(null);
+      return;
+    }
 
     if (!selectedCard) {
-      console.log("setSelectedCard");
-      setSelectedCard(() => card);
+      setSelectedCard(() => thisCard);
       setSelectedCardIndexInLane(() => props.order);
       setSelectedLaneId(props.laneId);
     }
-    // setSelectedCard(() => (!selectedCard ? card : null));
-    // setSelectedCard(() => (isMeSelected || !card.isFaceUp ? null : card));
-    // setSelectedLaneId(props.laneId);
   };
 
   return (
@@ -53,23 +49,20 @@ export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
 
 export default CardView;
 
-const isOtherCardSelected = (
-  selectedCard: Card,
-  isMeSelected: boolean
-): boolean => {
-  return selectedCard && !isMeSelected;
-};
-
-const determinCardContent = (card: Card, isSelected: boolean): JSX.Element => {
-  return card.isFaceUp ? (
+const determinCardContent = (
+  thisCard: Card,
+  selectedCard: Card
+): JSX.Element => {
+  const isMeSelected = thisCard.equals(selectedCard);
+  return thisCard.isFaceUp ? (
     <FaceUp
-      id={card.suit.value + card.rank}
-      color={card.suit.color}
-      isSelected={isSelected}
+      id={thisCard.suit.value + thisCard.rank}
+      color={thisCard.suit.color}
+      isSelected={isMeSelected}
     >
-      <FaceUpTop>{card.suit.value + card.rank}</FaceUpTop>
-      <FaceUpMiddle>{card.suit.value}</FaceUpMiddle>
-      <FaceUpBottom>{card.rank + card.suit.value}</FaceUpBottom>
+      <FaceUpTop>{thisCard.suit.value + thisCard.rank}</FaceUpTop>
+      <FaceUpMiddle>{thisCard.suit.value}</FaceUpMiddle>
+      <FaceUpBottom>{thisCard.rank + thisCard.suit.value}</FaceUpBottom>
     </FaceUp>
   ) : (
     <FaceDown src={backImage}></FaceDown>
