@@ -58,6 +58,13 @@ export default class Card {
     return this._suit === another._suit && this._rank === another._rank;
   };
 
+  public isLessByOne = (another: Card): boolean => {
+    if (!another) {
+      return false;
+    }
+    return this._rank.isLessByOne(another.rank);
+  };
+
   public id = (): string => {
     return this.suit.toString() + this.rank.toString();
   };

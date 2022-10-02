@@ -26,7 +26,7 @@ describe("move", () => {
       );
 
       const playerUsecase = new PlayerUsecase();
-      const actual = playerUsecase.move(initial, 0, 0, 1);
+      const actual = playerUsecase.move(initial, LaneId.of(0), 0, LaneId.of(1));
 
       const expected = {
         playField: PlayField.of(
@@ -73,7 +73,7 @@ describe("move", () => {
       );
 
       const playerUsecase = new PlayerUsecase();
-      const actual = playerUsecase.move(initial, 0, 0, 1);
+      const actual = playerUsecase.move(initial, LaneId.of(0), 0, LaneId.of(1));
 
       const expected = {
         playField: PlayField.of(
@@ -120,7 +120,7 @@ describe("move", () => {
       );
 
       const playerUsecase = new PlayerUsecase();
-      const actual = playerUsecase.move(initial, 0, 0, 1);
+      const actual = playerUsecase.move(initial, LaneId.of(0), 0, LaneId.of(1));
 
       const expected = {
         playField: PlayField.of(
@@ -161,7 +161,7 @@ describe("move", () => {
       );
 
       const playerUsecase = new PlayerUsecase();
-      const actual = playerUsecase.move(initial, 0, 0, 1);
+      const actual = playerUsecase.move(initial, LaneId.of(0), 0, LaneId.of(1));
 
       const expected = {
         playField: PlayField.of(
@@ -202,7 +202,7 @@ describe("move", () => {
       );
 
       const playerUsecase = new PlayerUsecase();
-      const actual = playerUsecase.move(initial, 0, 0, 1);
+      const actual = playerUsecase.move(initial, LaneId.of(0), 0, LaneId.of(1));
 
       const expected = {
         playField: PlayField.of(

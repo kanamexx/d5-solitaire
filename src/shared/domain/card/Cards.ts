@@ -52,6 +52,12 @@ export default class Cards {
     }
     return -1;
   };
+  public findLast = (): Card => {
+    if (this._values.length === 0) {
+      return null;
+    }
+    return this._values[this._values.length - 1];
+  };
 
   public isEmpty = (): boolean => {
     return this._values.length === 0;

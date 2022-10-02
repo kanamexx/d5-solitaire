@@ -88,6 +88,26 @@ describe("equals", () => {
     expect(faceup.equals(facedown)).toBeFalsy();
   });
 });
+describe("isLessByOne", () => {
+  it("returns true, if me is less than another by one", () => {
+    const ace = Card.of(Suit.CLUB, Rank.ACE, true);
+    const two = Card.of(Suit.CLUB, Rank.TWO, true);
+    expect(ace.isLessByOne(two)).toBeTruthy();
+  });
+  it("returns false, if me is greater than another", () => {
+    const ace = Card.of(Suit.CLUB, Rank.ACE, true);
+    const two = Card.of(Suit.CLUB, Rank.TWO, true);
+    expect(two.isLessByOne(ace)).toBeFalsy();
+  });
+  it("returns false, if the same rank", () => {
+    const ace = Card.of(Suit.CLUB, Rank.ACE, true);
+    expect(ace.isLessByOne(ace)).toBeFalsy();
+  });
+  it("returns false, if the another is null", () => {
+    const ace = Card.of(Suit.CLUB, Rank.ACE, true);
+    expect(ace.isLessByOne(null)).toBeFalsy();
+  });
+});
 describe("id", () => {
   it("returns id", () => {
     expect(Card.of(Suit.CLUB, Rank.EIGHT, true).id()).toBe("♣8");

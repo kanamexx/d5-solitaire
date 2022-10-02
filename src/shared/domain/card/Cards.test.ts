@@ -189,6 +189,17 @@ describe("instantiate", () => {
       expect(cards.findLastFaceDownIndex()).toBe(-1);
     });
   });
+  describe("findLast", () => {
+    it("returns null. if empty", () => {
+      expect(Cards.empty().findLast()).toBeNull();
+    });
+    it("returns last card.", () => {
+      const card1 = Card.of(Suit.CLUB, Rank.EIGHT, true);
+      const card2 = Card.of(Suit.DIAMOND, Rank.SEVEN, true);
+      const cards = Cards.of([card1, card2]);
+      expect(cards.findLast()).toEqual(card2);
+    });
+  });
   describe("isEmpry", () => {
     test("returns true, if empty", () => {
       expect(Cards.empty().isEmpty()).toBeTruthy();

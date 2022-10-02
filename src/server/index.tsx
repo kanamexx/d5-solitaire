@@ -8,6 +8,7 @@ import ReactDOMServer from "react-dom/server";
 import { Provider } from "react-redux";
 import Cards from "shared/domain/card/Cards";
 import GameMaster from "shared/domain/GameMaster";
+import { LaneIdType } from "shared/domain/lane/LaneId";
 import PlayField from "shared/domain/PlayField";
 import CardResponseBody from "shared/presentation/CardResponseBody";
 import LaneResponseBody from "shared/presentation/LaneResponseBody";
@@ -15,6 +16,7 @@ import PlayerUsecase from "shared/usecase/PlayerUsecase";
 import sourceMapSupport from "source-map-support";
 import App from "../client/App";
 import { store } from "../client/store";
+import LaneId from "../shared/domain/lane/LaneId";
 
 sourceMapSupport.install();
 
@@ -50,10 +52,11 @@ api.get("/solitaire", (req, res) => {
 api.get("/solitaire/:from/:index/:to", (req, res) => {
   const done = new PlayerUsecase().move(
     playField,
-    parseInt(req.params.from),
+    LaneId.of(parseInt(req.params.from) as LaneIdType),
     parseInt(req.params.index),
-    parseInt(req.params.to)
+    LaneId.of(parseInt(req.params.to) as LaneIdType)
   );
+  playField = done.playField;
   return toResponse(res, done.playField, done.message);
 });
 

@@ -84,6 +84,9 @@ export default class Rank {
   public isGreaterThan = (another: Rank): boolean => {
     return this._value > another._value;
   };
+  public isLessByOne = (another: Rank): boolean => {
+    return this._value + 1 === another._value;
+  };
 
   public toString = (): string => {
     return this._str;

@@ -69,3 +69,18 @@ const testSuccessfulInstantiation = (
 const testFailedInstantiation = (value: any) => {
   expect(() => Rank.of(value)).toThrow(new Error(`invalid Rank: ${value}`));
 };
+
+describe("isLessByOne", () => {
+  it("returns true, if me is less than another by one", () => {
+    expect(Rank.SIX.isLessByOne(Rank.SEVEN)).toBeTruthy();
+  });
+  it("returns false, if me is the same to another", () => {
+    expect(Rank.SIX.isLessByOne(Rank.SIX)).toBeFalsy();
+  });
+  it("returns false, if me is less than another at least two", () => {
+    expect(Rank.SIX.isLessByOne(Rank.EIGHT)).toBeFalsy();
+  });
+  it("returns false, if me is greater than another", () => {
+    expect(Rank.SIX.isLessByOne(Rank.FIVE)).toBeFalsy();
+  });
+});
