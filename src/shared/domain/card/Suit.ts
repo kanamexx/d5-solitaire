@@ -39,5 +39,9 @@ export default class Suit {
   public get value(): Types.SuitSymbolType {
     return this._value;
   }
+
+  public toString = (): string => {
+    return this._value;
+  };
 }
 export type ColorType = "black" | "red";

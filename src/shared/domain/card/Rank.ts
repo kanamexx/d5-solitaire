@@ -1,24 +1,26 @@
-import { RankSymbolType, RankType } from "shared/domain/types";
+import { RankType } from "shared/domain/types";
 
 export default class Rank {
   private readonly _value: RankType;
+  private readonly _str: string;
 
-  public static readonly ACE: Rank = new Rank(1);
-  public static readonly TWO: Rank = new Rank(2);
-  public static readonly THREE: Rank = new Rank(3);
-  public static readonly FOUR: Rank = new Rank(4);
-  public static readonly FIVE: Rank = new Rank(5);
-  public static readonly SIX: Rank = new Rank(6);
-  public static readonly SEVEN: Rank = new Rank(7);
-  public static readonly EIGHT: Rank = new Rank(8);
-  public static readonly NINE: Rank = new Rank(9);
-  public static readonly TEN: Rank = new Rank(10);
-  public static readonly JACK: Rank = new Rank(11);
-  public static readonly QUEEN: Rank = new Rank(12);
-  public static readonly KING: Rank = new Rank(13);
+  public static readonly ACE: Rank = new Rank(1, "A");
+  public static readonly TWO: Rank = new Rank(2, "2");
+  public static readonly THREE: Rank = new Rank(3, "3");
+  public static readonly FOUR: Rank = new Rank(4, "4");
+  public static readonly FIVE: Rank = new Rank(5, "5");
+  public static readonly SIX: Rank = new Rank(6, "6");
+  public static readonly SEVEN: Rank = new Rank(7, "7");
+  public static readonly EIGHT: Rank = new Rank(8, "8");
+  public static readonly NINE: Rank = new Rank(9, "9");
+  public static readonly TEN: Rank = new Rank(10, "10");
+  public static readonly JACK: Rank = new Rank(11, "J");
+  public static readonly QUEEN: Rank = new Rank(12, "Q");
+  public static readonly KING: Rank = new Rank(13, "K");
 
-  private constructor(value: RankType) {
+  private constructor(value: RankType, str: string) {
     this._value = value;
+    this._str = str;
   }
 
   public static of = (value: RankType): Rank => {
@@ -83,18 +85,7 @@ export default class Rank {
     return this._value > another._value;
   };
 
-  public toString = (): RankSymbolType => {
-    switch (this._value) {
-      case 1:
-        return "A";
-      case 11:
-        return "J";
-      case 12:
-        return "Q";
-      case 13:
-        return "K";
-      default:
-        return this._value.toString() as RankSymbolType;
-    }
+  public toString = (): string => {
+    return this._str;
   };
 }

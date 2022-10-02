@@ -28,6 +28,22 @@ describe("instantiate", () => {
     testFailedInstantiation(Suit.CLUB, null, false);
   });
 });
+const testSuccessfulInstantiation = (
+  value: any,
+  expectation: { suit: Suit; rank: Rank; isBack: boolean }
+) => {
+  const entity = Card.of(value.suit, value.rank, value.isBack);
+  expect(entity.suit).toEqual(expectation.suit);
+  expect(entity.rank).toEqual(expectation.rank);
+  expect(entity.suit).toEqual(expectation.suit);
+  expect(entity.rank).toEqual(expectation.rank);
+  expect(entity.isFaceUp).toBeFalsy();
+};
+const testFailedInstantiation = (suit: any, rank: any, isFace: boolean) => {
+  expect(() => Card.of(suit, rank, isFace)).toThrow(
+    new Error(`invalid args: {suit: ${suit}, rank: ${rank}, isFace: ${isFace}`)
+  );
+};
 
 describe("turnOver", () => {
   test("face up card turn to be face down", () => {
@@ -72,20 +88,21 @@ describe("equals", () => {
     expect(faceup.equals(facedown)).toBeFalsy();
   });
 });
-
-const testSuccessfulInstantiation = (
-  value: any,
-  expectation: { suit: Suit; rank: Rank; isBack: boolean }
-) => {
-  const entity = Card.of(value.suit, value.rank, value.isBack);
-  expect(entity.suit).toEqual(expectation.suit);
-  expect(entity.rank).toEqual(expectation.rank);
-  expect(entity.suit).toEqual(expectation.suit);
-  expect(entity.rank).toEqual(expectation.rank);
-  expect(entity.isFaceUp).toBeFalsy();
-};
-const testFailedInstantiation = (suit: any, rank: any, isFace: boolean) => {
-  expect(() => Card.of(suit, rank, isFace)).toThrow(
-    new Error(`invalid args: {suit: ${suit}, rank: ${rank}, isFace: ${isFace}`)
-  );
-};
+describe("id", () => {
+  it("returns id", () => {
+    expect(Card.of(Suit.CLUB, Rank.EIGHT, true).id()).toBe("♣8");
+  });
+});
+describe("top", () => {
+  it("returns top", () => {
+    expect(Card.of(Suit.CLUB, Rank.EIGHT, true).top()).toBe("♣8");
+  });
+});
+describe("bottom", () => {
+  it("returns bottom", () => {
+    expect(Card.of(Suit.CLUB, Rank.EIGHT, true).bottom()).toBe("8♣");
+  });
+  it("returns exchanged rank character if 2 digits", () => {
+    expect(Card.of(Suit.CLUB, Rank.TEN, true).bottom()).toBe("01♣");
+  });
+});

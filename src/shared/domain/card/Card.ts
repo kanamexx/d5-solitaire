@@ -2,7 +2,7 @@ import { RankType, SuitSymbolType } from "shared/domain/types";
 import Rank from "./Rank";
 import Suit from "./Suit";
 
-class Card {
+export default class Card {
   private readonly _suit: Suit;
   private readonly _rank: Rank;
   private readonly _isFaceUp: boolean;
@@ -57,6 +57,18 @@ class Card {
     }
     return this._suit === another._suit && this._rank === another._rank;
   };
-}
 
-export default Card;
+  public id = (): string => {
+    return this.suit.toString() + this.rank.toString();
+  };
+
+  public top = (): string => {
+    return this.suit.toString() + this.rank.toString();
+  };
+
+  public bottom = (): string => {
+    return this.rank === Rank.TEN
+      ? "01" + this.suit.toString()
+      : this.rank.toString() + this.suit.toString();
+  };
+}

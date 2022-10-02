@@ -1,8 +1,8 @@
 import React from "react";
+import Card from "shared/domain/card/Card";
 import { ColorType } from "shared/domain/card/Suit";
 import LaneId from "shared/domain/lane/LaneId";
 import styled from "styled-components";
-import Card from "../shared/domain/card/Card";
 import backImage from "./assets/card-back.png";
 type CardViewProps = {
   card: Card;
@@ -19,12 +19,10 @@ type CardViewProps = {
 
 export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
   const [selectedCard, setSelectedCard] = props.selectedCardState;
-  const [selectedCardIndexInLane, setSelectedCardIndexInLane] =
-    props.selectedCardIndexInLaneState;
-  const [selectedLaneId, setSelectedLaneId] = props.selectedLaneIdState;
+  const [, setSelectedCardIndexInLane] = props.selectedCardIndexInLaneState;
+  const [, setSelectedLaneId] = props.selectedLaneIdState;
 
-  const thisCard = props.card;
-  const content = determinCardContent(thisCard, selectedCard);
+  const content = determinCardContent(props.card, selectedCard);
   const handleClick = async () => {
     if (!props.card.isFaceUp) {
       setSelectedCard(null);
@@ -34,7 +32,7 @@ export const CardView: React.FC<CardViewProps> = (props: CardViewProps) => {
     }
 
     if (!selectedCard) {
-      setSelectedCard(() => thisCard);
+      setSelectedCard(() => props.card);
       setSelectedCardIndexInLane(() => props.order);
       setSelectedLaneId(props.laneId);
     }
@@ -56,13 +54,13 @@ const determinCardContent = (
   const isMeSelected = thisCard.equals(selectedCard);
   return thisCard.isFaceUp ? (
     <FaceUp
-      id={thisCard.suit.value + thisCard.rank}
+      id={thisCard.id()}
       color={thisCard.suit.color}
       isSelected={isMeSelected}
     >
-      <FaceUpTop>{thisCard.suit.value + thisCard.rank}</FaceUpTop>
-      <FaceUpMiddle>{thisCard.suit.value}</FaceUpMiddle>
-      <FaceUpBottom>{thisCard.rank + thisCard.suit.value}</FaceUpBottom>
+      <FaceUpTop>{thisCard.top()}</FaceUpTop>
+      <FaceUpMiddle>{thisCard.suit.toString()}</FaceUpMiddle>
+      <FaceUpBottom>{thisCard.bottom()}</FaceUpBottom>
     </FaceUp>
   ) : (
     <FaceDown src={backImage}></FaceDown>
