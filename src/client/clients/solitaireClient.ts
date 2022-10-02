@@ -1,11 +1,12 @@
 import Card from "shared/domain/card/Card";
+import Goal from "shared/domain/goal/Goal";
 import LaneResponseBody from "shared/presentation/LaneResponseBody";
 import BaseClient from "./baseClient";
 
-type ResponseBody = {
+export type ResponseBody = {
   set: Card[];
   lanes: LaneResponseBody[];
-  goals: Card[][];
+  goals: Goal[];
   message: string;
 };
 
@@ -28,6 +29,14 @@ class SolitaireClient extends BaseClient {
     to: number
   ): Promise<ResponseBody> => {
     return await this.get<ResponseBody>(`/solitaire/${from}/${index}/${to}`);
+  };
+
+  public command = async (
+    from: number,
+    index: number,
+    to: number
+  ): Promise<ResponseBody> => {
+    return await this.post<ResponseBody>(`/solitaire/command`, { test: "aaa" });
   };
 }
 

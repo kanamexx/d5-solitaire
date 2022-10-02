@@ -59,6 +59,10 @@ api.get("/solitaire/:from/:index/:to", (req, res) => {
   playField = done.playField;
   return toResponse(res, done.playField, done.message);
 });
+api.post("/solitaire/command", (req, res) => {
+  console.log("command", req.body);
+  return toResponse(res, playField, "aaa");
+});
 
 api.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

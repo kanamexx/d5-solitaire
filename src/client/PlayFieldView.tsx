@@ -1,7 +1,8 @@
-import SolitaireClient from "client/clients/solitaireClient";
+import SolitaireClient, { ResponseBody } from "client/clients/solitaireClient";
 import React, { useState } from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
+import Goal from "shared/domain/goal/Goal";
 import Lane from "shared/domain/lane/Lane";
 import LaneId from "shared/domain/lane/LaneId";
 import DeckView from "./DeckView";
@@ -12,7 +13,7 @@ type PlayFieldProps = {
   // TODO: delete set and use deck
   set: Card[];
   lanes: Lane[];
-  goals: Card[][];
+  goals: Goal[];
   message: string;
 };
 
@@ -40,11 +41,15 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
     indexFrom: number,
     laneIdTo: LaneId
   ) => {
-    const res = await sClient.move(laneIdFrom.value, indexFrom, laneIdTo.value);
+    const res = await sClient.command(
+      laneIdFrom.value,
+      indexFrom,
+      laneIdTo.value
+    );
     setData(res);
   };
 
-  const setData = (data) => {
+  const setData = (data: ResponseBody) => {
     setDeck(() =>
       Cards.of(
         data.set.map((card) =>
@@ -67,11 +72,7 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
     );
 
     setGoals(() =>
-      data.goals.map((goal) =>
-        goal.map((card) =>
-          Card.of(card.suit.value, card.rank.value, card.isFaceUp)
-        )
-      )
+      data.goals.map((goal) => Goal.of(goal.suit, Cards.of(goal.cards.values)))
     );
 
     setMessage(() => data.message);
