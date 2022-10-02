@@ -82,4 +82,11 @@ export default class Goal {
 
     return true;
   };
+
+  public append = (card: Card): Goal => {
+    if (!this.canAppend(card)) {
+      throw new Error("card cannot be apended");
+    }
+    return Goal.of(this._suit, this._cards.append(Cards.of([card])));
+  };
 }

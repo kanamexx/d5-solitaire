@@ -90,3 +90,20 @@ describe("canAppend", () => {
     ).toBeFalsy();
   });
 });
+
+describe("append", () => {
+  it("returns appended goal", () => {
+    const ace = Card.of(Suit.CLUB, Rank.ACE, true);
+
+    const actual1 = Goal.empty(Suit.CLUB).append(ace);
+    const expectation1 = Goal.of(Suit.CLUB, Cards.of([ace]));
+    expect(actual1).toBeInstanceOf(Goal);
+    expect(JSON.stringify(actual1)).toEqual(JSON.stringify(expectation1));
+
+    const two = Card.of(Suit.CLUB, Rank.TWO, true);
+    const actual2 = actual1.append(two);
+    const expectation2 = Goal.of(Suit.CLUB, Cards.of([ace, two]));
+    expect(actual2).toBeInstanceOf(Goal);
+    expect(JSON.stringify(actual2)).toEqual(JSON.stringify(expectation2));
+  });
+});
