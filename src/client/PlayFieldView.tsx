@@ -2,6 +2,7 @@ import SolitaireClient, { ResponseBody } from "client/clients/solitaireClient";
 import React, { useState } from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
+import Suit from "shared/domain/card/Suit";
 import Goal from "shared/domain/goal/Goal";
 import Lane from "shared/domain/lane/Lane";
 import LaneId from "shared/domain/lane/LaneId";
@@ -71,8 +72,9 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
       )
     );
 
-    setGoals(() =>
-      data.goals.map((goal) => Goal.of(goal.suit, Cards.of(goal.cards.values)))
+    setGoals(
+      () => [Goal.empty(Suit.CLUB)]
+      // data.goals.map((goal) => Goal.of(goal.suit, Cards.of(goal.cards.values)))
     );
 
     setMessage(() => data.message);

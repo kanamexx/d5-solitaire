@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 
+import bodyParser from "body-parser";
 import express from "express";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
@@ -23,7 +24,9 @@ sourceMapSupport.install();
 const PORT = process.env.PORT || 3006;
 const api = express();
 
-api.use(express.static("dist"));
+api.use(express.static("dist"), bodyParser.urlencoded({ extended: true }));
+api.use(bodyParser.json());
+
 api.get("/", (req, res) => {
   const app = ReactDOMServer.renderToString(
     <Provider store={store}>
