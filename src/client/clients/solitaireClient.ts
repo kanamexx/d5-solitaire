@@ -36,7 +36,11 @@ class SolitaireClient extends BaseClient {
     index: number,
     to: number
   ): Promise<ResponseBody> => {
-    return await this.post<ResponseBody>(`/solitaire/command`, { test: "aaa" });
+    return await this.post<ResponseBody>(`/solitaire/command`, {
+      from: from,
+      index: index,
+      to: to,
+    });
   };
 }
 

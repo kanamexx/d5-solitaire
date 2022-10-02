@@ -63,8 +63,15 @@ api.get("/solitaire/:from/:index/:to", (req, res) => {
   return toResponse(res, done.playField, done.message);
 });
 api.post("/solitaire/command", (req, res) => {
-  console.log("command", req.body);
-  return toResponse(res, playField, "aaa");
+  const body = req.body;
+  console.log("command", body);
+  const done = new PlayerUsecase().move(
+    playField,
+    LaneId.of(parseInt(body.from) as LaneIdType),
+    parseInt(body.index),
+    LaneId.of(parseInt(body.to) as LaneIdType)
+  );
+  return toResponse(res, done.playField, done.message);
 });
 
 api.listen(PORT, () => {
