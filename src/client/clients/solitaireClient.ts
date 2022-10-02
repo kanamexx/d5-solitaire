@@ -1,3 +1,4 @@
+import { PostCommandRequestBody } from "server";
 import Card from "shared/domain/card/Card";
 import LaneResponseBody from "shared/presentation/LaneResponseBody";
 import BaseClient from "./baseClient";
@@ -28,6 +29,15 @@ class SolitaireClient extends BaseClient {
     to: number
   ): Promise<ResponseBody> => {
     return await this.get<ResponseBody>(`/solitaire/${from}/${index}/${to}`);
+  };
+  public command = async (
+    from: number,
+    index: number,
+    to: number
+  ): Promise<ResponseBody> => {
+    const body: PostCommandRequestBody =
+      PostCommandRequestBody.moveCommandRequest(from, index, to);
+    return await this.post<ResponseBody>(`/solitaire/command`, body);
   };
 }
 

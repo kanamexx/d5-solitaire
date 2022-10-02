@@ -2,6 +2,7 @@ import Card from "./card/Card";
 import Cards from "./card/Cards";
 import Rank from "./card/Rank";
 import Suit from "./card/Suit";
+import Goal from "./goal/Goal";
 import Lane from "./lane/Lane";
 import LaneId, { LaneIdType } from "./lane/LaneId";
 import PlayField from "./PlayField";
@@ -27,7 +28,7 @@ export default class GameMaster {
       const lane: Lane = Lane.of(LaneId.of(i), cards);
       lanes.push(lane);
     }
-    const goals: Card[][] = Suit.list().map(() => []);
+    const goals: Goal[] = Suit.list().map((s) => Goal.empty(s));
 
     return PlayField.of(deck, lanes, goals);
   };

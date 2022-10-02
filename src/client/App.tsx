@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
+import Goal from "shared/domain/goal/Goal";
 import Lane from "shared/domain/lane/Lane";
 import { changeGeneration, selectGeneration } from "./generation";
 import PlayFieldView from "./PlayFieldView";
@@ -9,7 +10,7 @@ type AppProps = {
   set: Card[];
   deck: Cards;
   lanes: Lane[];
-  goals: Card[][];
+  goals: Goal[];
   message: string;
 };
 

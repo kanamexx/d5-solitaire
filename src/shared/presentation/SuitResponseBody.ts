@@ -1,7 +1,7 @@
 import Suit, { ColorType } from "shared/domain/card/Suit";
 import * as Types from "../domain/types/index";
 
-class SuitResponseBody {
+export default class SuitResponseBody {
   public readonly value: Types.SuitSymbolType;
   public readonly color: ColorType;
   public readonly numberSymbol: string;
@@ -16,4 +16,3 @@ class SuitResponseBody {
     return new SuitResponseBody(entity.value, entity.color);
   }
 }
-export { SuitResponseBody as SuitResponse };

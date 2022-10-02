@@ -14,3 +14,6 @@ export type RankSymbolType =
   | "J"
   | "Q"
   | "K";
+export type CommandType = "move";
+export type FromType = "lane" | "goal";
+export type ToType = "lane" | "goal";

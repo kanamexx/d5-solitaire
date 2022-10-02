@@ -2,6 +2,7 @@ import SolitaireClient from "client/clients/solitaireClient";
 import React, { useState } from "react";
 import Card from "shared/domain/card/Card";
 import Cards from "shared/domain/card/Cards";
+import Goal from "shared/domain/goal/Goal";
 import Lane from "shared/domain/lane/Lane";
 import LaneId from "shared/domain/lane/LaneId";
 import DeckView from "./DeckView";
@@ -12,7 +13,7 @@ type PlayFieldProps = {
   // TODO: delete set and use deck
   set: Card[];
   lanes: Lane[];
-  goals: Card[][];
+  goals: Goal[];
   message: string;
 };
 
@@ -40,7 +41,11 @@ export const PlayFieldView: React.FC<PlayFieldProps> = (
     indexFrom: number,
     laneIdTo: LaneId
   ) => {
-    const res = await sClient.move(laneIdFrom.value, indexFrom, laneIdTo.value);
+    const res = await sClient.command(
+      laneIdFrom.value,
+      indexFrom,
+      laneIdTo.value
+    );
     setData(res);
   };
 
