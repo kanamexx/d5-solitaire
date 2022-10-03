@@ -1,14 +1,14 @@
 import Card from "shared/domain/card/Card";
 import RankResponseBody from "./RankResponseBody";
-import { SuitResponse } from "./SuitResponseBody";
+import SuitResponseBody from "./SuitResponseBody";
 
 export default class CardResponseBody {
-  public readonly suit: SuitResponse;
+  public readonly suit: SuitResponseBody;
   public readonly rank: RankResponseBody;
   public readonly isFaceUp: boolean;
 
   private constructor(card: Card) {
-    this.suit = SuitResponse.of(card.suit);
+    this.suit = SuitResponseBody.of(card.suit);
     this.rank = RankResponseBody.of(card.rank);
     this.isFaceUp = card.isFaceUp;
   }

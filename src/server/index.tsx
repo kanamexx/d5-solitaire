@@ -12,6 +12,7 @@ import GameMaster from "shared/domain/GameMaster";
 import { LaneIdType } from "shared/domain/lane/LaneId";
 import PlayField from "shared/domain/PlayField";
 import CardResponseBody from "shared/presentation/CardResponseBody";
+import GoalResponseBody from "shared/presentation/GoalResponseBody";
 import LaneResponseBody from "shared/presentation/LaneResponseBody";
 import PlayerUsecase from "shared/usecase/PlayerUsecase";
 import sourceMapSupport from "source-map-support";
@@ -84,9 +85,11 @@ const toResponse = (res: any, playField: PlayField, message: string) => {
       ? []
       : playField.set.map((card) => CardResponseBody.of(card)),
     lanes: !playField.lanes
-      ? null
+      ? []
       : playField.lanes.map((lane) => LaneResponseBody.of(lane)),
-    goals: playField.goals,
+    goals: !playField.goals
+      ? []
+      : playField.goals.map((goal) => GoalResponseBody.of(goal)),
     message: message,
   });
 };

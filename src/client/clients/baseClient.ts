@@ -18,7 +18,7 @@ class BaseClient {
   };
 
   public post = async <T>(url: string, body: any): Promise<T> => {
-    return (await this._httpClient.post(url, body)) as T;
+    return (await this._httpClient.post(url, body)).data as T;
   };
 }
 
